@@ -1,0 +1,16 @@
+@model List<GC_MVC.Models.Recettes>
+
+<h1>Recettes de la categorie</h1>
+<p>Nombre de recettes : @Model.Count</p>
+
+@foreach(GC_MVC.Models.Recettes recette in Model)
+    {
+        <a asp-controller="Recettes" asp-action="Detail" asp-route-id="@recette.id_recette"> @recette.nom</a>
+        <p>Titre : @recette.nom</p>
+        <p>Temps de préparation : @recette.temps_preparation</p>
+        <p>Temps de cuisson : @recette.temps_cuisson</p>
+        <p>Difficulté : @recette.difficulte</p>
+        <p>Photo : </p>
+        <img src="~/img/recettes/@recette.photo"  alt="@recette.nom"/>
+        <p>Créateur GC : @recette.createur</p>
+    }

@@ -4,6 +4,17 @@
 <ul>
     @foreach (GC_MVC.Models.Categories categorie in Model)
     {
-        <li>@categorie.nom</li>
+        <li>
+            <!--
+                asp-controller : contrôleur que l'on souhaite appeler
+                asp-action     : méthode (Action) du contrôleur à appeler
+                asp-route-id   : valeur envoyée dans le paramètre "id"
+            -->
+            <a asp-controller="Categories"
+               asp-action="Recettes"
+               asp-route-id="@categorie.id_categorie">
+                @categorie.nom
+            </a>
+        </li>
     }
 </ul>
