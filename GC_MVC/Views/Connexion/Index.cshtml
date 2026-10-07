@@ -1,0 +1,33 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Connexion";
+} 
+
+<h1>Connexion</h1>
+    <section class="fond-connexion">
+        <div class="connexion-container-1">
+            <div class="button-google">
+                <button>Connexion avec Google</button>
+            </div>
+            <div class="button-facebook">
+                <button>Connexion avec Facebook</button>
+            </div>
+        </div>
+        <div class="connexion-container-2">
+            <form action="#" method="post">
+                <label for="mail">Adresse e-mail</label>
+                <input type="email" id="mail" name="adresseMail" required>
+                <label for="mdp">Mot de passe : </label>
+                <input type="password" id="mdp" name="MotDePasse" required>
+                <p>Mot de passe oublié ?</p>
+                <div class="button">
+                    <input id="connexion" type="submit" value="Connexion" />
+                </div> 
+                <a asp-controller="Inscription" asp-action="Index">Je n'ai pas de compte : je rejoins le Club !</a>
+            </form>
+        </div>
+    </section>
+
+@section Styles {
+    <link rel="stylesheet" href="~/CSS/styleConnexion.css" />
+} 

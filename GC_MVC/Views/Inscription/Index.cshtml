@@ -1,0 +1,35 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Inscription";
+} 
+
+<h1>Inscription nouveau membre</h1>
+<div class="fond-inscription">
+    <div class="inscription">
+        <form action="#" method="get">
+            <div class="ligne-inscription">
+                <label for="identifiant">Votre identifiant :</label>
+                <input type="text" id="identifiant" name="nom-identifiant" required/>
+            </div>
+            <div class="ligne-inscription">
+                <label for="email">Votre email :</label>
+                <input type="email" id="email" name="nom-email" required>
+            </div>
+            <div class="ligne-inscription">
+                <label for="password">Votre mot de passe :</label>
+                <input for="password" id="password" name="nom-password" required />
+            </div>
+            <div class="ligne-inscription">
+                <label for="password-2">Confirmez votre mot de passe :</label>
+                <input for="password" id="password-2" name="nom-password-2" required />
+            </div>
+        </form>
+    </div>
+    <div class="button-club">
+        <button>Je rejoins le club GC</button>
+    </div>
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="~/CSS/styleInscription.css" />
+} 

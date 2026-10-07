@@ -1,0 +1,101 @@
+/* responsive */
+/* TABLETTE */
+
+@media (max-width: 1200px) 
+{
+
+    .header-container 
+    {
+        grid-template-columns: 1fr 1fr;
+        padding: 20px 0;
+        row-gap: 20px;
+    }
+
+    .logo 
+    {
+        grid-column: 1 / 2;
+        grid-row: 1;
+    }
+
+    .recherche 
+    {
+        grid-column: 2;
+        grid-row: 1;
+        justify-self: end;
+    }
+
+    .navigation 
+    {
+        grid-column: 1 / 3;
+        grid-row: 2;
+    }
+
+    .actions 
+    {
+        grid-column: 1 / 3;
+        grid-row: 3;
+        justify-content: center;
+    }
+
+}
+
+
+/* Mobile */
+
+@media (max-width: 768px) 
+{
+
+    .header-container 
+    {
+        display: flex;
+        flex-direction: column;
+        padding: 20px 0;
+    }
+
+    .logo 
+    {
+        order: 1;
+    }
+
+    .logo img 
+    {
+        width: 120px;
+    }
+
+    .recherche 
+    {
+        order: 2;
+        max-width: 100%;
+    }
+
+
+    .navigation 
+    {
+        order: 3;
+        width: 100%;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+
+    .actions 
+    {
+        order: 4;
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+
+    .contact 
+    {
+        display: none;
+    }
+
+
+    .separateur 
+    {
+        display: none;
+    }
+
+}

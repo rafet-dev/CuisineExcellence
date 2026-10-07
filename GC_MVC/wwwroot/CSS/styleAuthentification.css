@@ -1,0 +1,72 @@
+:root 
+{
+
+    --ivoire: #FFFDF8;
+    --creme: #F7F2E8;
+    --anthracite: #242424;
+    --gris-chaud: #6F6A62;
+    --or-champagne: #C9A45C;
+    --beige: #E5DED1;
+}
+
+h1
+{
+    padding: 20px;
+    text-align: center;
+    font-family: "Bodoni Moda", sans-serif;
+}
+
+.fond-authentification
+{
+    background-color: var(--beige);
+    height:430px;
+    margin: 10px 150px;
+    display:flex;
+}
+
+.fond-authentification .authentification-container
+{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.fond-authentification .authentification-container form
+{
+    width:100%;
+}
+
+.fond-authentification .authentification-container #mail, .fond-authentification .authentification-container #mdp
+{
+    width: 350px;
+    height: 35px;
+    margin: 10px 10px;
+}
+
+.button
+{
+    text-align:center;
+    padding-bottom:20px;
+}
+
+#connexion
+{
+    text-align: center;
+    margin:20px;
+    padding: 15px;
+    background-color: #C9A45C;
+    color: #FFFDF8;
+    font-size: 20px;
+    font-family: "Montserrat", sans-serif;
+    cursor: pointer;
+    font-size: 15px;
+    border-radius: 3px;
+    transition: 0.3s;
+}
+
+#connexion:hover
+{
+    background-color:#B85C4A;
+}

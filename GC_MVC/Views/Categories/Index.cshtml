@@ -1,0 +1,9 @@
+@model List<GC_MVC.Models.Categories>
+
+<h1>Categories</h1>
+<ul>
+    @foreach (GC_MVC.Models.Categories categorie in Model)
+    {
+        <li>@categorie.nom</li>
+    }
+</ul>

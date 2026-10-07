@@ -1,0 +1,68 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Recherche";
+} 
+
+<h1>Recherche</h1>
+    <div class="recherche-filtre">
+        <div class="recherche">
+            <input type="text" id="champRecherche" placeholder="Rechercher une recette, un ingrédient...">
+            <button type="button" id="boutonRecherche" aria-label="Rechercher">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <line x1="16.5" y1="16.5" x2="22" y2="22"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="filtre">
+            <div class="info">
+                <label for="choix-tps-prep">Temps global de préparation :</label>
+                <select id="choix-tps-prep" name="liste-de-tps">
+                    <option value="option1">moins de 20 minutes</option>
+                    <option value="option2">20 - 30 minutes</option>
+                    <option value="option3">30 - 45 minutes</option>
+                    <option value="option4">45 minutes - 60 minutes</option>
+                    <option value="option5"> + d'une heure </option>
+                </select>
+            </div>
+
+            <div class="info">
+                <label class="diff">Difficulté :</label>
+                <div class="rating">
+                    <label><input type="radio" name="niveau-diff" value="1"> ★</label>
+                    <label><input type="radio" name="niveau-diff" value="2"> ★★</label>
+                    <label><input type="radio" name="niveau-diff" value="3"> ★★★</label>
+                    <label><input type="radio" name="niveau-diff" value="4"> ★★★★</label>
+                    <label><input type="radio" name="niveau-diff" value="5"> ★★★★★</label>
+                </div>
+            </div>
+
+            <div class="info">
+                <label class="diff">Note :</label>
+
+                <div class="rating">
+                    <label><input type="radio" name="niveau-diff" value="1"> ★</label>
+                    <label><input type="radio" name="niveau-diff" value="2"> ★★</label>
+                    <label><input type="radio" name="niveau-diff" value="3"> ★★★</label>
+                    <label><input type="radio" name="niveau-diff" value="4"> ★★★★</label>
+                    <label><input type="radio" name="niveau-diff" value="5"> ★★★★★</label>
+                </div>
+            </div>
+
+            <div class="info">
+                <label class="categorie">Categorie : </label>
+                <select id="categorie" name="choix catégorie">
+                    <option value="option1">Entrée</option>
+                    <option value="option2">Plat</option>
+                    <option value="option3">Dessert</option>
+                    <option value="option4">Cuisine Asiatique</option>
+                    <option value="option5">Burgers</option>
+                </select>
+            </div>
+        </div>
+    </div>
+<h1>Résultats de la recherche</h1>
+
+@section Styles {
+    <link rel="stylesheet" href="~/CSS/styleRecherche.css" />
+} 

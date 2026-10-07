@@ -1,0 +1,71 @@
+/* menu principal */
+:root 
+{
+
+    --ivoire: #FFFDF8;
+    --creme: #F7F2E8;
+    --anthracite: #242424;
+    --gris-chaud: #6F6A62;
+    --or-champagne: #C9A45C;
+    --beige: #E5DED1;
+}
+
+/* RESET */
+
+* 
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body 
+{
+    background-color: var(--ivoire);
+    color: var(--anthracite);
+    font-family: "Montserrat", sans-serif;
+}
+
+h1
+{
+    font-family: "Bodoni Moda", sans-serif;
+    text-align: center;
+}
+
+.recherche-filtre
+{
+    margin: 10px 150px;
+    background-color: var(--beige);
+    padding: 20px;
+       
+}
+
+.recherche-filtre .recherche
+{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.recherche-filtre .filtre
+{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: space-around;
+}
+
+.rating
+{
+    display:flex;
+    gap:15px;
+    color:var(--or-champagne);
+    font-size:24px;
+    flex-wrap:wrap;
+}
+
+.rating input
+{
+    width:auto;
+    height:auto;
+}

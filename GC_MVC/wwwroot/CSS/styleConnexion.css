@@ -1,0 +1,111 @@
+/*#######################################
+                CONNEXION
+########################################*/
+:root 
+{
+    --ivoire: #FFFDF8;
+    --creme: #F7F2E8;
+    --anthracite: #242424;
+    --gris-chaud: #6F6A62;
+    --or-champagne: #C9A45C;
+    --beige: #E5DED1;
+}
+
+h1
+{
+    padding: 20px;
+    text-align: center;
+    font-family: "Bodoni Moda" , sans-serif;
+}
+
+.fond-connexion
+{
+    background-color: var(--beige);
+    height:430px;
+    margin: 10px 150px;
+    display:flex;
+}
+
+.fond-connexion .connexion-container-1
+{
+    border-right:1px solid var(--or-champagne);
+    margin: 70px;
+    padding-right:50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.fond-connexion .connexion-container-2
+{
+    margin: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.fond-connexion .connexion-container-2 form
+{
+    width:100%;
+}
+
+.fond-connexion .connexion-container-2 #mail, .fond-connexion .connexion-container-2 #mdp
+{
+    width: 350px;
+    height: 35px;
+    margin: 10px 10px;
+}
+.fond-connexion .connexion-container-2 p
+{
+    font-size: 16px;
+    padding: 20px 0px;
+    text-align: center;
+}
+
+.button-google, .button-facebook
+{
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+
+.button-google button, .button-facebook button
+{
+    text-align: center;
+    padding: 15px;
+    background-color:#C9A45C;
+    color:#FFFDF8;
+    font-size: 20px;
+    font-family: "Montserrat", sans-serif;
+    cursor:pointer;
+    font-size: 15px;
+    border-radius: 3px;
+    transition: 0.3s;
+}
+
+.button-google button:hover, .button-facebook button:hover, #connexion:hover
+{
+    background-color:#B85C4A;
+}
+
+.button
+{
+    text-align:center;
+    padding-bottom:20px;
+}
+
+#connexion
+{
+    text-align: center;
+    padding: 15px;
+    background-color: #C9A45C;
+    color: #FFFDF8;
+    font-size: 20px;
+    font-family: "Montserrat", sans-serif;
+    cursor: pointer;
+    font-size: 15px;
+    border-radius: 3px;
+    transition: 0.3s;
+}

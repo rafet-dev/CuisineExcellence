@@ -1,0 +1,105 @@
+:root 
+{
+
+    --ivoire: #FFFDF8;
+    --creme: #F7F2E8;
+    --anthracite: #242424;
+    --gris-chaud: #6F6A62;
+    --or-champagne: #C9A45C;
+    --beige: #E5DED1;
+}
+
+h1
+{
+    padding: 20px;
+    text-align: center;
+     font-family: "Bodoni Moda" , sans-serif;
+}
+
+.fond-contact
+{
+    margin: 10px 150px;
+    background-color: var(--beige);
+    height:430px;
+    display:flex;
+}
+
+.fond-contact .contact-container-1 form
+{
+    border-right:1px solid var(--or-champagne);
+    width:100%;
+    margin: 25px 50px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:left;
+    padding: 20px;
+}
+
+.fond-contact .contact-container-1 form input
+{
+    padding: 5px;
+    margin: 3px 0px;
+    font-size: 20px;
+    font-family: "Montserrat", sans-serif;
+}
+
+.fond-contact .contact-container-2 
+{
+    margin: 70px;
+    padding-left:50px;
+    width:100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+}
+
+.fond-contact .contact-container-2 textarea
+{
+    margin-top: 20px;
+    width: 800px;
+    height: 500px;
+    font-size: 20px;
+    font-family: "Montserrat", sans-serif;
+}
+
+/* bouton envoyer */
+
+.button
+{
+    text-align:center;
+    padding-bottom:20px;
+}
+
+.button button 
+{
+    margin: 20px;
+    text-align: center;
+    padding: 15px;
+    background-color: #C9A45C;
+    color: #FFFDF8;
+    font-size: 20px;
+    font-family: "Montserrat", sans-serif;
+    cursor: pointer;
+    font-size: 15px;
+    border-radius: 3px;
+    transition: 0.3s;
+}
+
+.button button:hover
+{
+    background-color:#B85C4A;
+}
+
+/* confirmation formulaire */
+
+.cache {
+    display: none;
+}
+.affiche {
+    display: block;
+    color: green;
+    font-weight: bold;
+    margin-top: 15px;
+}

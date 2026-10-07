@@ -1,0 +1,23 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Authentification";
+} 
+
+<h1>Authentification</h1>
+    <section class="fond-authentification">
+        <div class="authentification-container">
+            <form action="" method="post">
+                <label for="mail">Login</label>
+                <input type="email" id="mail" name="adresseMail" required>
+                <label for="mdp">Mot de passe : </label>
+                <input type="password" id="mdp" name="MotDePasse" required>
+                <div class="button">
+                    <input id="connexion" type="submit" value="Connexion" />
+                </div>
+            </form>
+        </div>
+    </section>
+
+@section Styles {
+    <link rel="stylesheet" href="~/CSS/styleAuthentification.css" />
+} 

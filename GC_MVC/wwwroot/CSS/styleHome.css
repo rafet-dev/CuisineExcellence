@@ -1,0 +1,342 @@
+/*############################################
+                    HOME
+############################################*/
+
+/* couverture principale */
+h1
+{
+    font-family: "Bodoni Moda", sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+
+.contenu
+{
+    width: 100vw;
+    height: 100vh;
+    background-image: url("/img/illustrations/ecran.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 10%;
+    box-sizing: border-box;
+}
+
+.presentation
+{
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.presentation img
+{
+    width: 70%;
+    height: auto;
+}
+
+.presentation p
+{
+    color: #FFFDF8;
+    font-family: "Montserrat", sans-serif;
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+.slogan
+{
+    color: #FFFDF8;
+    font-family: "Montserrat", sans-serif;
+    font-size: 24px;
+    margin: 20px 0 30px;
+}
+
+.bouton-recettes
+{
+    padding: 14px 28px;
+    background-color: #C9A45C;
+    color: #FFFDF8;
+    text-decoration: none;
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+    border-radius: 3px;
+    transition: 0.3s;
+}
+
+.bouton-recettes:hover
+{
+    background-color: #B85C4A;
+}
+
+/* section Actualité */
+.actualite h1
+{
+    text-align: center;
+    justify-content: center;
+    color: #242424;
+}
+
+.actualite .fond-actualite
+{
+    background-color: #E5DED1;
+    margin: 10px 150px;
+    display: flex;
+    flex-direction:column;
+}
+
+.actualite .fond-actualite .section-actualite
+{
+    margin: 10px 20px;
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+.actualite .fond-actualite .section-actualite .actualite1
+{   
+    margin: 10px 20px;
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.actualite .fond-actualite .section-actualite .actualite1 img 
+{
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+}
+
+.actualite .fond-actualite .section-actualite .actualite1 .texte-actualite
+{
+    padding: 20px;
+    font-size: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* bouton Voir toutes les actualités */
+
+.button-actualite
+{
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+
+.button-actualite button
+{
+    padding: 15px;
+    background-color:#C9A45C;
+    color:#FFFDF8;
+    font-size: 20px;
+    font-family: "Montserrat", sans-serif;
+    cursor:pointer;
+    font-size: 15px;
+    border-radius: 3px;
+    transition: 0.3s;
+}
+
+.button-actualite button:hover
+{
+    background-color:#B85C4A;
+}
+
+/* section Citations */
+.citations h1
+{
+    text-align: center;
+    color: #242424;
+}
+
+.citations .fond-citation
+{
+    background-color: #E5DED1;
+    margin: 10px 150px;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    gap: 16px;
+    padding: 10px;
+    /* Masquer la barre de défilement pour un meilleur design */
+    scrollbar-width: none; /* Firefox */
+}
+
+.citations .fond-citation .slide
+{
+    flex: 0 0 100%; /* Chaque diapositive prend 100% de la largeur du conteneur */
+    scroll-snap-align: start;
+}
+
+.citations .fond-citation .slide p
+{
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+}
+
+/* section Recettes à la une */
+.recette h1
+{
+    text-align: center;
+    justify-content: center;
+    color: #242424;
+}
+.recette .fond-recette 
+{
+    background-color: #E5DED1;
+    margin: 10px 150px;
+    display: flex;
+    flex-direction:column;
+}
+
+.recette .fond-recette .section-recette
+{
+    margin: 10px 20px;
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+.recette .fond-recette .section-recette .recette1
+{   
+    margin: 10px 20px;
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.recette .fond-recette .section-recette .recette1 img 
+{
+    width: 100%;
+}
+
+.recette .fond-recette .section-recette .recette1 .texte-recette1
+{
+    padding: 20px;
+    font-size: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+/* pour les étoiles */
+
+.notation 
+{
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.etoile 
+{
+    color: #C9A45C;
+    font-size: 40px;
+}
+
+.note 
+{
+    margin-left: 8px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    color: #6F6A62;
+}
+
+/* bouton "Voir nos autres recettes gourmandes */
+
+.button-recette
+{
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+
+.button-recette button
+{
+    padding: 15px;
+    background-color:#C9A45C;
+    color:#FFFDF8;
+    font-size: 20px;
+    font-family: "Montserrat", sans-serif;
+    cursor:pointer;
+    font-size: 15px;
+    border-radius: 3px;
+    transition: 0.3s;
+}
+
+.button-recette button:hover
+{
+    background-color:#B85C4A;
+}
+
+/* section Rejoindre le club */
+.club h1
+{
+    text-align: center;
+    color: #242424;
+}
+.club .club-img
+{
+    background-color: #E5DED1; 
+    margin: 10px 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    padding: 20px;
+}
+
+.club .club-img img
+{
+    max-width:450px;
+    height:auto;
+    display: block;
+}
+
+.button-club
+{
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+
+.button-club button
+{
+    padding: 15px;
+    background-color:#C9A45C;
+    color:#FFFDF8;
+    font-size: 20px;
+    font-family: "Montserrat", sans-serif;
+    cursor:pointer;
+    font-size: 15px;
+    border-radius: 3px;
+    transition: 0.3s;
+}
+
+.button-club button:hover
+{
+    background-color:#B85C4A;
+}

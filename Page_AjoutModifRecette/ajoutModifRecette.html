@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Gastronome créatif</title>
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="AjoutModifRecetteMenuStyle.css">
+        <link rel="stylesheet" href="AjoutModifRecetteMainStyle.css">
+        <link rel="stylesheet" href="AjoutModifRecetteFooterStyle.css">
+    </head>
+    <body>
+        <header class="header">
+            <div class="header-container">
+                <!--RECHERCHE-->
+                <div class="recherche">
+                    <input type="text" id="champRecherche" placeholder="Rechercher une recette, un ingrédient...">
+                    <button type="button" id="boutonRecherche" aria-label="Rechercher">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="11" cy="11" r="7"></circle>
+                            <line x1="16.5" y1="16.5" x2="22" y2="22"></line>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- NAVIGATION -->
+                <nav class="navigation">
+                    <a href="#" class="menu-principal">Recettes<span class="fleche">⌄</span></a>
+                    <a href="..\Page_Actualite\actualite.html">Actualités</a>
+                    <a href="#">C'est la saison !</a>
+                </nav>
+
+                <!-- LOGO -->
+                <a href="pagePrincipale.html" class="logo"><img src="..\img\logo\logo_GC.png" alt="Gastronome créatif"></a>
+
+                <!-- ACTIONS -->
+
+                <div class="actions">
+
+                    <a href="..\Page_Contact\contact.html" class="contact">Contactez-nous !</a>
+                    <span class="separateur"></span>
+                    <!-- Connexion -->
+                    <a href="..\Page_Connexion\connexion.html" class="connexion">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="12" cy="8" r="4"></circle>
+                            <path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"></path>
+                        </svg>
+                        <span>Se connecter / S'inscrire</span>
+                    </a>
+                    <!-- Favoris -->
+                    <a href="#" class="icone-action" aria-label="Mes favoris">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M20.8 8.7c0 5.5-8.8 10.5-8.8 10.5S3.2 14.2 3.2 8.7C3.2 6 5.2 4 7.8 4c1.6 0 3.1.8 4.2 2.1C13.1 4.8 14.6 4 16.2 4c2.6 0 4.6 2 4.6 4.7z"></path>
+                        </svg>
+                    </a>
+                    <!-- Panier -->
+                    <a href="#" class="icone-action" aria-label="Mon panier">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M6 8h12l1 12H5L6 8z"></path>
+                            <path d="M9 8V6a3 3 0 0 1 6 0v2"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <h1>Ajout/Modification de votre recette gourmet</h1>
+
+            <section class ="AjoutRecette">
+                <div class="infos-1">
+                    <div class="info">
+                        <label id="list" for="titre-recette">Titre de la recette :</label>
+                        <input type="text" id="titre-recette" name="titre" required />
+                    </div>
+
+                    <div class="info">
+                        <label id="list" for="choix-tps-prep">Choisissez ou écrivez un temps de préparation :</label>
+                        <input list="suggestions-tps-prep" id="choix-tps-prep" name="tps-prep" placeholder="Sélectionnez ou écrivez le temps de préparation ..." />
+                        <datalist id="suggestions-tps-prep">
+                            <option value="15 minutes">
+                            <option value="30 minutes">
+                            <option value="45 minutes">
+                            <option value="1 heure">
+                        </datalist>
+                    </div>
+
+                    <div class="info">
+                        <label id="list" for="choix-tps-cui">Choisissez ou écrivez un temps de cuisson :</label>
+                        <input list="suggestions-tps-cui" id="choix-tps-cui" name="tps-prep" placeholder="Sélectionnez ou écrivez le temps de cuisson ..." />
+                        <datalist id="suggestions-tps-cui">
+                            <option value="15 minutes">
+                            <option value="30 minutes">
+                            <option value="45 minutes">
+                            <option value="1 heure">
+                        </datalist>
+                    </div>
+
+                    <div class="info">
+                        <label class="diff">Difficulté :</label>
+
+                        <div class="rating">
+                            <label><input type="radio" name="niveau-diff" value="1"> ★</label>
+                            <label><input type="radio" name="niveau-diff" value="2"> ★★</label>
+                            <label><input type="radio" name="niveau-diff" value="3"> ★★★</label>
+                            <label><input type="radio" name="niveau-diff" value="4"> ★★★★</label>
+                            <label><input type="radio" name="niveau-diff" value="5"> ★★★★★</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-ajout">
+                    <div class="button-image">
+                        <button>Ajouter une image</button>
+                    </div>
+                    <div class="button-ingredient">
+                        <button>Ajouter un ingrédient</button>
+                    </div>
+                    <div class="button-etape">
+                        <button>Ajouter une étape</button>
+                    </div>
+                </div>
+                <div class="img-recette">
+                    <!-- ajout de l'image sélectionnée par le membre-->
+                </div>
+
+                <h1>Ingrédients</h1>
+                <div class="liste-ingredient">
+                    <div class="un-ingredient">
+                    <div class="img"></div> <!-- ajout de l'image de ingrédient -->
+                        <p>ingredient 1</p>
+                    </div>
+                    <div class="un-ingredient">
+                        <div class="img"></div> <!-- ajout de l'image de ingrédient -->
+                        <p>ingredient 2</p>
+                    </div>
+                </div>
+                <h1>Préparation</h1>
+
+                <div class="preparation">
+                    <div class="etape">
+                        <p id="numero">1</p>
+                        <div class="info-etape">
+                            <label id="etape" for="texte-etape"></label>
+                            <textarea id="texte-etape" name="description" placeholder="Décrivez votre recette étape par étape ..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="button-image">
+                <button>Valider la recette</button>
+            </div>
+        </main>
+
+        <footer>
+        <div class="footer-container1">
+            <div class ="logo-footer1">
+                <a href="pagePrincipale.html" class="logo"><img src="..\img\logo\logo_GC.png" alt="Gastronome créatif"></a>
+            </div>
+        </div>
+        <div class="footer-container2">
+            <div class="logo-footer2">
+                <a href="http://www.facebook.com"><img src="..\img\logo\logo_facebook.png"/></a>
+                <a href="http://www.youtube.com"><img src="..\img\logo\logo_youtube2.png"/></a>
+                <a href="http://www.instagram.com"><img src="..\img\logo\logo_instagram2.png"/></a>
+                <a href="http://www.pinterest.com"><img src="..\img\logo\logo_pinterest2.png"/></a>
+                <a href="http://www.x.com"><img src="..\img\logo\logo_twitter2.png"/></a>
+                <a href="http://www.tiktok.com"><img src="..\img\logo\logo_tiktok2.png"/></a>
+            </div>
+            <p>A propos - <a href="..\Page_Contact\contact.html" class="contact">Contact</a> - Mentions légales - CGU - CGV - Protection des données personnelles - Cookies - Préférences cookies - Accessibilité</p>
+        </div>
+    </footer>
+    </body>
+</html>

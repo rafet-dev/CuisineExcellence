@@ -1,0 +1,60 @@
+h1
+{
+    font-family: "Bodoni Moda", sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+
+.fond-inscription
+{
+    margin: 10px 150px;
+    background-color: var(--beige);
+    width: auto;
+    height: 365px;
+}
+
+.fond-inscription .inscription
+{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    margin: 10px 500px;
+}
+
+.fond-inscription .inscription input
+{
+    padding: 10px;
+    width: 500px;
+    height: 35px;
+    font-size: 20px;
+}
+
+.fond-inscription .inscription .ligne-inscription
+{
+    margin: 5px;
+}
+
+/* bouton inscription */
+
+.button-club
+{
+    text-align: center;
+    padding-bottom: 20px;
+}
+.button-club button
+{
+    padding: 15px;
+    background-color:#C9A45C;
+    color:#FFFDF8;
+    font-size: 20px;
+    font-family: "Montserrat", sans-serif;
+    cursor:pointer;
+    font-size: 15px;
+    border-radius: 3px;
+    transition: 0.3s;
+}
+
+.button-club button:hover
+{
+    background-color:#B85C4A;
+}

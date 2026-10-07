@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gastronome créatif</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="menuStyle.css">
+    <link rel="stylesheet" href="mainStyle.css">
+    <link rel="stylesheet" href="footerStyle.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="header-container">
+            <!--RECHERCHE-->
+            <div class="recherche">
+                <input type="text" id="champRecherche" placeholder="Rechercher une recette, un ingrédient...">
+                <button type="button" id="boutonRecherche" aria-label="Rechercher">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="11" cy="11" r="7"></circle>
+                        <line x1="16.5" y1="16.5" x2="22" y2="22"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- NAVIGATION -->
+            <nav class="navigation">
+                <a href="#" class="menu-principal">Recettes<span class="fleche">⌄</span></a>
+                <a href="..\Page_Actualite\actualite.html">Actualités</a>
+                <a href="#">C'est la saison !</a>
+            </nav>
+
+            <!-- LOGO -->
+            <a href="pagePrincipale.html" class="logo"><img src="..\img\logo\logo_GC.png" alt="Gastronome créatif"></a>
+
+            <!-- ACTIONS -->
+
+            <div class="actions">
+
+                <a href="..\Page_Contact\contact.html" class="contact">Contactez-nous !</a>
+                <span class="separateur"></span>
+                <!-- Connexion -->
+                <a href="..\Page_Connexion\connexion.html" class="connexion">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="12" cy="8" r="4"></circle>
+                        <path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"></path>
+                    </svg>
+                    <span>Se connecter / S'inscrire</span>
+                </a>
+                <!-- Favoris -->
+                <a href="#" class="icone-action" aria-label="Mes favoris">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M20.8 8.7c0 5.5-8.8 10.5-8.8 10.5S3.2 14.2 3.2 8.7C3.2 6 5.2 4 7.8 4c1.6 0 3.1.8 4.2 2.1C13.1 4.8 14.6 4 16.2 4c2.6 0 4.6 2 4.6 4.7z"></path>
+                    </svg>
+                </a>
+                <!-- Panier -->
+                <a href="#" class="icone-action" aria-label="Mon panier">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M6 8h12l1 12H5L6 8z"></path>
+                        <path d="M9 8V6a3 3 0 0 1 6 0v2"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </header>
+
+
+    <main>
+        <h1>Bienvenue à tous les passionnés & passionnées de cuisine !</h1>
+        <section class="contenu">
+            <div class="presentation">
+                <img src="../img/logo/logo_transparent.png" alt="Gastronome créatif" />
+                <p class="slogan">L'art de la cuisine autrement.</p>
+                <a href="#" class="bouton-recettes">Découvrir nos recettes</a>
+            </div>
+        </section>
+        <!-- section Actualités -->
+        <section class="actualite">
+            <h1>Actualités</h1>
+            <div class="fond-actualite">
+            <div class="section-actualite">
+                <div class="actualite1">
+                    <img src="..\img\illustrations\aubergine-saucisse-de-morteau.jpeg" />
+                    <div class="texte-actualite">
+                        <p>Saucisse de Morteau à l'aubergine</p>
+                    </div>
+                </div>
+
+                <div class="actualite1">
+                    <img src="..\img\illustrations\saumon-315x420.jpeg" />
+                    <div class="texte-actualite">
+                        <p>Saumon à la plancha, crème au wasabi</p>
+                    </div>
+                </div>
+
+                <div class="actualite1">
+                    <img src="..\img\illustrations\pizza-pasteque-315x420.jpg" />
+                    <div class="texte-actualite">
+                        <p>Pizza à la pastèque</p>
+                    </div>
+                </div>
+            </div>
+            <div class="button-actualite">
+                <button>Voir toutes les actualités</button>
+            </div>
+            </div>
+        </section>
+        <!-- section citations -->
+        <section class="citations">
+            <h1>Citations</h1>
+            <div class="fond-citation">
+                <div class="slide">
+                    <p>La bonne cuisine est honnête, sincère et simple.</p>
+                    <p>Elisabeth David, écrivaine de livres de cuisine</p>
+                </div>
+                <div class="slide">
+                    <p>La cuisine, c'est donner de la mémoire à l'éphémère.</p>
+                    <p>Thierry Marx, chef cuisinier</p>
+                </div>
+                <div class="slide">
+                    <p>Faites simple et donnez du goût à chaque bouchée.</p>
+                    <p>Joël Robuchon, chef cuisinier</p>
+                </div>
+                <div class="slide">
+                    <p>Cuisiner c'est imaginer, inventer, créer et partager.</p>
+                    <p>Anne-Sophie Pic</p>
+                </div>
+                <div class="slide">
+                    <p>Classique ou moderne, il n'y a qu'une seule cuisine... La bonne.</p>
+                    <p>Paul Bocuse</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- section recette à la une -->
+        <section class="recette">
+            <h1>Recettes à la une</h1>
+            <div class="fond-recette">
+            <div class="section-recette">
+                <div class="recette1">
+                    <img src="..\img\illustrations\aubergine-saucisse-de-morteau.jpeg" />
+                    <div class="texte-recette1">
+                        <p>Saucisse de Morteau à l'aubergine</p>
+                        <div class="notation">
+
+                            <span class="etoile">★</span>
+                            <span class="etoile">★</span>
+                            <span class="etoile">★</span>
+                            <span class="etoile">★</span>
+                            <span class="etoile">★</span>
+                            <br>
+                            <span class="note">4,5/5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recette1">
+                    <img src="..\img\illustrations\saumon-315x420.jpeg" />
+                    <div class="texte-recette1">
+                        <p>Saumon à la plancha, crème au wasabi</p>
+                        <div class="notation">
+
+                            <span class="etoile">★</span>
+                            <span class="etoile">★</span>
+                            <span class="etoile">★</span>
+                            <span class="etoile">★</span>
+                            <span class="etoile">★</span>
+
+                            <span class="note">4,5/5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recette1">
+                    <img src="..\img\illustrations\pizza-pasteque-315x420.jpg" />
+                    <div class="texte-recette1">
+                        <p>Pizza à la pastèque</p>
+                        <div class="notation">
+
+                            <span class="etoile">★</span>
+                            <span class="etoile">★</span>
+                            <span class="etoile">★</span>
+                            <span class="etoile">★</span>
+                            <span class="etoile">★</span>
+
+                            <span class="note">4,5/5</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="button-recette">
+                <button>Voir nos autres recettes gourmandes</button>
+            </div>
+        </div>
+        </section>
+        <!-- section rejoindre le club -->
+        <section class="club">
+            <h1>Rejoindre le club</h1>
+            <div class="club-img">
+                <img src="..\img\club\contribuer.png" />
+                <img src="..\img\club\manger.png" />
+                <img src="..\img\club\menuSemaine.png" />
+                <img src="..\img\club\noter.png" />
+                <img src="..\img\club\nouveaute.png" />
+                <img src="..\img\club\sauvegarder.png" />
+            </div>    
+            <div class="button-club">
+                <button>Rejoindre le club GC</button>
+            </div>
+            </div>  
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="footer-container1">
+            <div class ="logo-footer1">
+                <a href="pagePrincipale.html" class="logo"><img src="..\img\logo\logo_GC.png" alt="Gastronome créatif"></a>
+            
+            </div>
+        </div>
+        <div class="footer-container2">
+            <div class="logo-footer2">
+                <a href="http://www.facebook.com"><img src="..\img\logo\logo_facebook.png"/></a>
+                <a href="http://www.youtube.com"><img src="..\img\logo\logo_youtube2.png"/></a>
+                <a href="http://www.instagram.com"><img src="..\img\logo\logo_instagram2.png"/></a>
+                <a href="http://www.pinterest.com"><img src="..\img\logo\logo_pinterest2.png"/></a>
+                <a href="http://www.x.com"><img src="..\img\logo\logo_twitter2.png"/></a>
+                <a href="http://www.tiktok.com"><img src="..\img\logo\logo_tiktok2.png"/></a>
+            </div>
+            
+            <p>A propos - <a href="..\Page_Contact\contact.html" class="contact">Contact</a> - Mentions légales - CGU - CGV - Protection des données personnelles - Cookies - Préférences cookies - Accessibilité</p>
+        </div>
+    </footer>
+</body>
+
+</html>

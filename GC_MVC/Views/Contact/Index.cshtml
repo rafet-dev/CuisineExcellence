@@ -1,0 +1,47 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Contact";
+} 
+
+<h1>Contactez-nous !</h1>
+    <section class="fond-contact">
+        <div class="contact-container-1">
+            <form action="#" method="post">
+                <label for="name">Votre nom :</label>
+                <input type="text" id="name" name="nom" required/>
+                        
+                <label for="first-name">Votre Prénom :</label>
+                <input type="text" id="first-name" name="prenom" required/>
+                        
+                <label for="mail">Adresse email :</label>
+                <input type="email" id="mail" name="adresse-mail" required/>
+                        
+                <label for="confirmation-mail">Confirmer l'adresse email :</label>
+                <input type="email" id="confirmation-mail" name="confirmation-adresse-mail">
+                <br />
+                <label for="membre">Etes-vous membre du club GC ?</label>
+                <label for="oui">Oui <input type="radio" id="oui" name="reponse" /></label>
+                <br />
+                        
+                <label for="non">Non <input type="radio" id="non" name="reponse" /></label>
+                        
+
+            </form>
+        </div>
+        <div class="contact-container-2">
+            <label for="msg">Message :</label>
+            <textarea id="msg" name="user_message"></textarea>
+
+            <div class="button">
+                <button type="submit">Envoyer votre message</button>
+            </div>
+
+            <div id="messageConfirmation" class="cache">
+                Merci ! Votre message a bien été envoyé.
+            </div>
+        </div>
+    </section>
+
+@section Styles {
+    <link rel="stylesheet" href="~/CSS/styleContact.css" />
+} 

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Gastronome créatif</title>
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="UtilisateurMenuStyle.css">
+        <link rel="stylesheet" href="UtilisateurMainStyle.css">
+        <link rel="stylesheet" href="UtilisateurFooterStyle.css">
+    </head>
+    <body>
+        <header class="header">
+            <div class="header-container">
+                <!--RECHERCHE-->
+                <div class="recherche">
+                    <input type="text" id="champRecherche" placeholder="Rechercher une recette, un ingrédient...">
+                    <button type="button" id="boutonRecherche" aria-label="Rechercher">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="11" cy="11" r="7"></circle>
+                            <line x1="16.5" y1="16.5" x2="22" y2="22"></line>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- NAVIGATION -->
+                <nav class="navigation">
+                    <a href="..\Page_Recette\recette.html" class="menu-principal">Recettes<span class="fleche">⌄</span></a>
+                    <a href="..\Page_Actualite\actualite.html">Actualités</a>
+                    <a href="..\Page_Saison\saison.html">C'est la saison !</a>
+                </nav>
+
+                <!-- LOGO -->
+                <a href="..\Page_Principale\pagePrincipale.html" class="logo"><img src="..\img\logo\logo_GC.png" alt="Gastronome créatif"></a>
+
+                <!-- ACTIONS -->
+
+                <div class="actions">
+
+                    <a href="..\Page_Contact\contact.html" class="contact">Contactez-nous !</a>
+                    <span class="separateur"></span>
+                    <!-- Connexion -->
+                    <a href="..\Page_Connexion\connexion.html" class="connexion">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="12" cy="8" r="4"></circle>
+                            <path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"></path>
+                        </svg>
+                        <span>Se connecter / S'inscrire</span>
+                    </a>
+                    <!-- Favoris -->
+                    <a href="#" class="icone-action" aria-label="Mes favoris">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M20.8 8.7c0 5.5-8.8 10.5-8.8 10.5S3.2 14.2 3.2 8.7C3.2 6 5.2 4 7.8 4c1.6 0 3.1.8 4.2 2.1C13.1 4.8 14.6 4 16.2 4c2.6 0 4.6 2 4.6 4.7z"></path>
+                        </svg>
+                    </a>
+                    <!-- Panier -->
+                    <a href="#" class="icone-action" aria-label="Mon panier">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M6 8h12l1 12H5L6 8z"></path>
+                            <path d="M9 8V6a3 3 0 0 1 6 0v2"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </header>
+        <main>
+            <h1>Bienvenue + nom utilisateur !</h1>
+        </main>
+        <footer>
+            <div class="footer-container1">
+                <div class ="logo-footer1">
+                    <a href="..\Page_Principale\pagePrincipale.html" class="logo"><img src="..\img\logo\logo_GC.png" alt="Gastronome créatif"></a>
+                
+                </div>
+            </div>
+            <div class="footer-container2">
+                <div class="logo-footer2">
+                    <a href="http://www.facebook.com"><img src="..\img\logo\logo_facebook.png"/></a>
+                    <a href="http://www.youtube.com"><img src="..\img\logo\logo_youtube2.png"/></a>
+                    <a href="http://www.instagram.com"><img src="..\img\logo\logo_instagram2.png"/></a>
+                    <a href="http://www.pinterest.com"><img src="..\img\logo\logo_pinterest2.png"/></a>
+                    <a href="http://www.x.com"><img src="..\img\logo\logo_twitter2.png"/></a>
+                    <a href="http://www.tiktok.com"><img src="..\img\logo\logo_tiktok2.png"/></a>
+                </div>
+                
+                <p>A propos - <a href="..\Page_Contact\contact.html" class="contact">Contact</a> - Mentions légales - CGU - CGV - Protection des données personnelles - Cookies - Préférences cookies - Accessibilité</p>
+            </div>
+        </footer>
+    </body>
+</html>
