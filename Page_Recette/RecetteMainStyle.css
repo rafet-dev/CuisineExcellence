@@ -145,7 +145,7 @@ img
     padding: 10px;
 }
 
-.preparation .etape #numero
+.preparation .etape .numero
 {
     background-color: var(--gris-chaud);
     border: 1px solid var(--anthracite);
@@ -161,7 +161,7 @@ img
 }
 
 
-.preparation .etape #texte
+.preparation .etape .texte
 {
     border: 1px solid var(--anthracite);
     width: 750px;

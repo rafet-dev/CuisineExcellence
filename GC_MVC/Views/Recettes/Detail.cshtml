@@ -1,4 +1,166 @@
 @using GC_MVC.Models
-@model Recettes
+@using GC_MVC.ViewModels
+@model RecetteDetailViewModel
+@{
+    int noteArrondie = (int)Math.Round(Model.Moyenne);
+}
 
-    <h1>@Model.nom</h1>
+   <h1>@Model.Recette?.nom</h1>
+        <div class="image-recette">
+            <img src="~/img/recettes/@Model.Recette?.photo" alt="@Model.Recette?.nom" />
+        </div>
+        <div class="note-commentaire">
+            
+            <p>Je note cette recette ! </p>
+            <p>Je commente cette recette !</p>
+        </div>
+        <div class="infos-principales">
+            <p>Auteur :  @Model.Createur?.identifiant</p>
+            <p>Note :
+                @if(Model.Avis.Count > 0)
+                {
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        if (i <= noteArrondie)
+                        {
+                            <span class="etoile">★</span>
+                        }
+                        else
+                        {
+                            <span class="etoile-vide">☆</span>
+                        }
+                    }
+                }
+                else
+                {
+                    <span>Pas encore de note</span>
+                }</p>
+            <p>Temps de préparation : @Model.Recette?.temps_preparation.TotalMinutes mn</p>
+            <div class="difficulte-recette">
+                <span>Difficulté :</span>
+                @for (int i = 1; i <= 5; i++)
+                {
+                    if (i <= Model.Recette?.difficulte)
+                        {
+                            <i data-lucide="chef-hat" class="toque-active"></i>
+                        }
+                        else
+                        {
+                            <i data-lucide="chef-hat" class="toque-inactive"></i>
+                        }
+                }
+            </div>
+            <p>Prix</p>
+            <div class="portions-recette">
+                <button type="button" id="diminuer-personnes">−</button>
+                <span id="nombre-personnes">
+                    @Model.Recette?.nombre_personnes
+                </span>
+                <button type="button" id="augmenter-personnes">+</button>
+                <span>personnes</span>
+            </div>
+        </div>
+        <div class="button-sauvegarder-imprimer">
+            <div class="button-sauvegarder">
+                <button>Sauvegarder</button>
+            </div>
+
+             <div class="button-imprimer">
+                <button>Imprimer</button>
+            </div>
+        </div>
+        <h1>Ingrédients</h1>
+        <div class="liste-ingredient">
+            <div class="un-ingredient">
+                <ul>
+                    @foreach(IngredientQuantiteViewModel ingredient in Model.Ingredients)
+                    {
+                        <img src="..\img\ingredient\farine.jpg" />
+                        <li>
+                            <span data-quantite-initiale="@ingredient.Quantite">
+                                @ingredient.Quantite
+                            </span>
+                            @ingredient.Nom
+                        </li>  
+                    }
+                </ul> 
+            </div>
+        </div>
+        <h1>Préparation</h1>
+        <div class="preparation">
+            <div class="info-preparation">
+                <p>temps de préparation :  @Model.Recette?.temps_preparation.TotalMinutes mn </p>
+                <p>temps de cuisson:  @Model.Recette?.temps_cuisson.TotalMinutes mn</p>
+            </div>
+            
+                @foreach(Etapes etape in Model.Etapes)
+                {
+                    <div class="etape">
+                        <p class="numero">@etape.numero_etape</p>
+                        <p class="texte">@etape.texte</p>
+                    </div>
+                } 
+            
+        </div>
+
+        @if(Model.Avis.Count > 0)
+        {   
+            <div class="bloc-note-moyenne">
+                <p class="note-moyenne">Note moyenne : @Model.Moyenne.ToString("F2")/5</p>
+                @for (int i = 1; i <= 5; i++)
+                {
+                    if (i <= noteArrondie)
+                    {
+                        <span class="etoile">★</span>
+                    }
+                    else
+                    {
+                        <span class="etoile-vide">☆</span>
+                    }
+                }
+            </div>
+            @foreach (AvisUtilisateurViewModel avisUtilisateur in Model.Avis)
+            {
+                <div class="carte-avis">
+                    <div class="entete-avis">
+                        <p>Utilisateur : @avisUtilisateur.Pseudo</p>
+                        <p>Note : 
+                        @for (int i = 1; i <= 5; i++)
+                            {
+                                if (i <= avisUtilisateur.Note)
+                                {
+                                    <span class ="etoile">★</span>
+                                }
+                                else
+                                {
+                                    <span class="etoile-vide">☆</span>
+                                }
+                            }
+                        </p>
+                    </div>
+                <p>@avisUtilisateur.Commentaire</p>
+            </div>
+            }
+        }
+        else
+        {
+            <p>Aucun avis pour le moment.</p>
+        }
+
+         <div class="button-note-club">
+            <div class="button-note">
+                <button>J'ai cuisiné cette recette gourmande !</button>
+            </div>
+            <p>C'est votre première recette ?</p>
+             <div class="button-club">
+                <button>Rejoignez le club !</button>
+            </div>
+        </div>
+
+@section Styles {
+    <link rel="stylesheet" href="~/CSS/styleDetailRecette.css" />
+} 
+
+@section Scripts {
+    <script src="~/JS/scriptDetailRecette.js" defer></script>
+}

@@ -13,3 +13,5 @@ obj/
 .env.*
 # Logs
 *.log
+# autres
+*.json

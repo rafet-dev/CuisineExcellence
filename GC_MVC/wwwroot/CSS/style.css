@@ -27,6 +27,12 @@ body
     font-family: "Montserrat", sans-serif;
 }
 
+ol 
+{
+    list-style-type: decimal;
+    padding-left: 40px;
+}
+
 /*##########################################
                 Header
 ###########################################*/

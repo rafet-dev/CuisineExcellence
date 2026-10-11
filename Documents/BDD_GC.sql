@@ -2431,3 +2431,14 @@ VALUES
 (60, 9, 4, 'Très bonne recette, parfaite pour utiliser des pommes bien mûres.'),
 (60, 15, 5, 'Rapide, économique et délicieuse, surtout encore légèrement tiède.');
 ---------------------------------------------------------------------------------------------------------------------
+--modification de la table pour calcul de prix de revient d'une recette
+alter table ingredients
+add prix_reference numeric(10,2),
+add quantite_reference numeric(10,2),
+add unite_reference varchar(20);
+
+alter table recettes 
+add nombre_personnes integer;
+
+
+

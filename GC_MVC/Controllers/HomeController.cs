@@ -1,12 +1,21 @@
 using Microsoft.AspNetCore.Mvc;
+using GC_MVC.Data;
+using GC_MVC.Models;
 
 namespace GC_MVC.Controllers;
 
 public class HomeController : Controller
 {
+    private readonly GCContext _context;
+    public HomeController(GCContext context)
+    {
+        _context = context;
+    }
     public IActionResult Index()
     {
-        return View();
+        List<Recettes> recettes = _context.Recettes.Take(3).ToList();
+
+        return View(recettes);
     }
 
 }

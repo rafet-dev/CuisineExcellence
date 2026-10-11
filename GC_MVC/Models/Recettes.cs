@@ -14,6 +14,6 @@ namespace GC_MVC.Models
         public string photo {get; set;}
         public TimeSpan temps_cuisson {get; set;}
         public TimeSpan temps_preparation {get; set;}
+        public int? nombre_personnes { get; set;}
     }
-
 }

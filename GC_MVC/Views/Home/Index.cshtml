@@ -1,3 +1,5 @@
+@using GC_MVC.Models
+@model List<GC_MVC.Models.Recettes>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Accueil";
@@ -72,57 +74,22 @@
         <section class="recette">
             <h1>Recettes à la une</h1>
             <div class="fond-recette">
-            <div class="section-recette">
-                <div class="recette1">
-                    <img src="~/img/illustrations/aubergine-saucisse-de-morteau.jpeg" />
-                    <div class="texte-recette1">
-                        <p>Saucisse de Morteau à l'aubergine</p>
-                        <div class="notation">
-
-                            <span class="etoile">★</span>
-                            <span class="etoile">★</span>
-                            <span class="etoile">★</span>
-                            <span class="etoile">★</span>
-                            <span class="etoile">★</span>
-                            <br>
-                            <span class="note">4,5/5</span>
-                        </div>
-                    </div>
+                <div class="section-recette">
+                    @foreach(Recettes recettes in Model)
+                    {
+                        <div class="recette1">
+                            <a asp-controller="Recettes" asp-action="Detail" asp-route-id="@recettes.id_recette"><img src="~/img/illustrations/@recettes.photo" alt="@recettes.nom" /></a>
+                            <div class="texte-recette1">
+                                <h2><a asp-controller="Recettes" asp-action="Detail" asp-route-id="@recettes.id_recette">
+                                    @recettes.nom</a></h2>
+                                    <!-- asp-controller="Recettes"	Sélectionne RecettesController 
+                                    asp-action="Detail"	Appelle l'action Detail()
+                                    asp-route-id= recettes.id_recette Transmet l'identifiant de la recette-->
+                            </div>
+                        </div>   
+                    }
                 </div>
-
-                <div class="recette1">
-                    <img src="~/img/illustrations/saumon-315x420.jpeg" />
-                    <div class="texte-recette1">
-                        <p>Saumon à la plancha, crème au wasabi</p>
-                        <div class="notation">
-
-                            <span class="etoile">★</span>
-                            <span class="etoile">★</span>
-                            <span class="etoile">★</span>
-                            <span class="etoile">★</span>
-                            <span class="etoile">★</span>
-
-                            <span class="note">4,5/5</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="recette1">
-                    <img src="~/img/illustrations/pizza-pasteque-315x420.jpg" />
-                    <div class="texte-recette1">
-                        <p>Pizza à la pastèque</p>
-                        <div class="notation">
-
-                            <span class="etoile">★</span>
-                            <span class="etoile">★</span>
-                            <span class="etoile">★</span>
-                            <span class="etoile">★</span>
-                            <span class="etoile">★</span>
-
-                            <span class="note">4,5/5</span>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
             <div class="button-recette">
                 <button>Voir nos autres recettes gourmandes</button>

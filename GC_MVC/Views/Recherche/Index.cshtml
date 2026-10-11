@@ -1,3 +1,5 @@
+@using GC_MVC.Models
+@model List<GC_MVC.Models.Recettes>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Recherche";
@@ -5,15 +7,15 @@
 
 <h1>Recherche</h1>
     <div class="recherche-filtre">
-        <div class="recherche">
-            <input type="text" id="champRecherche" placeholder="Rechercher une recette, un ingrédient...">
-            <button type="button" id="boutonRecherche" aria-label="Rechercher">
+        <form class="recherche" asp-controller="recherche" asp-controller="Recherche" asp-action="Index" method="get">
+            <input type="text" id="champRecherche" name = "terme" placeholder="Rechercher une recette, un ingrédient...">
+            <button type="submit" id="boutonRecherche" aria-label="Rechercher">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
                     <circle cx="11" cy="11" r="7"></circle>
                     <line x1="16.5" y1="16.5" x2="22" y2="22"></line>
                 </svg>
             </button>
-        </div>
+        </form>
         <div class="filtre">
             <div class="info">
                 <label for="choix-tps-prep">Temps global de préparation :</label>
@@ -62,6 +64,19 @@
         </div>
     </div>
 <h1>Résultats de la recherche</h1>
+@if (Model.Count == 0)
+{
+    <p>Aucun résultat trouvé</p>
+}
+else
+{
+    @foreach (GC_MVC.Models.Recettes recette in Model)
+    {
+        <div class="resultat-recette">
+            <a asp-controller="Recettes" asp-action="Detail" asp-route-id="@recette.id_recette"><h2>@recette.nom</h2></a>
+        </div>
+    }
+}
 
 @section Styles {
     <link rel="stylesheet" href="~/CSS/styleRecherche.css" />
