@@ -69,3 +69,33 @@ h1
     width:auto;
     height:auto;
 }
+
+/* résultats de la recherche */
+
+.grille-recettes
+{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 30px 0;
+}
+
+.resultat-recette
+{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    gap:15px;
+}
+
+.resultat-recette img {
+    width: 150px;
+    height: 180px;
+    object-fit: cover;
+}
+
+.resultat-recette a 
+{
+    color: var(--anthracite);
+    text-decoration: none;
+}

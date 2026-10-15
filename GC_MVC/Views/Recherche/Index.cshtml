@@ -7,8 +7,8 @@
 
 <h1>Recherche</h1>
     <div class="recherche-filtre">
-        <form class="recherche" asp-controller="recherche" asp-controller="Recherche" asp-action="Index" method="get">
-            <input type="text" id="champRecherche" name = "terme" placeholder="Rechercher une recette, un ingrédient...">
+        <form id="formulaireRecherche" class="recherche" asp-controller="Recherche" asp-action="Index" method="get">
+            <input type="text" id="champRecherchePage" name = "terme" placeholder="Rechercher une recette, un ingrédient...">
             <button type="submit" id="boutonRecherche" aria-label="Rechercher">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
                     <circle cx="11" cy="11" r="7"></circle>
@@ -31,11 +31,11 @@
             <div class="info">
                 <label class="diff">Difficulté :</label>
                 <div class="rating">
-                    <label><input type="radio" name="niveau-diff" value="1"> ★</label>
-                    <label><input type="radio" name="niveau-diff" value="2"> ★★</label>
-                    <label><input type="radio" name="niveau-diff" value="3"> ★★★</label>
-                    <label><input type="radio" name="niveau-diff" value="4"> ★★★★</label>
-                    <label><input type="radio" name="niveau-diff" value="5"> ★★★★★</label>
+                    <label><input type="radio" name="niveau-diff" value="1"><i data-lucide="chef-hat" class="toque-active"></i></label>
+                    <label><input type="radio" name="niveau-diff" value="2"><i data-lucide="chef-hat" class="toque-active"></i><i data-lucide="chef-hat" class="toque-active"></i></label>
+                    <label><input type="radio" name="niveau-diff" value="3"><i data-lucide="chef-hat" class="toque-active"></i><i data-lucide="chef-hat" class="toque-active"></i><i data-lucide="chef-hat" class="toque-active"></i></label>
+                    <label><input type="radio" name="niveau-diff" value="4"><i data-lucide="chef-hat" class="toque-active"></i><i data-lucide="chef-hat" class="toque-active"></i><i data-lucide="chef-hat" class="toque-active"></i><i data-lucide="chef-hat" class="toque-active"></i></label>
+                    <label><input type="radio" name="niveaudiff" value="5"> <i data-lucide="chef-hat" class="toque-active"></i><i data-lucide="chef-hat" class="toque-active"></i><i data-lucide="chef-hat" class="toque-active"></i><i data-lucide="chef-hat" class="toque-active"></i><i data-lucide="chef-hat" class="toque-active"></i></label>
                 </div>
             </div>
 
@@ -43,41 +43,54 @@
                 <label class="diff">Note :</label>
 
                 <div class="rating">
-                    <label><input type="radio" name="niveau-diff" value="1"> ★</label>
-                    <label><input type="radio" name="niveau-diff" value="2"> ★★</label>
-                    <label><input type="radio" name="niveau-diff" value="3"> ★★★</label>
-                    <label><input type="radio" name="niveau-diff" value="4"> ★★★★</label>
-                    <label><input type="radio" name="niveau-diff" value="5"> ★★★★★</label>
+                    <label><input type="radio" name="niveau-note" value="1"> ★</label>
+                    <label><input type="radio" name="niveau-note" value="2"> ★★</label>
+                    <label><input type="radio" name="niveau-note" value="3"> ★★★</label>
+                    <label><input type="radio" name="niveau-note" value="4"> ★★★★</label>
+                    <label><input type="radio" name="niveau-note" value="5"> ★★★★★</label>
                 </div>
             </div>
 
             <div class="info">
-                <label class="categorie">Categorie : </label>
-                <select id="categorie" name="choix catégorie">
-                    <option value="option1">Entrée</option>
-                    <option value="option2">Plat</option>
-                    <option value="option3">Dessert</option>
-                    <option value="option4">Cuisine Asiatique</option>
-                    <option value="option5">Burgers</option>
+                <label for="categorie">Categorie : </label>
+                <select id="categorie" name="categorie" form="formulaireRecherche">
+                    <option value="">Toutes les catégories</option>
+                    @foreach(Categories categories in ViewBag.Categories)
+                    {
+                        <option value="@categories.id_categorie">@categories.nom</option>
+                    }
                 </select>
             </div>
         </div>
     </div>
 <h1>Résultats de la recherche</h1>
-@if (Model.Count == 0)
+
+@if (ViewBag.RechercheEffectuee == false)
 {
-    <p>Aucun résultat trouvé</p>
+    <p>Saisissez un terme pour rechercher une recette.</p>
+}
+else if (Model.Count == 0)
+{
+    <p>Aucun résultat trouvé.</p>
 }
 else
 {
-    @foreach (GC_MVC.Models.Recettes recette in Model)
-    {
-        <div class="resultat-recette">
-            <a asp-controller="Recettes" asp-action="Detail" asp-route-id="@recette.id_recette"><h2>@recette.nom</h2></a>
-        </div>
-    }
+    <div class="grille-recettes">
+        @foreach (GC_MVC.Models.Recettes recette in Model)
+        {
+            <div class="resultat-recette">
+                <img src="~/img/recettes/@recette.photo" alt="@recette.nom"/>
+                <a asp-controller="Recettes" asp-action="Detail" asp-route-id="@recette.id_recette"><h2>@recette.nom</h2></a>
+            </div>
+        }
+    </div>
+    
 }
 
 @section Styles {
     <link rel="stylesheet" href="~/CSS/styleRecherche.css" />
 } 
+
+@section Scripts {
+    <script src="~/js/recherche.js"></script>
+}

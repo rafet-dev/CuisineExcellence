@@ -17,24 +17,53 @@ public class RechercheController : Controller
     {
         _context = context;
     }
-    public IActionResult Index(string? terme)
+    // méthode pour afficher la page de recherche
+    public IActionResult Index(string? terme, int? categorie)
     {   
-        List<Recettes> recettes = new List<Recettes>();
-        // Vérifie que l'utilisateur a saisi un terme de recherche. La condition est fausse si "terme" est null, vide
-        // ou contient uniquement des espaces.
+        IQueryable<Recettes> requete = _context.Recettes.AsQueryable();
+        ViewBag.RechercheEffectuee = !string.IsNullOrWhiteSpace(terme) || categorie != null;
+
         if (!string.IsNullOrWhiteSpace(terme))
-        {   
-            // Recherche dans la table Recettes de PostgreSQL.
-            // Where() filtre les recettes selon une condition & r représente chaque recette examinée.
-            // Contains(terme) vérifie si le nom contient le texte recherché.
-            // ToList() exécute la requête et récupère les résultats sous forme d'une liste d'objets Recettes.
-            // EF.Functions.ILike() = permet de rendre la recherche insensible à la casse.
-            recettes = _context.Recettes
-                    .Where(r => EF.Functions.ILike(r.nom, $"%{terme}%"))
-                    .ToList();
+        {
+            requete = requete.Where(r =>
+                EF.Functions.ILike(r.nom, $"%{terme}%"));
         }
+
+        if (categorie != null)
+        {
+            requete = requete.Where(r =>
+                _context.Categories_recettes.Any(cr =>
+                    cr.id_recette == r.id_recette &&
+                    cr.id_categorie == categorie));
+        }
+
+        List<Recettes> recettes = requete.ToList();
+        List<Categories> categories = _context.Categories.ToList();
+        ViewBag.Categories = categories;
         // Transmet la liste des recettes à la vue Razor.
         return View(recettes);
+    }
+
+    // méthode pour répondre aux requetes Fetch
+    public IActionResult Resultats(string? terme, int? categorie)
+    {
+        IQueryable<Recettes> requete = _context.Recettes.AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(terme))
+        {
+            requete = requete.Where(r => EF.Functions.ILike(r.nom, $"%{terme}%"));
+        }
+
+        if(categorie != null)
+        {
+            requete = requete.Where(r =>
+             _context.Categories_recettes.Any(cr =>
+                cr.id_recette == r.id_recette &&
+                cr.id_categorie == categorie));
+        }
+
+        List<Recettes> recettes = requete.ToList();
+        return Json(recettes);
     }
 
 }
