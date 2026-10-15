@@ -1,0 +1,31 @@
+image: mcr.microsoft.com/dotnet/sdk:10.0
+
+variables:
+  SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
+  GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
+  LANG: "C.UTF-8" # Force l'environnement à utiliser l'UTF-8 universal
+
+stages:
+  - build-sonar
+
+
+build-sonar:
+  stage: build-sonar
+  
+  
+  cache:
+    policy: pull-push
+    key: "sonar-cache-$CI_COMMIT_REF_SLUG"
+    paths:
+      - "${SONAR_USER_HOME}/cache"
+      - sonar-scanner/
+      
+  script: 
+      - "dotnet tool install --global dotnet-sonarscanner"
+      - "export PATH=\"$PATH:$HOME/.dotnet/tools\""
+      - "dotnet sonarscanner begin /k:\"rzitoun_gc_f1917d6d-088e-478e-9e82-83aae9c6e456\" /d:sonar.token=\"$SONAR_TOKEN\" /d:\"sonar.host.url=$SONAR_HOST_URL\" "
+      - "dotnet build GC_MVC"
+      - "dotnet sonarscanner end /d:sonar.token=\"$SONAR_TOKEN\""
+  allow_failure: true
+  rules:
+    - if: $CI_COMMIT_BRANCH == 'main'
