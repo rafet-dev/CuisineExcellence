@@ -23,7 +23,7 @@ build-sonar:
   script: 
       - "dotnet tool install --global dotnet-sonarscanner"
       - "export PATH=\"$PATH:$HOME/.dotnet/tools\""
-      - "dotnet sonarscanner begin /k:\"rzitoun_gc_f1917d6d-088e-478e-9e82-83aae9c6e456\" /d:sonar.token=\"$SONAR_TOKEN\" /d:\"sonar.host.url=$SONAR_HOST_URL\" /d:sonar.exclusion=\"Documents/*,Pages_HTML/*\" "
+      - "dotnet sonarscanner begin /k:\"rzitoun_gc_f1917d6d-088e-478e-9e82-83aae9c6e456\" /d:sonar.token=\"$SONAR_TOKEN\" /d:\"sonar.host.url=$SONAR_HOST_URL\" /d:sonar.exclusion=\"Documents/*,Pages_HTML/**\" "
       - "dotnet build GC_MVC"
       - "dotnet sonarscanner end /d:sonar.token=\"$SONAR_TOKEN\""
   allow_failure: true
