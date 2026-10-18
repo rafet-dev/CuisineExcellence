@@ -1,0 +1,13 @@
+@model ConnexionViewModel
+@{
+    ViewData["Title"] = "Connexion";
+}
+
+<h1>Connexion</h1>
+<form asp-action="Connexion" asp-controller="Access" method="post">
+    <label asp-for="@Model.IdentifiantOuEmail"></label>
+    <input asp-for="@Model.IdentifiantOuEmail">
+    <label asp-for="@Model.MotDePasse"></label>
+    <input type="password" asp-for="@Model.MotDePasse">
+    <input type="submit" value="Se connecter">
+</form>

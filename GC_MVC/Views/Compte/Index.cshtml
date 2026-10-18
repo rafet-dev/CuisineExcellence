@@ -1,0 +1,52 @@
+
+@model GC_MVC.ViewModels.CompteViewModel
+
+@{
+    ViewData["Title"] = "Mon compte";
+}
+
+<h2>Bienvenue @Model.Identifiant !</h2>
+<main>
+    <h1>Mon compte</h1>
+
+    <section class="MesRecettes">
+        
+        <a asp-controller="Recettes" asp-action="Index">
+            <h2>Mes recettes</h2>
+            <p>Retrouvez ici toutes les recettes que vous avez créées.</p>
+        </a>
+
+    </section>
+    
+    <section>Créer une recette</section>
+    <section>Mes avis et commentaires</section>
+    <section>Mes favoris</section>
+    <section>Mes informations personnelles</section>
+</main>
+
+
+
+   
+
+
+@*
+<main class="compte-container">
+<section class="compte-profil">
+        <h1>Mon compte</h1>
+
+        <h2>Mes informations personnelles</h2>
+
+        <div class="compte-informations">
+            <p>
+                <strong>Identifiant :</strong>
+                @Model.Identifiant
+            </p>
+
+            <p>
+                <strong>Adresse e-mail :</strong>
+                @Model.Email
+            </p>
+        </div>
+    </section>'@
+</main>
+*@ 

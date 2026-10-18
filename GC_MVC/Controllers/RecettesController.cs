@@ -2,6 +2,8 @@ using GC_MVC.Data;
 using Microsoft.AspNetCore.Mvc;
 using GC_MVC.Models;
 using GC_MVC.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace GC_MVC.Controllers
 {
@@ -83,6 +85,23 @@ namespace GC_MVC.Controllers
                 Moyenne = moyenne
             };
             return View(vm);
+        }
+
+        [Authorize]
+        public IActionResult MesRecettes()
+        {
+            string? utilisateurId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if(!int.TryParse(utilisateurId, out int id))
+            {
+                return Unauthorized();
+            }
+
+            List<Recettes> mesRecettes = _context.Recettes
+                        .Where(recette => recette.createur == id)
+                        .ToList();
+
+            return View(mesRecettes);
         }
     }
 }

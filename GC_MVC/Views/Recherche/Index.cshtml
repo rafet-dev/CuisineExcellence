@@ -64,7 +64,7 @@
         </div>
     </div>
 <h1>Résultats de la recherche</h1>
-
+<div id="resultatsRecherche">
 @if (ViewBag.RechercheEffectuee == false)
 {
     <p>Saisissez un terme pour rechercher une recette.</p>
@@ -84,9 +84,8 @@ else
             </div>
         }
     </div>
-    
 }
-
+</div>
 @section Styles {
     <link rel="stylesheet" href="~/CSS/styleRecherche.css" />
 } 

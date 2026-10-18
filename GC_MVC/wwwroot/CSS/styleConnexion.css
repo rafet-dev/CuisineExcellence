@@ -48,7 +48,10 @@ h1
 
 .fond-connexion .connexion-container-2 form
 {
-    width:100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .fond-connexion .connexion-container-2 #mail, .fond-connexion .connexion-container-2 #mdp

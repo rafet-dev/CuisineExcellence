@@ -1,3 +1,5 @@
+@model GC_MVC.ViewModels.ConnexionViewModel
+
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Connexion";
@@ -14,16 +16,16 @@
             </div>
         </div>
         <div class="connexion-container-2">
-            <form action="#" method="post">
-                <label for="mail">Adresse e-mail</label>
-                <input type="email" id="mail" name="adresseMail" required>
+            <form asp-controller="Access" asp-action="Connexion" method="post">
+                <label for="mail">Identifiant ou adresse e-mail</label>
+                <input asp-for="IdentifiantOuEmail" type="text" id="mail" required>
                 <label for="mdp">Mot de passe : </label>
-                <input type="password" id="mdp" name="MotDePasse" required>
+                <input asp-for="MotDePasse" type="password" id="mdp" required>
                 <p>Mot de passe oublié ?</p>
                 <div class="button">
                     <input id="connexion" type="submit" value="Connexion" />
                 </div> 
-                <a asp-controller="Inscription" asp-action="Index">Je n'ai pas de compte : je rejoins le Club !</a>
+                <a asp-controller="Access" asp-action="Inscription">Je n'ai pas de compte : je rejoins le Club !</a>
             </form>
         </div>
     </section>

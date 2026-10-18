@@ -1,0 +1,99 @@
+@using GC_MVC.Models
+@model List<Recettes>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Mes Recettes";
+}
+
+<main>
+    <h1>Ajout/Modification de votre recette gourmet</h1>
+    <form asp-controller="Recettes" asp-action="CreerRecette" method="post">
+    <section class ="AjoutRecette">
+        <div class="infos-1">
+            <div class="info">
+                <label id="list" for="titre-recette">Titre de la recette :</label>
+                <input type="text" id="titre-recette" name="titre" required />
+            </div>
+
+            <div class="info">
+                <label id="list" for="choix-tps-prep">Choisissez ou écrivez un temps de préparation :</label>
+                <input list="suggestions-tps-prep" id="choix-tps-prep" name="tps-prep" placeholder="Sélectionnez ou écrivez le temps de préparation ..." />
+                <datalist id="suggestions-tps-prep">
+                    <option value="15 minutes"/>
+                    <option value="30 minutes"/>
+                    <option value="45 minutes"/>
+                    <option value="1 heure"/>
+                </datalist>
+            </div>
+
+            <div class="info">
+                <label id="list" for="choix-tps-cui">Choisissez ou écrivez un temps de cuisson :</label>
+                <input list="suggestions-tps-cui" id="choix-tps-cui" name="tps-prep" placeholder="Sélectionnez ou écrivez le temps de cuisson ..." />
+                <datalist id="suggestions-tps-cui">
+                    <option value="15 minutes"/>
+                    <option value="30 minutes"/>
+                    <option value="45 minutes"/>
+                    <option value="1 heure"/>
+                </datalist>
+            </div>
+
+            <div class="info">
+                <label class="diff">Difficulté :</label>
+
+                <div class="rating">
+                    <label><input type="radio" name="niveau-diff" value="1"> ★</label>
+                    <label><input type="radio" name="niveau-diff" value="2"> ★★</label>
+                    <label><input type="radio" name="niveau-diff" value="3"> ★★★</label>
+                    <label><input type="radio" name="niveau-diff" value="4"> ★★★★</label>
+                    <label><input type="radio" name="niveau-diff" value="5"> ★★★★★</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="button-ajout">
+            <div class="button-image">
+                <button>Ajouter une image</button>
+            </div>
+            <div class="button-ingredient">
+                <button>Ajouter un ingrédient</button>
+            </div>
+            <div class="button-etape">
+                <button>Ajouter une étape</button>
+            </div>
+        </div>
+        <div class="img-recette">
+            <!-- ajout de l'image sélectionnée par le membre-->
+        </div>
+
+        <h1>Ingrédients</h1>
+        <div class="liste-ingredient">
+            <div class="un-ingredient">
+            <div class="img"></div> <!-- ajout de l'image de ingrédient -->
+                <p>ingredient 1</p>
+            </div>
+            <div class="un-ingredient">
+                <div class="img"></div> <!-- ajout de l'image de ingrédient -->
+                <p>ingredient 2</p>
+            </div>
+        </div>
+        <h1>Préparation</h1>
+
+        <div class="preparation">
+            <div class="etape">
+                <p id="numero">1</p>
+                <div class="info-etape">
+                    <label id="etape" for="texte-etape"></label>
+                    <textarea id="texte-etape" name="description" placeholder="Décrivez votre recette étape par étape ..."></textarea>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="button-image">
+        <button>Valider la recette</button>
+    </div>
+    </form>
+</main>
+
+@section Styles {
+    <link rel="stylesheet" href="~/CSS/styleCreerRecette.css" />
+} 

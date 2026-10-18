@@ -1,35 +1,46 @@
+@model GC_MVC.ViewModels.InscriptionViewModel
+
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Inscription";
-} 
+}
 
 <h1>Inscription nouveau membre</h1>
+
 <div class="fond-inscription">
     <div class="inscription">
-        <form action="#" method="get">
+
+        <form asp-controller="Access" asp-action="Inscription" method="post">
+
             <div class="ligne-inscription">
-                <label for="identifiant">Votre identifiant :</label>
-                <input type="text" id="identifiant" name="nom-identifiant" required/>
+                <label asp-for="Identifiant">Votre identifiant :</label>
+                <input asp-for="Identifiant" type="text" id="identifiant" required />
             </div>
+
             <div class="ligne-inscription">
-                <label for="email">Votre email :</label>
-                <input type="email" id="email" name="nom-email" required>
+                <label asp-for="Email">Votre email :</label>
+                <input asp-for="Email" type="email" id="email" required />
             </div>
+
             <div class="ligne-inscription">
-                <label for="password">Votre mot de passe :</label>
-                <input for="password" id="password" name="nom-password" required />
+                <label asp-for="MotDePasse">Votre mot de passe :</label>
+                <input asp-for="MotDePasse" type="password" id="password" required />
             </div>
+
             <div class="ligne-inscription">
                 <label for="password-2">Confirmez votre mot de passe :</label>
-                <input for="password" id="password-2" name="nom-password-2" required />
+                <input asp-for="ConfirmationMotDePasse" type="password" id="password-2" required />
             </div>
+
+            <div class="button-club">
+                <button type="submit">Je rejoins le club GC</button>
+            </div>
+
         </form>
-    </div>
-    <div class="button-club">
-        <button>Je rejoins le club GC</button>
+
     </div>
 </div>
 
 @section Styles {
     <link rel="stylesheet" href="~/CSS/styleInscription.css" />
-} 
+}

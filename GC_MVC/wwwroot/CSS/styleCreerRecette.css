@@ -1,0 +1,184 @@
+:root 
+{
+
+    --ivoire: #FFFDF8;
+    --creme: #F7F2E8;
+    --anthracite: #242424;
+    --gris-chaud: #6F6A62;
+    --or-champagne: #C9A45C;
+    --beige: #E5DED1;
+}
+
+h1
+{
+    padding: 20px;
+    text-align: center;
+    font-family: "Bodoni Moda", sans-serif;
+}
+
+.AjoutRecette
+{
+    background-color: var(--beige);
+    margin: 10px 150px;
+    display:flex;
+    flex-direction: column;
+}
+
+.AjoutRecette .infos-1
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items:left;
+    gap: 15px;
+    padding: 20px;
+}
+
+.AjoutRecette .infos-1 .info
+{
+    display:flex;
+    justify-content: left;
+    align-items: center;
+    gap: 20px;
+}
+
+.AjoutRecette .infos-1 .info #list 
+{
+    font-size: 16px;
+    gap: 20px;
+}
+
+.AjoutRecette .infos-1 .info input:not([type="radio"])
+{
+    width: 500px;
+    height: 35px;
+}
+
+.rating{
+    display:flex;
+    gap:15px;
+    color:var(--or-champagne);
+    font-size:24px;
+    flex-wrap:wrap;
+}
+
+.rating input{
+    width:auto;
+    height:auto;
+}
+
+/* boutons */
+
+.button-ajout
+{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.button-image, .button-ingredient, .button-etape
+{
+    text-align:center;
+    padding-bottom:20px;
+}
+
+.button-image button, .button-ingredient button, .button-etape button
+{
+    text-align: center;
+    margin:20px;
+    padding: 15px;
+    background-color: #C9A45C;
+    color: #FFFDF8;
+    font-size: 20px;
+    font-family: "Montserrat", sans-serif;
+    cursor: pointer;
+    font-size: 15px;
+    border-radius: 3px;
+    transition: 0.3s;
+}
+
+.button-image button:hover, .button-ingredient button:hover, .button-etape button:hover
+{
+    background-color:#B85C4A;
+}
+
+/* image recette proposé */
+.img-recette
+{
+    margin: auto;
+    border: 1px solid var(--anthracite);
+    text-align: center;
+    width: 350px;
+    height: 350px;
+}
+/* affichage ingrédient */
+
+.liste-ingredient
+{
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    
+}
+
+.liste-ingredient .un-ingredient
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.liste-ingredient .un-ingredient .img
+{
+    border: 1px solid var(--anthracite);
+    width: 150px;
+    height: 150px; 
+}
+
+/* préparation */
+
+.preparation .etape
+{
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    padding: 10px;
+}
+
+.preparation .etape #numero
+{
+    background-color: var(--gris-chaud);
+    border: 1px solid var(--anthracite);
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+    color: var(--ivoire);
+    font-size: 36px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.preparation .etape .info-etape
+{
+    color: var(--anthracite);
+    font-size: 18px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.preparation .etape .info-etape textarea
+{
+    width: 750px;
+    height: 75px;
+    padding: 10px;
+    font-size: 16px;
+    resize: vertical;
+}
+

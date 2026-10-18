@@ -83,14 +83,15 @@ h1
 .resultat-recette
 {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items:center;
-    gap:15px;
+    gap:20px;
 }
 
 .resultat-recette img {
-    width: 150px;
-    height: 180px;
+    width: 120px;
+    height: 90px;
     object-fit: cover;
 }
 

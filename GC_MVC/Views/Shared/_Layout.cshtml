@@ -49,14 +49,42 @@
 
                 <a asp-controller="Contact" asp-action="Index" class="contact">Contactez-nous !</a>
                 <span class="separateur"></span>
-                <!-- Connexion -->
-                <a asp-controller="Connexion" asp-action="Index" class="connexion">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
-                        <circle cx="12" cy="8" r="4"></circle>
-                        <path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"></path>
-                    </svg>
-                    <span>Se connecter / S'inscrire</span>
-                </a>
+                
+                <!-- Authentification -->
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <form asp-controller="Access"
+                        asp-action="Deconnexion"
+                        method="post">
+
+                        <button type="submit" class="connexion">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                aria-hidden="true">
+                                <circle cx="12" cy="8" r="4"></circle>
+                                <path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"></path>
+                            </svg>
+                            <span>Se déconnecter</span>
+                        </button>
+                    </form>
+                }
+                else
+                {
+                    <a asp-controller="Access"
+                    asp-action="Connexion"
+                    class="connexion">
+
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true">
+                            <circle cx="12" cy="8" r="4"></circle>
+                            <path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"></path>
+                        </svg>
+
+                        <span>Se connecter / S'inscrire</span>
+                    </a>
+                }
+
                 <!-- Favoris -->
                 <a href="#" class="icone-action" aria-label="Mes favoris">
 
@@ -73,6 +101,16 @@
                 </a>
             </div>
         </div>
+                
+        <!-- Affichage des messages -->
+        @if (ViewData.ContainsKey("ValidateMessage"))
+        {
+            <div class="alert alert-info">@ViewData["ValidateMessage"]</div>
+        }
+        @if (TempData.ContainsKey("ValidateMessage"))
+        {
+            <div class="alert alert-info">@TempData["ValidateMessage"]</div>
+        }
     </header>
         
         <!-- Main page concerné -->

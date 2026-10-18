@@ -8,6 +8,6 @@ namespace GC_MVC.Models
     {
         [Key]
         public int id_categorie {get; set;}
-        public string nom {get; set;}
+        public string nom {get; set;} = string.Empty;
     }
 }

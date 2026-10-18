@@ -4,8 +4,6 @@ namespace GC_MVC.ViewModels
 {
     public class RecetteDetailViewModel
     {
-        internal object avisUtilisateur;
-
         public Recettes? Recette { get; set; } 
         public Utilisateurs? Createur { get; set; }
         public List<IngredientQuantiteViewModel> Ingredients { get; set; } = new List<IngredientQuantiteViewModel>();
