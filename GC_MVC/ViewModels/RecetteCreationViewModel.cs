@@ -16,6 +16,15 @@ namespace GC_MVC.ViewModels
         public int Difficulte { get; set; }
         [Range(1, 20, ErrorMessage = "Le nombre de personnes doit être compris entre 1 et 20.")]
         public int NombrePersonnes { get; set; }
+
+        // Liste des identifiants des catégories sélectionnées pour la recette.
+        public List<int> CategoriesSelectionnees { get; set; } = new List<int>();
+        // Contient les catégories disponibles pour le formulaire.
+        public List<Categories> CategoriesDisponibles { get; set; } = new List<Categories>();
+        // Liste des ingrédients disponibles pour le formulaire de Création de recette.
+        public List<Ingredients> IngredientsDisponibles { get; set; } = new List<Ingredients>();
+        // Liste de tous les ingrédients sélectionnées pour une recette
+        public List<IngredientRecetteViewModel> IngredientsSelectionnes { get; set; } = new List<IngredientRecetteViewModel>();
     }
 
 }

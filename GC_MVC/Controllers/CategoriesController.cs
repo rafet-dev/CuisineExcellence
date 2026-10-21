@@ -14,6 +14,7 @@ namespace GC_MVC.Controllers
         }
         public IActionResult Index()
         {
+            // Récupère toutes les catégories enregistrées dans la base de données.
             List<Categories> categories = _context.Categories.ToList();
             
             return View(categories);

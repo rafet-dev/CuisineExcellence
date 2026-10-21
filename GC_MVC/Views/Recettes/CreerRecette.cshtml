@@ -1,5 +1,5 @@
 @using GC_MVC.Models
-@model List<Recettes>
+@model GC_MVC.ViewModels.RecetteCreationViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Mes Recettes";
@@ -11,29 +11,33 @@
     <section class ="AjoutRecette">
         <div class="infos-1">
             <div class="info">
-                <label id="list" for="titre-recette">Titre de la recette :</label>
-                <input type="text" id="titre-recette" name="titre" required />
+                <label id="list" for="titre-recette">Titre de la recette :</label> @* Libellé associé au champ du titre. *@
+                <input asp-for="Nom" type="text" id="titre-recette" required /> @* Champ de saisie du titre de la recette. *@
+                <span asp-validation-for="Nom"></span> @* Affiche les éventuelles erreurs de validation de la propriété Nom. *@
             </div>
 
             <div class="info">
-                <label id="list" for="choix-tps-prep">Choisissez ou écrivez un temps de préparation :</label>
-                <input list="suggestions-tps-prep" id="choix-tps-prep" name="tps-prep" placeholder="Sélectionnez ou écrivez le temps de préparation ..." />
+                <label id="list" for="choix-tps-prep">Choisissez ou écrivez un temps de préparation en minutes:</label>
+                <input asp-for="TempsPreparation" type="number" list="suggestions-tps-prep" id="choix-tps-prep" placeholder="Sélectionnez ou écrivez le temps de préparation ..." />
+                <span asp-validation-for="TempsPreparation"></span> @* Affiche les erreurs de validation du temps de préparation. *@
                 <datalist id="suggestions-tps-prep">
-                    <option value="15 minutes"/>
-                    <option value="30 minutes"/>
-                    <option value="45 minutes"/>
-                    <option value="1 heure"/>
+                    <option value="15"/>
+                    <option value="30"/>
+                    <option value="45"/>
+                    <option value="60"/>
                 </datalist>
             </div>
 
             <div class="info">
-                <label id="list" for="choix-tps-cui">Choisissez ou écrivez un temps de cuisson :</label>
-                <input list="suggestions-tps-cui" id="choix-tps-cui" name="tps-prep" placeholder="Sélectionnez ou écrivez le temps de cuisson ..." />
+                <label id="list" for="choix-tps-cui">Choisissez ou écrivez un temps de cuisson en minutes :</label>
+                <input asp-for="TempsCuisson" type="number" list="suggestions-tps-cui" id="choix-tps-cui" placeholder="Sélectionnez ou écrivez le temps de cuisson ..." />
+                <span asp-validation-for="TempsCuisson"></span>
                 <datalist id="suggestions-tps-cui">
-                    <option value="15 minutes"/>
-                    <option value="30 minutes"/>
-                    <option value="45 minutes"/>
-                    <option value="1 heure"/>
+                    <option value="0"/>
+                    <option value="15"/>
+                    <option value="30"/>
+                    <option value="45"/>
+                    <option value="60"/>
                 </datalist>
             </div>
 
@@ -41,13 +45,43 @@
                 <label class="diff">Difficulté :</label>
 
                 <div class="rating">
-                    <label><input type="radio" name="niveau-diff" value="1"> ★</label>
-                    <label><input type="radio" name="niveau-diff" value="2"> ★★</label>
-                    <label><input type="radio" name="niveau-diff" value="3"> ★★★</label>
-                    <label><input type="radio" name="niveau-diff" value="4"> ★★★★</label>
-                    <label><input type="radio" name="niveau-diff" value="5"> ★★★★★</label>
+                    <label><input type="radio" asp-for="Difficulte" value="1"> ★</label>
+                    <label><input type="radio" asp-for="Difficulte" value="2"> ★★</label>
+                    <label><input type="radio" asp-for="Difficulte" value="3"> ★★★</label>
+                    <label><input type="radio" asp-for="Difficulte" value="4"> ★★★★</label>
+                    <label><input type="radio" asp-for="Difficulte" value="5"> ★★★★★</label>
                 </div>
+                <span asp-validation-for="Difficulte"></span>
             </div>
+
+            <div class="info">
+                <label id="list" for="nbPersonne">Nombre de personnes:</label> @* Libellé du nombre de personnes. *@
+                <input asp-for="NombrePersonnes" type="number" min="1" max="20" id="nbPersonne" required /> @* Champ numérique lié à la propriété NombrePersonnes du ViewModel. *@
+                <span asp-validation-for="NombrePersonnes"></span>  @* Affiche les éventuelles erreurs de validation. *@
+            </div>
+
+            <div class="info info-categories">
+                <label id="list" for="rechercheCategorie">Catégories : </label>
+                <div class= "zone-categories">
+                    <div class="recherche-categories">
+                        <input type="text" id="rechercheCategorie" placeholder="Rechercher une catégorie ..." /> 
+
+                        <!-- Conteneur regroupant tous les résultats de recherche -->
+                        <div class="resultats-categories">
+                        @foreach(Categories categorie in Model.CategoriesDisponibles)
+                        {
+                            <div class="categorie-resultat" data-id="@categorie.id_categorie">
+                                @categorie.nom
+                            </div>
+                        }
+                        </div>   
+                    </div>
+                    <!-- Conteneur des catégories sélectionnées -->
+                    <div id="categoriesSelectionnees"></div>
+                </div>
+                
+            </div>
+            
         </div>
 
         <div class="button-ajout">
@@ -55,7 +89,12 @@
                 <button>Ajouter une image</button>
             </div>
             <div class="button-ingredient">
-                <button>Ajouter un ingrédient</button>
+                <button type="button" id="ajouterIngrédient">Ajouter un ingrédient</button>
+                <!-- Recherche des ingrédients -->
+                <input type="search" id="rechercheIngredient" placeholder="Rechercher un ingrédient..." />
+
+                <!-- Conteneur des résultats de recherche -->
+                <div id="resultatsIngredients"></div>
             </div>
             <div class="button-etape">
                 <button>Ajouter une étape</button>
@@ -97,3 +136,18 @@
 @section Styles {
     <link rel="stylesheet" href="~/CSS/styleCreerRecette.css" />
 } 
+
+@section Scripts {
+    <script>
+        const IngredientsDisponibles = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(
+            Model.IngredientsDisponibles.Select(ingredient => new
+            {
+                id = ingredient.id_ingredient,
+                nom = ingredient.nom
+            })
+        ));
+
+        console.log(IngredientsDisponibles);
+    </script>
+    <script src="~/JS/scriptCreerRecette.js" defer></script>
+}

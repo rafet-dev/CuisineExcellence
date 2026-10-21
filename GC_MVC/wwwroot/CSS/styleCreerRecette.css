@@ -28,8 +28,8 @@ h1
 {
     display: flex;
     flex-direction: column;
-    justify-content: left;
-    align-items:left;
+    justify-content: flex-start;
+    align-items:flex-start;
     gap: 15px;
     padding: 20px;
 }
@@ -45,7 +45,6 @@ h1
 .AjoutRecette .infos-1 .info #list 
 {
     font-size: 16px;
-    gap: 20px;
 }
 
 .AjoutRecette .infos-1 .info input:not([type="radio"])
@@ -88,7 +87,6 @@ h1
     padding: 15px;
     background-color: #C9A45C;
     color: #FFFDF8;
-    font-size: 20px;
     font-family: "Montserrat", sans-serif;
     cursor: pointer;
     font-size: 15px;
@@ -182,3 +180,72 @@ h1
     resize: vertical;
 }
 
+/* étiquettes des catégories sélectionnées */
+.categorie-selectionnee
+{
+    display: inline-block;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid var(--or-champagne);
+    background-color: var(--ivoire);
+}
+
+/* Bouton de suppression d'une catégorie sélectionnée */
+.supprimer-categorie
+{
+    border: none;
+    background-color: transparent;
+    color: var(--or-champagne);
+    font-size: 20px;
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+/* Conteneur des résultats de recherche des catégories */
+.resultats-categories
+{
+    display: flex;
+    flex-direction: column;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+/* Zone de recherche des catégories */
+.recherche-categories
+{
+    display: flex;
+    flex-direction: column;
+}
+
+/* Conteneur principal de la sélection des catégories */
+.zone-categories
+{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    width: 100%;
+    gap: 20px;
+}
+
+/* Conteneur des catégories sélectionnées */
+#categoriesSelectionnees
+{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 5px 10px;
+}
+
+/* Empêche le libellé de passer à la ligne */
+.info label
+{
+    white-space: nowrap;
+}
+
+/* Aligne les éléments de la ligne des catégories en haut */
+.AjoutRecette .infos-1 .info-categories
+{
+    align-items: flex-start;
+    gap: 30px;
+}
