@@ -128,7 +128,6 @@ RechercheIngredientHTML.addEventListener("input", function()
         const NouvelIngredientHTML = document.createElement("div");
         NouvelIngredientHTML.textContent = ingredient.nom;
         ResultatsIngredientsHTML.appendChild(NouvelIngredientHTML);
-
     });
 });
     
