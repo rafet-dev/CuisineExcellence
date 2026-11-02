@@ -104,7 +104,7 @@ public class AccessController : Controller
             return LocalRedirect(returnUrl.ToString());
         }
 
-        return RedirectToAction("Index", "Home");
+        return RedirectToAction("Index", "Compte");
     }
     
     [Authorize]

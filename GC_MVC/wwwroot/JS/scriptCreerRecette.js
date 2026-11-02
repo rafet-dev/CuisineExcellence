@@ -1,15 +1,50 @@
+//*********************************************** */
+// ******* Variables provenant du DOM *********** */
+//*********************************************** */
+
 // Récupère le champ de recherche des catégories dans le HTML.
 let RechercheCategorieHTML = document.getElementById("rechercheCategorie");
 // Récupère tous les éléments HTML représentant les catégories.
 let CategorieResultatHTML = document.querySelectorAll(".categorie-resultat");
 // conteneur HTML dans lequel nous allons afficher les catégories.
 let CategoriesSelectionneesHTML = document.getElementById("categoriesSelectionnees");
-// tableau contenant les identifiants des catégories sélectionnées.
-const CategoriesSelectionnees = [];
+// conteneur HTML dans lequel nous allons afficher les ingrédients sélectionnés.
+const IngredientsSelectionnesHTML = document.getElementById("ingredientsSelectionnes");
 
+const ListeIngredientsHTML = document.querySelector(".liste-ingredient");
 const RechercheIngredientHTML = document.getElementById("rechercheIngredient");
 const ResultatsIngredientsHTML = document.getElementById("resultatsIngredients");
 
+//*********************************************** */
+// ******* Variables spécifiques au script ****** */
+//*********************************************** */
+
+// tableau contenant les identifiants des catégories sélectionnées.
+const CategoriesSelectionnees = [];
+const IngredientsSelectionnes = [];
+
+
+
+//*********************************************** */
+// ***************  Fonctions ******************* */
+//*********************************************** */
+
+// fonction pour mettre à jour les indices des champs HTML
+function MettreAJourIndices()
+{
+    IngredientsSelectionnes.forEach(function(ingredient, index)
+    {
+        ingredient.champId.name = `IngredientsSelectionnes[${index}].IdIngredient`;
+        ingredient.champQuantite.name = `IngredientsSelectionnes[${index}].Quantite`;
+
+        console.log("Ingrédient : ", ingredient.nom, "Index : ", index);
+        console.log("Quantité : ", ingredient.champQuantite.name);
+    });
+}
+
+//********************************************** */
+// **************** Events ********************* */
+//********************************************** */
 
 // Masque les catégories dès le chargement du script.
 CategorieResultatHTML.forEach(function(categorie)
@@ -111,12 +146,16 @@ CategorieResultatHTML.forEach(function(categorie)
     });
 });
 
-
 RechercheIngredientHTML.addEventListener("input", function()
 {   
     ResultatsIngredientsHTML.innerHTML="";
 
     const Recherche = RechercheIngredientHTML.value.trim().toLowerCase();
+    if (Recherche === "")
+    {
+        return;
+    }
+
     const IngredientsFiltres = IngredientsDisponibles.filter(function(ingredient)
     {
         return ingredient.nom.toLowerCase().includes(Recherche);
@@ -124,12 +163,115 @@ RechercheIngredientHTML.addEventListener("input", function()
 
     IngredientsFiltres.forEach(function(ingredient)
     {
-        console.log(ingredient.nom);
         const NouvelIngredientHTML = document.createElement("div");
         NouvelIngredientHTML.textContent = ingredient.nom;
+
+        NouvelIngredientHTML.addEventListener("click", function()
+        {
+            const IngredientExiste = IngredientsSelectionnes.some(function(ingredientSelectionne)
+            {
+                return ingredientSelectionne.id === ingredient.id;
+            });
+
+            if (!IngredientExiste)
+            {
+                ingredient.quantite = "";
+                IngredientsSelectionnes.push(ingredient);
+                const IndexIngredient = IngredientsSelectionnes.length - 1;
+
+                // Création du conteneur de la carte
+                const CarteIngredientHTML = document.createElement("div");
+                CarteIngredientHTML.classList.add("un-ingredient");
+
+                // Création de l'emplacement de l'image
+                const ImageIngredientHTML = document.createElement("div");
+                ImageIngredientHTML.classList.add("img");
+
+                // Ajout de l'image à la carte
+                CarteIngredientHTML.appendChild(ImageIngredientHTML);
+
+                // Création du paragraphe contenant le nom de l'ingrédient
+                const NomIngredientHTML = document.createElement("p");
+                NomIngredientHTML.textContent = ingredient.nom;
+
+                // Ajout du nom à la carte
+                CarteIngredientHTML.appendChild(NomIngredientHTML);
+
+                // Ajout de la carte dans la liste des ingrédients
+                ListeIngredientsHTML.appendChild(CarteIngredientHTML);
+
+                const ConteneurIngredientHTML = document.createElement("div");
+
+                let NouvelIngredientSelectionneHTML = document.createElement("span");
+                NouvelIngredientSelectionneHTML.textContent = ingredient.nom;
+                ConteneurIngredientHTML.appendChild(NouvelIngredientSelectionneHTML);
+
+                // Création du champ invisible pour l'identifiant
+                const IdIngredientHTML = document.createElement("input");
+                IdIngredientHTML.type = "hidden";
+                IdIngredientHTML.value = ingredient.id;
+                IdIngredientHTML.name = `IngredientsSelectionnes[${IndexIngredient}].IdIngredient`;
+
+                ConteneurIngredientHTML.appendChild(IdIngredientHTML);
+
+                // Création du champs de quantité 
+                let QuantiteIngredientHTML = document.createElement("input");
+                QuantiteIngredientHTML.type = "text";
+                QuantiteIngredientHTML.placeholder = "Ex: 300 g, 2 sachets ...";
+                QuantiteIngredientHTML.name = `IngredientsSelectionnes[${IndexIngredient}].Quantite`;
+
+                ConteneurIngredientHTML.appendChild(QuantiteIngredientHTML);
+                
+                ingredient.champId = IdIngredientHTML;
+                ingredient.champQuantite = QuantiteIngredientHTML;
+
+                // évènement de saisie de la quantité 
+                QuantiteIngredientHTML.addEventListener("input", function()
+                {
+                    const QuantiteSaisie = QuantiteIngredientHTML.value.trim();
+                    ingredient.quantite = QuantiteSaisie;
+                    
+                    IngredientsSelectionnes.forEach(function(ingredient)
+                    {
+                        console.log("Ingrédient sélectionné : ", ingredient.nom, "Quantité : ", ingredient.quantite);
+                    });
+                });
+
+                // Création du bouton de suppression 
+                const BoutonSupprimerIngredientHTML = document.createElement("button");
+                BoutonSupprimerIngredientHTML.type = "button";
+                BoutonSupprimerIngredientHTML.textContent = "×";
+
+                // Ajout du bouton dans le conteneur
+                ConteneurIngredientHTML.appendChild(BoutonSupprimerIngredientHTML);
+
+                // Événement de suppression
+                BoutonSupprimerIngredientHTML.addEventListener("click", function()
+                {
+                    const IndexIngredient = IngredientsSelectionnes.findIndex(function(ingredientSelectionne)
+                    {
+                        return ingredientSelectionne.id === ingredient.id;
+                    });
+
+                    if (IndexIngredient >= 0)
+                    {
+                        IngredientsSelectionnes.splice(IndexIngredient, 1);
+                        ConteneurIngredientHTML.remove();
+                        CarteIngredientHTML.remove();
+
+                        MettreAJourIndices();
+                    }
+                });
+
+                // Ajout du conteneur complet au formulaire
+                IngredientsSelectionnesHTML.appendChild(ConteneurIngredientHTML);
+            }
+            console.log("Tableau des ingrédients sélectionnés : ", IngredientsSelectionnes);
+        });
         ResultatsIngredientsHTML.appendChild(NouvelIngredientHTML);
     });
 });
-    
-    
+
+
+
 

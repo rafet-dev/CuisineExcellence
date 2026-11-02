@@ -166,7 +166,7 @@ namespace GC_MVC.Controllers
 
                 try
                 {
-                    // 1re boucle : vérifier que chaque catégorie existe dans PostgreSQL avant la transaction
+                    // 1-1 boucle : vérifier que chaque catégorie existe dans PostgreSQL avant la transaction
                     foreach(int id_categorie in model.CategoriesSelectionnees)
                     {
                         bool categorieExiste = _context.Categories.Any(categorie => categorie.id_categorie == id_categorie);
@@ -177,6 +177,22 @@ namespace GC_MVC.Controllers
                             model.CategoriesDisponibles = _context.Categories.ToList();
                             return View("CreerRecette", model);
                         } 
+                    }
+
+                    // 2-1 boucle : vérifier que chaque ingrédient existe dans PostgreSQL avant la transaction
+                    foreach (IngredientRecetteViewModel ingredient in model.IngredientsSelectionnes)
+                    {
+                        bool ingredientExiste = _context.Ingredients.Any(
+                            ingredientBDD => ingredientBDD.id_ingredient == ingredient.IdIngredient
+                        );
+
+                        if (!ingredientExiste)
+                        {
+                            ModelState.AddModelError("IngredientsSelectionnes", "Un ingrédient sélectionné n'existe plus.");
+                            model.IngredientsDisponibles = _context.Ingredients.ToList();
+
+                            return View("CreerRecette", model);
+                        }
                     }
                 }
 
@@ -206,7 +222,7 @@ namespace GC_MVC.Controllers
                     // Enregistre les modifications dans PostgreSQL, ici recette
                     _context.SaveChanges();
 
-                    // 2nde boucle : créer les associations entre les catégories et la nouvelle recette pendant la transaction 
+                    // 1-2 boucle : créer les associations entre les catégories et la nouvelle recette pendant la transaction 
                     foreach(int id_categorie in model.CategoriesSelectionnees)
                     {
                         Categories_recettes NouvelleAssociation = new Categories_recettes
@@ -216,6 +232,19 @@ namespace GC_MVC.Controllers
                         };
 
                         _context.Categories_recettes.Add(NouvelleAssociation);
+                    }
+
+                    // boucle 2-2 : Associations entre les ingrédients et la recette
+                    foreach (IngredientRecetteViewModel ingredient in model.IngredientsSelectionnes)
+                    {
+                        Ingredients_recettes NouvelleAssociationIngredient = new Ingredients_recettes
+                        {
+                            id_ingredient = ingredient.IdIngredient,
+                            id_recette = NouvelleRecette.id_recette,
+                            quantite = ingredient.Quantite
+                        };
+
+                        _context.Ingredients_Recettes.Add(NouvelleAssociationIngredient);
                     }
                     // Enregistre les modifications dans PostgreSQL, ici categories                    
                     _context.SaveChanges();
@@ -260,6 +289,104 @@ namespace GC_MVC.Controllers
                 return View("~/Views/Recettes/CreerRecette.cshtml", model);
             }
         }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult ModifierRecette(int id)
+        {
+            // Recherche de la recette à modifier.
+            Recettes? recette = _context.Recettes.FirstOrDefault(r => r.id_recette == id);
+
+            // Vérifie que la recette existe.
+            if (recette == null)
+            {
+                return NotFound();
+            }
+
+            // Récupère l'identifiant de l'utilisateur connecté.
+            string? utilisateurId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (!int.TryParse(utilisateurId, out int idUtilisateur))
+            {
+                return Unauthorized();
+            }
+
+            // Vérifie que l'utilisateur est bien le créateur.
+            if (recette.createur != idUtilisateur)
+            {
+                return Forbid();
+            }
+            
+            RecetteCreationViewModel model = new RecetteCreationViewModel();
+
+            model.Nom = recette.nom;
+            model.TempsPreparation = (int) recette.temps_preparation.TotalMinutes;
+            model.TempsCuisson = (int) recette.temps_cuisson.TotalMinutes;
+            model.Difficulte = recette.difficulte;
+
+            if (recette.nombre_personnes == null)
+            {
+                model.NombrePersonnes = 1;
+            }
+            else
+            {
+                model.NombrePersonnes = recette.nombre_personnes.Value;
+            }
+
+            List<int> mesCategoriesRecettes = (
+                from association in _context.Categories_recettes
+                where association.id_recette == id
+                select association.id_categorie
+            ).ToList();
+
+            model.CategoriesSelectionnees = mesCategoriesRecettes;
+
+            List<Categories> categories = _context.Categories.ToList();
+            model.CategoriesDisponibles = categories;
+
+            List<Ingredients> ingredients = _context.Ingredients.ToList();
+            model.IngredientsDisponibles = ingredients;
+
+            List<IngredientRecetteViewModel> mesIngredientsRecette = (
+                from association in _context.Ingredients_Recettes
+                where association.id_recette == id
+                select new IngredientRecetteViewModel
+                {
+                    IdIngredient = association.id_ingredient,
+                    Quantite = association.quantite
+                }
+            ).ToList();
+
+            model.IngredientsSelectionnes = mesIngredientsRecette;
+
+            // Le formulaire de modification sera ajouté ensuite.
+            return View("ModifierRecette", model);
+        }
+/*
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ModifierRecette(int id, RecetteCreationViewModel model)
+        {
+            Recettes? recette = _context.Recettes.FirstOrDefault(r => r.id_recette == id);
+
+            if (recette is null)
+            {
+                return NotFound();
+            }
+        }
+
+        string? utilisateurId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (!int.TryParse(utilisateurId, out int idUtilisateur))
+        {
+            return Unauthorized();
+        }
+
+        if (recette.createur != idUtilisateur)
+        {
+            return Forbid();
+        }*/
     }
 }
+
 

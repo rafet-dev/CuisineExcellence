@@ -6,12 +6,20 @@
 }
 
 <h2>Bienvenue @Model.Identifiant !</h2>
+
+@if (TempData["MessageSucces"] != null)
+{
+    <div class="message-succes">
+        @TempData["MessageSucces"]
+    </div>
+}
+
 <main>
     <h1>Mon compte</h1>
 
     <section class="MesRecettes">
         
-        <a asp-controller="Recettes" asp-action="Index">
+        <a asp-controller="Recettes" asp-action="MesRecettes">
             <h2>Mes recettes</h2>
             <p>Retrouvez ici toutes les recettes que vous avez créées.</p>
         </a>

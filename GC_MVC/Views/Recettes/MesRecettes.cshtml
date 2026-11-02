@@ -16,7 +16,9 @@
             <ul>
                 @foreach(Recettes recette in Model)
                     {
-                        <li>@recette.nom</li>
+                        <a asp-controller="Recettes" asp-action="Detail" asp-route-id="@recette.id_recette">
+                            <li>@recette.nom</li>
+                        </a>
                     }
             </ul>
         }

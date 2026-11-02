@@ -1,0 +1,56 @@
+@using GC_MVC.Models
+@model GC_MVC.ViewModels.RecetteCreationViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "GC - Modifier ma recette";
+}
+
+<main>
+    <form asp-controller="Recettes" asp-action="ModifierRecette" method="post">
+
+        @*identifiant recette *@
+        <input type="hidden" asp-for="IdRecette" />
+        @*Nom de la recette *@
+        <input type="text" asp-for="Nom" placeholder="Nom de la recette" required />
+        <span asp-validation-for="Nom"></span>
+        @*Temps préparation recette *@
+        <label id="list" for="choix-tps-prep">Choisissez ou écrivez un temps de préparation en minutes:</label>
+        <input asp-for="TempsPreparation" type="number" list="suggestions-tps-prep" id="choix-tps-prep" placeholder="Sélectionnez ou écrivez le temps de préparation ..." min="0" />
+        <span asp-validation-for="TempsPreparation"></span> @* Affiche les erreurs de validation du temps de préparation. *@
+        @*Temps cuisson recette *@
+        <label id="list" for="choix-tps-cui">Choisissez ou écrivez un temps de cuisson en minutes :</label>
+        <input asp-for="TempsCuisson" type="number" list="suggestions-tps-cui" id="choix-tps-cui" placeholder="Sélectionnez ou écrivez le temps de cuisson ..." min="0" />
+        <span asp-validation-for="TempsCuisson"></span>
+        @*Difficulté recette *@
+        <label class="diff">Difficulté :</label>
+
+                <div class="rating">
+                    <label><input type="radio" asp-for="Difficulte" value="1"> ★</label>
+                    <label><input type="radio" asp-for="Difficulte" value="2"> ★★</label>
+                    <label><input type="radio" asp-for="Difficulte" value="3"> ★★★</label>
+                    <label><input type="radio" asp-for="Difficulte" value="4"> ★★★★</label>
+                    <label><input type="radio" asp-for="Difficulte" value="5"> ★★★★★</label>
+                </div>
+                <span asp-validation-for="Difficulte"></span>
+        @*Nombre de personnes *@
+        <label asp-for="NombrePersonnes">Nombre de personnes :</label>@* Libellé du nombre de personnes. *@
+        <input asp-for="NombrePersonnes" type="number" min="1" max="20" required />@* Champ numérique lié à la propriété NombrePersonnes du ViewModel. *@
+        <span asp-validation-for="NombrePersonnes"></span>  @* Affiche les éventuelles erreurs de validation. *@
+
+    </form>
+
+</main>
+
+@foreach(Categories categorie in Model.CategoriesDisponibles)
+{
+    bool estSelectionnee = Model.CategoriesSelectionnees != null && Model.CategoriesSelectionnees.Contains(categorie.id_categorie);
+    <label for="categorie-@categorie.id_categorie">@categorie.nom</label>
+    <input type="checkbox" id="categorie-@categorie.id_categorie" checked="@estSelectionnee" name="CategoriesSelectionnees" value="@categorie.id_categorie" />
+
+    @if (Model.CategoriesSelectionnees is null || Model.CategoriesSelectionnees.Count == 0 )
+    {
+    
+    }
+
+
+}
