@@ -28,6 +28,10 @@ namespace GC_MVC.ViewModels
         public List<Ingredients> IngredientsDisponibles { get; set; } = new List<Ingredients>();
         // Liste de tous les ingrédients sélectionnées pour une recette
         public List<IngredientRecetteViewModel> IngredientsSelectionnes { get; set; } = new List<IngredientRecetteViewModel>();
+        // Liste des étapes de préparation de la recette
+        public List<string> Etapes { get; set; } = new List<string>();
+        // Ajout d'une image
+        public IFormFile? PhotoFichier { get; set; }
     }
 
 }

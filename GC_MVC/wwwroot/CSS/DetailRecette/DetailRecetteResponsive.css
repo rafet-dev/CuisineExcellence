@@ -1,0 +1,162 @@
+/* ==========================================
+   PAGE DÉTAIL RECETTE - TABLETTE
+   ========================================== */
+
+@media screen and (min-width: 769px) and (max-width: 1200px)
+{
+    .infos-principales
+    {
+        margin: 15px 30px;
+        padding: 20px;
+
+        height: auto;
+        min-height: 80px;
+
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+
+        gap: 20px 30px;
+    }
+
+    .liste-ingredient 
+    {
+        margin: 15px 30px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+    }
+
+    .preparation 
+    {
+        margin: 15px 30px;
+    }
+}
+
+/* ==========================================
+   PAGE DÉTAIL RECETTE - SMARTPHONE
+   ET TABLETTE VERTICALE ÉTROITE
+   ========================================== */
+
+@media screen and (max-width: 768px)
+{
+    .infos-principales
+    {
+        margin: 15px;
+        padding: 20px;
+
+        height: auto;
+        min-height: 80px;
+
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+
+        gap: 20px;
+    }
+
+    .liste-ingredient 
+    {
+        margin: 15px;
+        padding: 20px;
+
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+    }
+
+    .preparation 
+    {
+        margin: 15px;
+    }
+}
+
+/* PAGE DÉTAIL RECETTE - SMARTPHONE */
+@media screen and (max-width: 480px)
+{
+    .liste-ingredient
+    {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .liste-ingredient .un-ingredient img
+    {
+        display: none;
+    }
+
+    .preparation .etape 
+    {
+        gap: 12px;
+        padding: 10px 0;
+    }
+
+    .carte-avis .entete-avis 
+    {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .button-note-club
+    {
+        margin: 15px;
+        padding-bottom: 20px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+}
+
+@media screen and (max-width: 800px)
+{
+    .button-note-club button
+    {
+        width: 240px;
+        min-height: 65px;
+        height: auto;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+/* Smartphones en paysage */
+@media screen and (min-width: 481px) and (max-width: 950px)
+       and (orientation: landscape)
+{
+    .button-note-club 
+    {
+        margin: 15px 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .button-note-club button 
+    {
+        width: 240px;
+        height: auto;
+        min-height: 0;
+        padding: 10px 15px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+/* Smartphones : simplification des actions */
+@media screen and (max-width: 950px)
+{
+    .button-note-club > p
+    {
+        display: none;
+    }
+}

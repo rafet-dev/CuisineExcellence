@@ -1,0 +1,119 @@
+/* ==========================================
+   PAGE RECHERCHE - TABLETTE
+   ========================================== */
+
+@media screen and (min-width: 769px) and (max-width: 1200px) 
+{
+    .recherche-filtre
+    {
+        width: min(90%, 650px);
+        margin: 15px auto;
+        padding: 20px;
+    }
+
+    .grille-recettes
+    {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 30px;
+        padding: 30px 40px;
+    }
+
+    .resultat-recette 
+    {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 12px;
+        min-width: 0;
+        text-align: center;
+    }
+
+    .resultat-recette img 
+    {
+        width: 100%;
+        max-width: 200px;
+        height: 135px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+}
+
+
+/* ==========================================
+   PAGE RECHERCHE - SMARTPHONE
+   ========================================== */
+
+@media screen and (max-width: 768px) 
+{
+    .recherche-filtre 
+    {
+        margin: 15px;
+        padding: 20px;
+    }
+
+    .grille-recettes 
+    {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 15px;
+        padding: 20px 15px;
+    }
+
+    .resultat-recette 
+    {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 12px;
+        width: 100%;
+        min-width: 0;
+        text-align: center;
+    }
+
+    .resultat-recette img 
+    {
+        display: block;
+        width: 100%;
+        max-width: 240px;
+        height: 160px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+    
+}
+
+/* PAGE RECHERCHE - SMARTPHONE PAYSAGE */
+@media screen and (orientation: landscape)
+       and (max-height: 500px)
+       and (max-width: 900px)
+{
+    .grille-recettes 
+    {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+        padding: 20px 15px;
+    }
+
+    .resultat-recette 
+    {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 12px;
+        width: 100%;
+        min-width: 0;
+        text-align: center;
+    }
+
+    .resultat-recette img 
+    {
+        width: 100%;
+        max-width: 240px;
+        height: 160px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+}

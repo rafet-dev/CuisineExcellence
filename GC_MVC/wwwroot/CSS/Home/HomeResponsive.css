@@ -1,0 +1,498 @@
+/* ==========================================
+   RESPONSIVE - PAGE D'ACCUEIL
+   Gastronomie Créative
+   ========================================== */
+
+
+/* ==========================================
+   TABLETTE ET SMARTPHONE
+   ========================================== */
+
+@media screen and (max-width: 1280px)
+{
+    /* Couverture principale */
+    .contenu
+    {
+        display: none;
+    }
+
+    /* Section citations */
+    .citations
+    {
+        display: none;
+    }
+
+    /* Section Actualités */
+
+    .actualite .fond-actualite
+    {
+        margin: 15px 30px;
+        min-width: 0;
+    }
+
+    .actualite .fond-actualite .section-actualite
+    {
+        width: auto;
+        margin: 0;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .actualite .fond-actualite .section-actualite .actualite1
+    {
+        width: auto;
+        min-width: 0;
+        margin: 0;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+}
+
+/* ==========================================
+   SMARTPHONE
+   ========================================== */
+
+@media screen and (max-width: 768px)
+{
+    .actualite .fond-actualite
+    {
+        margin: 15px;
+    }
+}
+
+/* ==========================================
+   ACTUALITÉS - SMARTPHONE PORTRAIT
+   ========================================== */
+
+@media screen and (max-width: 768px) and (orientation: portrait)
+{
+    .actualite .fond-actualite .section-actualite
+    {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .actualite .fond-actualite .section-actualite .actualite1
+    {
+        width: 100%;
+        min-width: 0;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .actualite .fond-actualite .section-actualite .actualite1 img
+    {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        flex-shrink: 0;
+    }
+
+    .actualite .fond-actualite .section-actualite .actualite1 .texte-actualite
+    {
+        min-width: 0;
+        padding: 0;
+        font-size: 16px;
+        overflow-wrap: anywhere;
+    }
+}
+
+/* ==========================================
+   ACTUALITÉS - SMARTPHONE PAYSAGE
+   ========================================== */
+
+@media screen and (min-width: 481px) and (max-width: 950px) and (orientation: landscape)
+{
+    .actualite .fond-actualite .section-actualite
+    {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+    }
+
+    .actualite .fond-actualite .section-actualite .actualite1
+    {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .actualite .fond-actualite .section-actualite .actualite1 img
+    {
+        width: 140px;
+        height: 140px;
+        object-fit: cover;
+    }
+
+    .actualite .fond-actualite .section-actualite .actualite1 .texte-actualite
+    {
+        min-width: 0;
+        padding: 0;
+        font-size: 16px;
+        text-align: center;
+        overflow-wrap: anywhere;
+    }
+}
+
+/* ==========================================
+   RECETTES À LA UNE - SMARTPHONE PORTRAIT
+   ========================================== */
+
+@media screen and (max-width: 768px) and (orientation: portrait)
+{
+    .recette .fond-recette
+    {
+        margin: 15px;
+    }
+
+    .recette .section-recette
+    {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 15px;
+    }
+
+    .recette .section-recette .recette1
+    {
+        width: 100%;
+        flex: none;
+        min-width: 0;
+        gap: 15px;
+    }
+
+    .recette .section-recette .recette1 img
+    {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+    }
+
+    .recette .section-recette .recette1 .texte-recette1
+    {
+        min-width: 0;
+        font-size: 16px;
+    }
+
+    .recette .section-recette .recette1 .texte-recette1 h2
+    {
+        font-size: 16px;
+        overflow-wrap: break-word;
+    }
+}
+
+/* RECETTES À LA UNE - SMARTPHONE PAYSAGE */
+
+@media screen and (min-width: 481px) and (max-width: 950px)
+       and (orientation: landscape)
+{
+    .recette .fond-recette
+    {
+        margin: 15px 30px;
+        min-width: 0;
+    }
+
+    .recette .section-recette
+    {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 15px;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .recette .section-recette .recette1
+    {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        min-width: 0;
+        margin: 0;
+        gap: 10px;
+    }
+
+    .recette .section-recette .recette1 img
+    {
+        width: 100%;
+        max-width: 150px;
+        height: 150px;
+        object-fit: cover;
+    }
+
+    .recette .section-recette .recette1 .texte-recette1
+    {
+        width: 100%;
+        min-width: 0;
+        text-align: center;
+    }
+
+    .recette .section-recette .recette1 .texte-recette1 h2
+    {
+        font-size: 16px;
+        overflow-wrap: break-word;
+    }
+}
+
+/* TABLETTE PAYSAGE - ACTUALITÉS */
+
+@media screen and (min-width: 951px) and (max-width: 1280px)
+       and (orientation: landscape)
+{
+    .actualite .fond-actualite .section-actualite
+    {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+    }
+
+    .actualite .fond-actualite .section-actualite .actualite1
+    {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        min-width: 0;
+    }
+
+    .actualite .fond-actualite .section-actualite .actualite1 img
+    {
+        width: 100%;
+        max-width: 180px;
+        height: 180px;
+        object-fit: contain;
+    }
+
+    .actualite .fond-actualite .section-actualite .actualite1 .texte-actualite
+    {
+        width: 100%;
+        min-width: 0;
+        padding: 0;
+        text-align: center;
+        font-size: 18px;
+        overflow-wrap: break-word;
+    }
+}
+
+/* ACTUALITÉS - TABLETTE PORTRAIT */
+
+@media screen and (min-width: 701px) and (max-width: 1280px)
+       and (orientation: portrait)
+{
+    .actualite .fond-actualite .section-actualite
+    {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .actualite .fond-actualite .section-actualite .actualite1
+    {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        min-width: 0;
+        gap: 20px;
+    }
+
+    .actualite .fond-actualite .section-actualite .actualite1 img
+    {
+        width: 150px;
+        height: 150px;
+        object-fit: contain;
+        flex-shrink: 0;
+    }
+
+    .actualite .fond-actualite .section-actualite .actualite1 .texte-actualite
+    {
+        flex: 1;
+        min-width: 0;
+        padding: 0;
+        text-align: left;
+        font-size: 18px;
+    }
+}
+
+/* RECETTES À LA UNE - TABLETTE PAYSAGE */
+
+@media screen and (min-width: 951px) and (max-width: 1280px)
+       and (orientation: landscape)
+{
+    .recette .section-recette
+    {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .recette .section-recette .recette1
+    {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        min-width: 0;
+        margin: 0;
+        gap: 15px;
+    }
+
+    .recette .section-recette .recette1 img
+    {
+        width: 150px;
+        height: 150px;
+        object-fit: contain;
+    }
+
+    .recette .section-recette .recette1 .texte-recette1
+    {
+        width: 100%;
+        min-width: 0;
+        text-align: center;
+    }
+
+    .recette .section-recette .recette1 .texte-recette1 h2
+    {
+        font-size: 18px;
+        overflow-wrap: break-word;
+    }
+
+     .club .club-img img
+    {
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+    }
+}
+
+/* RECETTES À LA UNE - TABLETTE PORTRAIT */
+
+@media screen and (min-width: 769px) and (max-width: 1280px)
+       and (orientation: portrait)
+{
+    .recette .section-recette
+    {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 15px;
+    }
+
+    .recette .section-recette .recette1
+    {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        min-width: 0;
+        margin: 0;
+        gap: 15px;
+    }
+
+    .recette .section-recette .recette1 img
+    {
+        width: 150px;
+        height: 150px;
+        object-fit: contain;
+        flex-shrink: 0;
+    }
+
+    .recette .section-recette .recette1 .texte-recette1
+    {
+        min-width: 0;
+        padding: 0;
+    }
+
+    .recette .section-recette .recette1 .texte-recette1 h2
+    {
+        font-size: 18px;
+        overflow-wrap: break-word;
+    }
+}
+
+
+/* ==========================================
+   REJOINDRE LE CLUB - SMARTPHONE
+   ========================================== */
+
+@media screen and (max-width: 950px)
+{
+    .club .club-img
+    {
+        margin: 15px;
+        padding: 15px;
+        box-sizing: border-box;
+        gap: 20px;
+    }
+
+    .club .club-img img
+    {
+        width: 100%;
+        max-width: 280px;
+        height: auto;
+        object-fit: contain;
+    }
+}
+
+/* ==========================================
+   HARMONISATION DES CONTENEURS
+   ========================================== */
+
+/* Smartphone paysage */
+@media screen and (min-width: 769px) and (max-width: 950px)
+       and (orientation: landscape)
+{
+    .actualite .fond-actualite,
+    .recette .fond-recette,
+    .club .club-img
+    {
+        width: calc(100% - 60px);
+        min-width: 0;
+        margin: 15px auto;
+        box-sizing: border-box;
+    }
+}
+
+/* Tablette portrait */
+@media screen and (min-width: 769px) and (max-width: 950px)
+       and (orientation: portrait)
+{
+    .actualite .fond-actualite,
+    .recette .fond-recette,
+    .club .club-img
+    {
+        width: calc(100% - 60px);
+        min-width: 0;
+        margin: 15px auto;
+        box-sizing: border-box;
+    }
+}
+
+/* ==========================================
+   HARMONISATION - TABLETTE PAYSAGE
+   ========================================== */
+
+@media screen and (min-width: 951px) and (max-width: 1280px)
+       and (orientation: landscape)
+{
+    .actualite .fond-actualite,
+    .recette .fond-recette,
+    .club .club-img
+    {
+        width: calc(100% - 60px);
+        max-width: none;
+        min-width: 0;
+        margin: 15px auto;
+        box-sizing: border-box;
+    }
+}

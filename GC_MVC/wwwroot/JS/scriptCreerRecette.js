@@ -14,6 +14,11 @@ const IngredientsSelectionnesHTML = document.getElementById("ingredientsSelectio
 const ListeIngredientsHTML = document.querySelector(".liste-ingredient");
 const RechercheIngredientHTML = document.getElementById("rechercheIngredient");
 const ResultatsIngredientsHTML = document.getElementById("resultatsIngredients");
+const BoutonAjouterEtapeHTML = document.getElementById("ajouterEtape");
+const EtapesRecetteHTML = document.getElementById("etapesRecette");
+const BoutonAjouterImageHTML = document.getElementById("ajouterImage");
+const PhotoRecetteHTML = document.getElementById("photoRecette");
+const ApercuPhotoHTML = document.getElementById("apercuPhoto");
 
 //*********************************************** */
 // ******* Variables spécifiques au script ****** */
@@ -39,6 +44,22 @@ function MettreAJourIndices()
 
         console.log("Ingrédient : ", ingredient.nom, "Index : ", index);
         console.log("Quantité : ", ingredient.champQuantite.name);
+    });
+}
+
+function MettreAJourNumerosEtapes()
+{
+    let BlocsEtapesHTML = EtapesRecetteHTML.querySelectorAll(":scope > div");
+
+    BlocsEtapesHTML.forEach(function(BlocEtapeHTML, index)
+    {
+        let NouvelleEtapeHTML = BlocEtapeHTML.querySelector("textarea");
+        
+         // Numéro visible par l'utilisateur
+        NouvelleEtapeHTML.placeholder="Etape " + (index + 1);
+
+        // Nom du champ pour ASP.NET Core MVC
+        NouvelleEtapeHTML.name = "Etapes[" + index + "]";
     });
 }
 
@@ -272,6 +293,52 @@ RechercheIngredientHTML.addEventListener("input", function()
     });
 });
 
+BoutonAjouterEtapeHTML.addEventListener("click", function()
+{
+    let NumeroEtape = EtapesRecetteHTML.children.length + 1;
+    let BlocEtapeHTML = document.createElement("div");
+    let NouvelleEtapeHTML = document.createElement("textarea");
 
+    NouvelleEtapeHTML.placeholder = "Étape " + NumeroEtape;
 
+    let BoutonSupprimerEtapeHTML = document.createElement("button");
+
+    BoutonSupprimerEtapeHTML.textContent = "Supprimer";
+    BoutonSupprimerEtapeHTML.type = "button";
+
+    BoutonSupprimerEtapeHTML.addEventListener("click", function()
+    {
+        BlocEtapeHTML.remove();
+        MettreAJourNumerosEtapes();
+    });
+
+    // Ajouter la zone de texte dans le bloc
+    BlocEtapeHTML.appendChild(NouvelleEtapeHTML);
+
+    // Ajouter le bouton Supprimer dans le bloc
+    BlocEtapeHTML.appendChild(BoutonSupprimerEtapeHTML);
+
+    // Ajouter le bloc complet dans le conteneur principal
+    EtapesRecetteHTML.appendChild(BlocEtapeHTML);
+    MettreAJourNumerosEtapes();
+});
+
+// Ouvrir la fenêtre de sélection d'une image
+BoutonAjouterImageHTML.addEventListener("click", function()
+{
+    PhotoRecetteHTML.click();
+});
+
+PhotoRecetteHTML.addEventListener("change", function()
+{
+    const FichierSelectionne = PhotoRecetteHTML.files[0];
+
+    if (FichierSelectionne)
+    {
+        ApercuPhotoHTML.src = URL.createObjectURL(FichierSelectionne);
+
+        // Rendre l'image visible
+        ApercuPhotoHTML.hidden = false;
+    }
+});
 

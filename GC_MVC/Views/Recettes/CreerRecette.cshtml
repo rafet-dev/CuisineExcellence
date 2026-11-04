@@ -7,7 +7,7 @@
 
 <main>
     <h1>Ajout/Modification de votre recette gourmet</h1>
-    <form asp-controller="Recettes" asp-action="CreerRecette" method="post">
+    <form asp-controller="Recettes" asp-action="CreerRecette" method="post" enctype="multipart/form-data">
     <section class ="AjoutRecette">
         <div class="infos-1">
             <div class="info">
@@ -86,7 +86,10 @@
 
         <div class="button-ajout">
             <div class="button-image">
-                <button>Ajouter une image</button>
+                <button type="button" id="ajouterImage">Ajouter une image</button>
+                <input type="file" id="photoRecette" name="PhotoFichier" accept="image/*" hidden>
+                <span asp-validation-for="PhotoFichier" class="text-danger"></span>
+                
             </div>
             <div class="button-ingredient">
                 <button type="button" id="ajouterIngrédient">Ajouter un ingrédient</button>
@@ -99,11 +102,13 @@
                 <div id="ingredientsSelectionnes"></div>
             </div>
             <div class="button-etape">
-                <button>Ajouter une étape</button>
+                <button type="button" id="ajouterEtape">Ajouter une étape</button>
+                <div id="etapesRecette"></div>
             </div>
         </div>
         <div class="img-recette">
             <!-- ajout de l'image sélectionnée par le membre-->
+            <img id="apercuPhoto" alt="Aperçu de la photo de la recette" hidden>
         </div>
 
         <h1>Ingrédients</h1>

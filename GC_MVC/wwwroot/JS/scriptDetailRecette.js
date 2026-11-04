@@ -7,6 +7,7 @@ const nombrePersonnesInitial =Number(nombrePersonnes.textContent);
 // sélectionne tous les éléments HTML possédant l'attribut data-quantite-initiale. (une recette a plusieurs ingrédients)
 const ingredients = document.querySelectorAll("[data-quantite-initiale]");
 console.log(ingredients);
+
 //----------------------------------------------------------------------------------------------------------------------------
 // fonctions 
 

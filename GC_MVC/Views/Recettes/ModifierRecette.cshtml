@@ -37,20 +37,32 @@
         <input asp-for="NombrePersonnes" type="number" min="1" max="20" required />@* Champ numérique lié à la propriété NombrePersonnes du ViewModel. *@
         <span asp-validation-for="NombrePersonnes"></span>  @* Affiche les éventuelles erreurs de validation. *@
 
+
+        @foreach(Categories categorie in Model.CategoriesDisponibles)
+        {
+            bool estSelectionnee = Model.CategoriesSelectionnees != null && Model.CategoriesSelectionnees.Contains(categorie.id_categorie);
+            <label for="categorie-@categorie.id_categorie">@categorie.nom</label>
+            <input type="checkbox" id="categorie-@categorie.id_categorie" checked="@estSelectionnee" name="CategoriesSelectionnees" value="@categorie.id_categorie" />
+        }
+
+        <h2>Ingrédients de la recette</h2>
+
+        @for (int i = 0; i < Model.IngredientsSelectionnes.Count; i++)
+        {
+            int idIngredient = Model.IngredientsSelectionnes[i].IdIngredient;
+            Ingredients? ingredient = Model.IngredientsDisponibles.FirstOrDefault(ing => ing.id_ingredient == idIngredient);
+
+            @if (ingredient is not null)
+            {
+                <label asp-for="IngredientsSelectionnes[i].Quantite">@ingredient.nom</label>
+            }
+
+            <input type="hidden" asp-for="IngredientsSelectionnes[i].IdIngredient" />
+            <input type="text" asp-for="IngredientsSelectionnes[i].Quantite" />
+        }
+        
+        <button type="submit">Enregistrer les modifications</button>
     </form>
 
 </main>
 
-@foreach(Categories categorie in Model.CategoriesDisponibles)
-{
-    bool estSelectionnee = Model.CategoriesSelectionnees != null && Model.CategoriesSelectionnees.Contains(categorie.id_categorie);
-    <label for="categorie-@categorie.id_categorie">@categorie.nom</label>
-    <input type="checkbox" id="categorie-@categorie.id_categorie" checked="@estSelectionnee" name="CategoriesSelectionnees" value="@categorie.id_categorie" />
-
-    @if (Model.CategoriesSelectionnees is null || Model.CategoriesSelectionnees.Count == 0 )
-    {
-    
-    }
-
-
-}

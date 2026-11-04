@@ -15,11 +15,13 @@ namespace GC_MVC.Controllers
     {
         private readonly GCContext _context;
         private readonly ILogger<RecettesController> _logger;
+        private readonly IWebHostEnvironment _environment;
 
-        public RecettesController(GCContext context, ILogger<RecettesController> logger)
+        public RecettesController(GCContext context, ILogger<RecettesController> logger, IWebHostEnvironment environment)
         {
             _context = context;
             _logger = logger;
+            _environment = environment;
         }
 
         public IActionResult Detail(int id)
@@ -133,8 +135,127 @@ namespace GC_MVC.Controllers
         [HttpPost]
         public IActionResult CreerRecette(RecetteCreationViewModel model)
         {
+            // vérification de la présence et de la taille du fichier
+            if (model.PhotoFichier is not null)
+            {
+                const long TailleMaximale = 5 * 1024 * 1024;
+
+                string Extension = Path.GetExtension(model.PhotoFichier.FileName).ToLowerInvariant();
+
+                string[] ExtensionsAutorisees =
+                {
+                    ".jpg",
+                    ".jpeg",
+                    ".png",
+                    ".webp"
+                };
+
+                string[] TypesAutorises =
+                {
+                    "image/jpeg",
+                    "image/png",
+                    "image/webp"
+                };
+
+                if (model.PhotoFichier.Length == 0 ||
+                    model.PhotoFichier.Length > TailleMaximale)
+                {
+                    ModelState.AddModelError(
+                        "PhotoFichier",
+                        "L'image doit avoir une taille supérieure à 0 et ne pas dépasser 5 Mo."
+                    );
+                }
+
+                if (!ExtensionsAutorisees.Contains(Extension))
+                {
+                    ModelState.AddModelError(
+                        "PhotoFichier",
+                        "Seules les images JPG, PNG et WebP sont autorisées."
+                    );
+                }
+
+                if (!TypesAutorises.Contains(model.PhotoFichier.ContentType))
+                {
+                    ModelState.AddModelError(
+                        "PhotoFichier",
+                        "Le type de fichier sélectionné n'est pas autorisé."
+                    );
+                }
+
+                if (model.PhotoFichier.Length > 0 && model.PhotoFichier.Length < 12)
+                {
+                    ModelState.AddModelError(
+                        "PhotoFichier",
+                        "Le fichier est trop court pour être une image valide."
+                    );
+                }
+                else if (model.PhotoFichier.Length >= 12 && model.PhotoFichier.Length <= TailleMaximale)
+                {
+                    using Stream FluxImage = model.PhotoFichier.OpenReadStream();
+
+                    byte[] Signature = new byte[12];
+                    FluxImage.ReadExactly(Signature);
+
+                    byte[] SignaturePNG =
+                    {
+                        0x89, 0x50, 0x4E, 0x47,
+                        0x0D, 0x0A, 0x1A, 0x0A
+                    };
+
+                    bool EstPNG = Signature.Take(8).SequenceEqual(SignaturePNG);
+                    bool EstJPEG = Signature[0] == 0xFF && Signature[1] == 0xD8 && Signature[2] == 0xFF;
+
+                    byte[] DebutWebP = Signature.Take(4).ToArray();
+                    byte[] FinWebP = Signature.Skip(8).Take(4).ToArray();
+                    bool EstRIFF = DebutWebP.SequenceEqual(System.Text.Encoding.ASCII.GetBytes("RIFF"));
+                    bool EstWEBP = FinWebP.SequenceEqual(System.Text.Encoding.ASCII.GetBytes("WEBP") );
+                    bool EstWebP = EstRIFF && EstWEBP;
+
+                    bool PNGValide = Extension == ".png"
+                    && model.PhotoFichier.ContentType == "image/png"
+                    && EstPNG;
+
+                    bool JPEGValide = (Extension == ".jpg" || Extension == ".jpeg")
+                    && model.PhotoFichier.ContentType == "image/jpeg"
+                    && EstJPEG;
+
+                    bool WebPValide = Extension == ".webp"
+                    && model.PhotoFichier.ContentType == "image/webp"
+                    && EstWebP;
+
+                    bool ImageValide = PNGValide || JPEGValide || WebPValide;
+
+                    if (!ImageValide)
+                    {
+                        ModelState.AddModelError(
+                            "PhotoFichier",
+                            "La signature du fichier ne correspond pas à un format d'image autorisé."
+                        );
+                    }
+                }
+            }
+
             if (ModelState.IsValid)
             {
+                // création du chemin d'enregistrement de l'image
+                string CheminWebRoot = _environment.WebRootPath;
+                Console.WriteLine("Dossier wwwroot utilisé : " + CheminWebRoot);
+
+                string CheminDossier = Path.Combine(
+                    CheminWebRoot,
+                    "img",
+                    "recettes"
+                );
+
+                string? NomFichier = null;
+                string? CheminFichier = null;
+
+                if (model.PhotoFichier is not null)
+                {
+                    string Extension = Path.GetExtension(model.PhotoFichier.FileName).ToLowerInvariant();
+                    NomFichier = Guid.NewGuid().ToString() + Extension;
+                }
+
                 // Création d'une nouvelle recette
                 Recettes NouvelleRecette = new Recettes();
                 // Récupération du nom depuis le ViewModel
@@ -175,6 +296,7 @@ namespace GC_MVC.Controllers
                         {
                             ModelState.AddModelError("CategoriesSelectionnees", "Une catégorie sélectionnée n'existe plus.");
                             model.CategoriesDisponibles = _context.Categories.ToList();
+                            model.IngredientsDisponibles = _context.Ingredients.ToList();
                             return View("CreerRecette", model);
                         } 
                     }
@@ -189,6 +311,7 @@ namespace GC_MVC.Controllers
                         if (!ingredientExiste)
                         {
                             ModelState.AddModelError("IngredientsSelectionnes", "Un ingrédient sélectionné n'existe plus.");
+                            model.CategoriesDisponibles = _context.Categories.ToList();
                             model.IngredientsDisponibles = _context.Ingredients.ToList();
 
                             return View("CreerRecette", model);
@@ -212,9 +335,24 @@ namespace GC_MVC.Controllers
                 }
                 
                 IDbContextTransaction? transactionNouvelleRecette = null;
+                bool CommitTente = false;
                 
                 try
                 {
+                    // Création du dossier des images si nécessaire
+                    Directory.CreateDirectory(CheminDossier);
+
+                    if (NomFichier is not null && model.PhotoFichier is not null)
+                    {
+                        CheminFichier = Path.Combine(CheminDossier, NomFichier);
+                        using (FileStream FluxFichier = new FileStream(CheminFichier, FileMode.CreateNew))
+                        {
+                            model.PhotoFichier.CopyTo(FluxFichier);
+                        }
+
+                        NouvelleRecette.photo = NomFichier;
+                    }
+
                     // préparation de la transaction pour valider l'ajout d'une nouvelle recette
                     transactionNouvelleRecette = _context.Database.BeginTransaction();
                     // Prépare l'insertion de la nouvelle recette.
@@ -246,9 +384,23 @@ namespace GC_MVC.Controllers
 
                         _context.Ingredients_Recettes.Add(NouvelleAssociationIngredient);
                     }
+
+                    // Enregistrement des étapes de préparation
+                    for (int i = 0; i < model.Etapes.Count; i++)
+                    {
+                        Etapes NouvelleEtape = new Etapes
+                        {
+                            id_recette = NouvelleRecette.id_recette,
+                            numero_etape = i + 1,
+                            texte = model.Etapes[i]
+                        };
+
+                        _context.Etapes.Add(NouvelleEtape);
+                    }
                     // Enregistre les modifications dans PostgreSQL, ici categories                    
                     _context.SaveChanges();
-
+                
+                    CommitTente = true;
                     transactionNouvelleRecette?.Commit();
                     TempData["MessageSucces"] = "Votre recette a bien été enregistrée !";
                     return RedirectToAction("Index", "Compte");
@@ -259,20 +411,39 @@ namespace GC_MVC.Controllers
                       // Première erreur : l'enregistrement a échoué.
                     _logger.LogError(ex, "Erreur lors de la création d'une recette");
 
+                    bool AnnulationReussie = false;
+
                     try
                     {
-                        // On essaie d'annuler la transaction
-                        transactionNouvelleRecette?.Rollback();
+                        if (transactionNouvelleRecette is not null)
+                        {
+                            transactionNouvelleRecette.Rollback();
+                            AnnulationReussie = true;
+                        }
                     }
-
                     catch (Exception exRollback)
                     {
-                        // Deuxième erreur : l'annulation a échoué.
                         _logger.LogError(exRollback, "Erreur lors de l'annulation");
                     }
-                    
+
+                    try
+                    {
+                        if (!CommitTente
+                            && (transactionNouvelleRecette is null || AnnulationReussie)
+                            && CheminFichier is not null
+                            && System.IO.File.Exists(CheminFichier))
+                        {
+                            System.IO.File.Delete(CheminFichier);
+                        }
+                    }
+                    catch (Exception exSuppression)
+                    {
+                        _logger.LogError(exSuppression, "Erreur lors de la suppression de la photo");
+                    }
+                                        
                     ViewData["ValidateMessage"] = "Une erreur est survenue lors de l'enregistrement de la recette. Veuillez réessayer.";
                     model.CategoriesDisponibles = _context.Categories.ToList();
+                    model.IngredientsDisponibles = _context.Ingredients.ToList();
                     return View("CreerRecette", model);
                 }
 
@@ -286,6 +457,7 @@ namespace GC_MVC.Controllers
             {
                 ViewData["ValidateMessage"] = "La recette n'est pas valide.";
                 model.CategoriesDisponibles = _context.Categories.ToList();
+                model.IngredientsDisponibles = _context.Ingredients.ToList();
                 return View("~/Views/Recettes/CreerRecette.cshtml", model);
             }
         }
@@ -319,6 +491,7 @@ namespace GC_MVC.Controllers
             
             RecetteCreationViewModel model = new RecetteCreationViewModel();
 
+            model.IdRecette = recette.id_recette;
             model.Nom = recette.nom;
             model.TempsPreparation = (int) recette.temps_preparation.TotalMinutes;
             model.TempsCuisson = (int) recette.temps_cuisson.TotalMinutes;
@@ -362,7 +535,7 @@ namespace GC_MVC.Controllers
             // Le formulaire de modification sera ajouté ensuite.
             return View("ModifierRecette", model);
         }
-/*
+
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -374,18 +547,176 @@ namespace GC_MVC.Controllers
             {
                 return NotFound();
             }
-        }
 
-        string? utilisateurId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        if (!int.TryParse(utilisateurId, out int idUtilisateur))
-        {
-            return Unauthorized();
-        }
+            string? utilisateurId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        if (recette.createur != idUtilisateur)
-        {
-            return Forbid();
-        }*/
+            if (!int.TryParse(utilisateurId, out int idUtilisateur))
+            {
+                return Unauthorized();
+            }
+
+            if (recette.createur != idUtilisateur)
+            {
+                return Forbid();
+            }
+
+            // Vérification de la présence d'au moins une catégorie
+            if (model.CategoriesSelectionnees == null || model.CategoriesSelectionnees.Count == 0)
+            {
+                ModelState.AddModelError(
+                    "CategoriesSelectionnees",
+                    "Veuillez sélectionner au moins une catégorie."
+                );
+            }
+
+            // Vérification de la présence d'au moins un ingrédient
+            if (model.IngredientsSelectionnes == null || model.IngredientsSelectionnes.Count == 0)
+            {
+                ModelState.AddModelError(
+                    "IngredientsSelectionnes",
+                    "Veuillez sélectionner au moins un ingrédient."
+                );
+            }
+
+            if (!ModelState.IsValid)
+            {
+                model.CategoriesDisponibles = _context.Categories.ToList();
+                model.IngredientsDisponibles = _context.Ingredients.ToList();
+
+                return View("ModifierRecette", model);
+            }
+
+            // Vérification de l'existence des catégories
+            foreach (int idCategorie in model.CategoriesSelectionnees!)
+            {
+                bool categorieExiste = _context.Categories.Any(
+                    categorie => categorie.id_categorie == idCategorie
+                );
+
+                if (!categorieExiste)
+                {
+                    ModelState.AddModelError("CategoriesSelectionnees", "Une catégorie sélectionnée n'existe plus.");
+
+                        model.CategoriesDisponibles = _context.Categories.ToList();
+                        model.IngredientsDisponibles = _context.Ingredients.ToList();
+
+                        return View("ModifierRecette", model);
+                }
+            }
+
+            foreach (IngredientRecetteViewModel ingredient in model.IngredientsSelectionnes!)
+            {
+                bool ingredientExiste = _context.Ingredients.Any(
+                    ingredientBDD => ingredientBDD.id_ingredient == ingredient.IdIngredient
+                );
+
+                if (!ingredientExiste)
+                {
+                    ModelState.AddModelError("IngredientsSelectionnes", "Un ingrédient sélectionné n'existe plus.");
+
+                        model.CategoriesDisponibles = _context.Categories.ToList();
+                        model.IngredientsDisponibles = _context.Ingredients.ToList();
+
+                        return View("ModifierRecette", model);
+                    }
+                }
+
+            IDbContextTransaction? transactionModificationRecette = null;
+
+            try
+            {
+                // début de la transaction de modification d'une recette
+                transactionModificationRecette = _context.Database.BeginTransaction();
+                
+                // 1. modification des propriétés de la recette
+                recette.nom = model.Nom;
+                recette.difficulte = model.Difficulte;
+                recette.nombre_personnes = model.NombrePersonnes;
+                recette.temps_preparation = TimeSpan.FromMinutes(model.TempsPreparation);
+                recette.temps_cuisson = TimeSpan.FromMinutes(model.TempsCuisson);
+
+                // récupération des anciennes associations
+                List<Categories_recettes> anciennesAssociations = _context.Categories_recettes
+                    .Where(association => association.id_recette == id)
+                    .ToList();
+
+                // supprimer les anciennes associations
+                _context.Categories_recettes.RemoveRange(anciennesAssociations);
+
+                // Enregistrer les suppressions
+                _context.SaveChanges();
+
+                // création des nouvelles associations
+                foreach(int idCategorie in model.CategoriesSelectionnees)
+                {
+                    Categories_recettes nouvelleAssociation = new Categories_recettes
+                    {
+                        id_recette = id,
+                        id_categorie = idCategorie,
+                    };
+                    
+                    // Ajout de la nouvelle association
+                    _context.Categories_recettes.Add(nouvelleAssociation);
+                }
+
+                // 2. Récupération des anciennes associations d'ingrédients
+                List<Ingredients_recettes> anciensIngredients = _context.Ingredients_Recettes
+                    .Where(association => association.id_recette == id)
+                    .ToList();
+
+                // Suppression des anciennes associations
+                _context.Ingredients_Recettes.RemoveRange(anciensIngredients);
+
+                // Enregistrement des suppressions
+                _context.SaveChanges(); 
+
+                // Création des nouvelles associations d'ingrédients
+                foreach (IngredientRecetteViewModel ingredient in model.IngredientsSelectionnes!)
+                {
+                    Ingredients_recettes nouvelleAssociationIngredient = new Ingredients_recettes
+                    {
+                        id_ingredient = ingredient.IdIngredient,
+                        id_recette = id,
+                        quantite = ingredient.Quantite
+                    };
+
+                    _context.Ingredients_Recettes.Add(nouvelleAssociationIngredient);
+                }
+
+                // Enregistrement des nouvelles associations
+                _context.SaveChanges();
+
+                // Validation de la transaction
+                transactionModificationRecette.Commit();
+
+                // Redirection vers la recette modifiée
+                return RedirectToAction("Detail", new { id = id });
+            }
+
+            catch (Exception ex)
+            {
+                // Journalisation de l'erreur initiale
+                _logger.LogError(ex, "Erreur lors de la modification d'une recette.");
+
+                try
+                {
+                    // Tentative d'annulation de la transaction
+                    transactionModificationRecette?.Rollback();
+                }
+                catch (Exception exRollback)
+                {
+                    // Journalisation d'une éventuelle erreur d'annulation
+                    _logger.LogError(exRollback, "Erreur lors de l'annulation");
+                }
+
+                return StatusCode(500, "Une erreur est survenue lors de la modification de la recette.");
+            }
+
+            finally
+            {
+                transactionModificationRecette?.Dispose();
+            }
+        }  
     }
 }
 

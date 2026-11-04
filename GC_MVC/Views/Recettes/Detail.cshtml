@@ -7,7 +7,10 @@
 
    <h1>@Model.Recette?.nom</h1>
         <div class="image-recette">
-            <img src="~/img/recettes/@Model.Recette?.photo" alt="@Model.Recette?.nom" />
+            @{
+                string ImageAffichee = Model.Recette?.photo ?? "image-par-defaut.png";
+            }
+            <img src="@Url.Content("~/img/recettes/" + ImageAffichee)" alt="@Model.Recette?.nom" />
         </div>
         <div class="note-commentaire">
             

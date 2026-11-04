@@ -12,9 +12,11 @@
     <!-- icones pour toque cuisinier (difficulté) -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="~/JS/script.js" asp-append-version="true" defer></script>
-    <link rel="stylesheet" href="~/CSS/style.css">
+    <link rel="stylesheet" href="~/CSS/style.css" asp-append-version="true">
 
     @await RenderSectionAsync("Styles", required: false)
+
+    <link rel="stylesheet" href="~/CSS/styleResponsive.css" asp-append-version="true">
 </head>
 
 <body>
@@ -33,12 +35,48 @@
                 </button>
             </div>
 
+            <!-- Recherche sur mobile -->
+            <a asp-controller="Recherche" asp-action="Index" class="recherche-mobile" aria-label="Accéder à la recherche">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true">
+
+                    <circle cx="11" cy="11" r="7"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2" />
+
+                    <path d="M16 16L21 21"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round" />
+                </svg>
+            </a>
+
+            <!-- BOUTON MENU HAMBURGER -->
+            <button type="button" class="bouton-menu" id="boutonMenu" aria-label="Ouvrir le menu de navigation" aria-controls="menuNavigation" aria-expanded="false">
+
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M4 6h16M4 12h16M4 18h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+
             <!-- NAVIGATION -->
-            <nav class="navigation">
-                <a asp-controller="AccueilRecette" asp-action="Index">Recettes<span class="fleche">⌄</span></a>
+            <nav class="navigation" id="menuNavigation">
+                <a asp-controller="AccueilRecette" asp-action="Index">
+                    Recettes<span class="fleche">⌄</span>
+                </a>
                 <a asp-controller="AccueilActualite" asp-action="Index">Actualités</a>
                 <a asp-controller="Saison" asp-action="Index">C'est la saison !</a>
+
+                <!-- Liens supplémentaires pour mobile -->
+                <div class="navigation-mobile-actions">
+                    <a href="#"><span>♡</span>Mes favoris</a>
+                    <a href="#"><span>♧</span>Mon panier</a>
+                </div>
             </nav>
+            
 
             <!-- LOGO -->
             <a asp-controller="Home" asp-action="Index" class="logo"><img src="~/img/logo/logo_GC.png" alt="Gastronome créatif"></a>
@@ -53,20 +91,19 @@
                 <!-- Authentification -->
                 @if (User.Identity?.IsAuthenticated == true)
                 {
-                    <form asp-controller="Access"
-                        asp-action="Deconnexion"
-                        method="post">
+                    <a asp-controller="Compte"
+                    asp-action="Index"
+                    class="connexion">
 
-                        <button type="submit" class="connexion">
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                aria-hidden="true">
-                                <circle cx="12" cy="8" r="4"></circle>
-                                <path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"></path>
-                            </svg>
-                            <span>Se déconnecter</span>
-                        </button>
-                    </form>
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true">
+                            <circle cx="12" cy="8" r="4"></circle>
+                            <path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"></path>
+                        </svg>
+
+                        <span>Mon compte</span>
+                    </a>
                 }
                 else
                 {
@@ -137,11 +174,7 @@
             
             <p>A propos - <a asp-controller="Contact" asp-action="Index" class="contact">Contact</a> - Mentions légales - CGU - CGV - Protection des données personnelles - Cookies - Préférences cookies - Accessibilité</p>
         </div>
-    </footer>
-
-    <!-- JS -->
-    <script src="~/JS/script.js" defer></script>
-    @await RenderSectionAsync("Scripts", required: false)
+        @await RenderSectionAsync("Scripts", required: false)
     </body>
 
 </html>
