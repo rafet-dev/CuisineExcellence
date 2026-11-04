@@ -373,3 +373,54 @@ footer
 }
 
 
+
+
+/* BOUTON MENU HAMBURGER */
+
+.bouton-menu {
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    width: 44px;
+    height: 44px;
+
+    background-color: transparent;
+    border: 1px solid var(--or-champagne);
+    border-radius: 8px;
+
+    color: var(--or-champagne);
+    cursor: pointer;
+}
+
+.bouton-menu svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Recherche mobile */
+
+.recherche-mobile {
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    width: 44px;
+    height: 44px;
+
+    border: 1px solid var(--or-champagne);
+    border-radius: 8px;
+
+    color: var(--or-champagne);
+    text-decoration: none;
+}
+
+.recherche-mobile svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* navigation mobile */
+.navigation-mobile-actions {
+    display: none;
+}
