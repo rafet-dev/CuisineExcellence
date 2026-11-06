@@ -11,14 +11,21 @@ public class HomeController : Controller
     {
         _context = context;
     }
+    
     public IActionResult Index()
     {
-        List<Recettes> recettes = _context.Recettes.Take(3).ToList();
+        List<int> recettesALaUne = new List<int> { 6, 8, 17 };
+
+        List<Recettes> recettes = _context.Recettes
+            .OrderByDescending(r => r.id_recette)
+            .Where(r => recettesALaUne.Contains(r.id_recette))
+            .Take(3)
+            .ToList();
 
         return View(recettes);
     }
-
 }
+
 
 
  

@@ -1,7 +1,6 @@
 /* responsive */
 /* TABLETTE */
-
-@media (max-width: 1200px) 
+@media screen and (min-width: 769px) and (max-width: 1024px)
 {
 
     .header-container 
@@ -42,15 +41,20 @@
 
 /* Mobile */
 
-@media (max-width: 768px) 
+@media screen and (max-width: 800px),
+       screen and (orientation: landscape)
+              and (max-height: 500px)
+              and (max-width: 950px)
 {
     .header-container {
         display: grid;
         grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
         grid-template-rows: auto auto;
         align-items: center;
-        gap: 10px;
-        padding: 10px 12px;
+        padding: 5px 12px;
+        min-height: 0;
+        row-gap: 5px;
+        
     }
     
     /* Affichage du bouton hamburger sur mobile */
@@ -70,7 +74,7 @@
     }
 
     .logo img {
-        width: 85px;
+        width: 65px;
         max-width: 100%;
         height: auto;
     }
@@ -80,10 +84,13 @@
         display: none;
         grid-column: 1 / -1;
         grid-row: 2;
-
         width: 100%;
         flex-direction: column;
-        gap: 18px;
+        gap: 8px;
+    }
+
+    .navigation a {
+        padding: 3px 0;
     }
 
     /* Navigation mobile ouverte */
@@ -143,13 +150,58 @@
         display: none;
     }
 
-    .navigation-mobile-actions {
+   .navigation-mobile-actions {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 18px;
+        gap: 8px;
+    }
+}
+
+/* Menu compact en orientation paysage */
+
+@media screen and (orientation: landscape)
+       and (max-height: 500px)
+       and (max-width: 950px)
+{
+    /* Réduire la hauteur du header en paysage */
+    .header-container {
+        min-height: 0;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        row-gap: 5px;
     }
 
-    
- 
+    .logo img {
+        width: 65px;
+        height: auto;
+    }
+}
+
+/* TABLETTE HORIZONTALE */
+@media screen and (min-width: 1025px) and (max-width: 1280px)
+{
+    /* Masquer la barre de recherche classique */
+    .recherche {
+        display: none;
+    }
+
+    /* Afficher le bouton de recherche */
+    .recherche-mobile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Espacement latéral du header */
+    .header-container {
+        padding-left: 20px;
+        padding-right: 2px;
+        box-sizing: border-box;
+    }
+
+    /* Rapprocher les éléments de droite */
+    .actions {
+        gap: 10px;
+    }
 }

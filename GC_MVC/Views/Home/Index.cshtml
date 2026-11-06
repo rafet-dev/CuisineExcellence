@@ -78,7 +78,7 @@
                     @foreach(Recettes recettes in Model)
                     {
                         <div class="recette1">
-                            <a asp-controller="Recettes" asp-action="Detail" asp-route-id="@recettes.id_recette"><img src="~/img/illustrations/@recettes.photo" alt="@recettes.nom" /></a>
+                            <a asp-controller="Recettes" asp-action="Detail" asp-route-id="@recettes.id_recette"><img src="~/img/recettes/@recettes.photo" alt="@recettes.nom" /></a>
                             <div class="texte-recette1">
                                 <h2><a asp-controller="Recettes" asp-action="Detail" asp-route-id="@recettes.id_recette">
                                     @recettes.nom</a></h2>
@@ -89,12 +89,11 @@
                         </div>   
                     }
                 </div>
-                
-            </div>
-            <div class="button-recette">
+                <div class="button-recette">
                 <button>Voir nos autres recettes gourmandes</button>
             </div>
-        </div>
+            </div>
+            
         </section>
         <!-- section rejoindre le club -->
         <section class="club">
@@ -109,10 +108,10 @@
             </div>    
             <div class="button-club">
                 <button>Rejoindre le club GC</button>
-            </div>
-            </div>  
+            </div> 
         </section>
 
 @section Styles {
-    <link rel="stylesheet" href="~/CSS/styleHome.css" />
-} 
+    <link rel="stylesheet" href="~/CSS/Home/styleHome.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/CSS/Home/HomeResponsive.css" asp-append-version="true" />
+}

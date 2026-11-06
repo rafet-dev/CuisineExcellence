@@ -35,7 +35,7 @@
                     <label><input type="radio" name="niveau-diff" value="2"><i data-lucide="chef-hat" class="toque-active"></i><i data-lucide="chef-hat" class="toque-active"></i></label>
                     <label><input type="radio" name="niveau-diff" value="3"><i data-lucide="chef-hat" class="toque-active"></i><i data-lucide="chef-hat" class="toque-active"></i><i data-lucide="chef-hat" class="toque-active"></i></label>
                     <label><input type="radio" name="niveau-diff" value="4"><i data-lucide="chef-hat" class="toque-active"></i><i data-lucide="chef-hat" class="toque-active"></i><i data-lucide="chef-hat" class="toque-active"></i><i data-lucide="chef-hat" class="toque-active"></i></label>
-                    <label><input type="radio" name="niveaudiff" value="5"> <i data-lucide="chef-hat" class="toque-active"></i><i data-lucide="chef-hat" class="toque-active"></i><i data-lucide="chef-hat" class="toque-active"></i><i data-lucide="chef-hat" class="toque-active"></i><i data-lucide="chef-hat" class="toque-active"></i></label>
+                    <label><input type="radio" name="niveau-diff" value="5"> <i data-lucide="chef-hat" class="toque-active"></i><i data-lucide="chef-hat" class="toque-active"></i><i data-lucide="chef-hat" class="toque-active"></i><i data-lucide="chef-hat" class="toque-active"></i><i data-lucide="chef-hat" class="toque-active"></i></label>
                 </div>
             </div>
 
@@ -79,7 +79,9 @@ else
         @foreach (GC_MVC.Models.Recettes recette in Model)
         {
             <div class="resultat-recette">
-                <img src="~/img/recettes/@recette.photo" alt="@recette.nom"/>
+                <img src="@Url.Content($"~/img/recettes/{recette.photo}")"
+     alt="@recette.nom"
+     onerror="this.onerror=null; this.src='@Url.Content("~/img/recettes/image-par-defaut.png")';" />
                 <a asp-controller="Recettes" asp-action="Detail" asp-route-id="@recette.id_recette"><h2>@recette.nom</h2></a>
             </div>
         }
@@ -87,7 +89,8 @@ else
 }
 </div>
 @section Styles {
-    <link rel="stylesheet" href="~/CSS/styleRecherche.css" />
+    <link rel="stylesheet" href="~/CSS/Recherche/styleRecherche.css" />
+    <link rel="stylesheet" href="~/CSS/Recherche/RechercheResponsive.css" />
 } 
 
 @section Scripts {

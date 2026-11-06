@@ -74,20 +74,18 @@
         </div>
         <h1>Ingrédients</h1>
         <div class="liste-ingredient">
-            <div class="un-ingredient">
-                <ul>
-                    @foreach(IngredientQuantiteViewModel ingredient in Model.Ingredients)
-                    {
-                        <img src="..\img\ingredient\farine.jpg" />
-                        <li>
-                            <span data-quantite-initiale="@ingredient.Quantite">
-                                @ingredient.Quantite
-                            </span>
-                            @ingredient.Nom
-                        </li>  
-                    }
-                </ul> 
-            </div>
+            @foreach (IngredientQuantiteViewModel ingredient in Model.Ingredients)
+            {
+                <div class="un-ingredient">
+                    <img src="~/img/ingredient/farine.jpg" alt="@ingredient.Nom" />
+                    <p>
+                        <span data-quantite-initiale="@ingredient.Quantite">
+                            @ingredient.Quantite
+                        </span>
+                        @ingredient.Nom
+                    </p>
+                </div>
+            }
         </div>
         <h1>Préparation</h1>
         <div class="preparation">
@@ -152,7 +150,7 @@
 
          <div class="button-note-club">
             <div class="button-note">
-                <button>J'ai cuisiné cette recette gourmande !</button>
+                <button>J'ai cuisiné cette recette !</button>
             </div>
             <p>C'est votre première recette ?</p>
              <div class="button-club">
@@ -161,8 +159,9 @@
         </div>
 
 @section Styles {
-    <link rel="stylesheet" href="~/CSS/styleDetailRecette.css" />
-} 
+    <link rel="stylesheet" href="~/CSS/DetailRecette/styleDetailRecette.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/CSS/DetailRecette/DetailRecetteResponsive.css" asp-append-version="true" />
+}
 
 @section Scripts {
     <script src="~/JS/scriptDetailRecette.js" defer></script>

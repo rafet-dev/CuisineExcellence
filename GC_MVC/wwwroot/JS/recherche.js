@@ -44,10 +44,18 @@ formulaireRecherche.addEventListener("submit", event =>
                 resultatsRecherche.appendChild(carteRecette);
 
                 const imageRecette = document.createElement("img");
-                imageRecette.src = "/img/recettes/" + recette.photo;
+                const imageParDefaut = "/img/recettes/image-par-defaut.png";
                 imageRecette.alt = recette.nom;
-                carteRecette.appendChild(imageRecette);
+                imageRecette.onerror = function()
+                {
+                    imageRecette.onerror = null;
+                    imageRecette.src = imageParDefaut;
+                };
+                imageRecette.src = recette.photo
+                    ? "/img/recettes/" + recette.photo
+                    : imageParDefaut;
 
+                carteRecette.appendChild(imageRecette);
                 const titreRecette = document.createElement("h2");
                 titreRecette.textContent = recette.nom;
 
@@ -59,8 +67,5 @@ formulaireRecherche.addEventListener("submit", event =>
                 grilleRecettes.appendChild(carteRecette);
 
             });
-            
-            
-            
         });     
 });

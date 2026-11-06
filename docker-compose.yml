@@ -1,0 +1,39 @@
+services:
+  db:
+    image: postgres:18
+    container_name: gc-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: GC
+    volumes:
+      - pgdata:/var/lib/postgresql
+      # Initialisation de la base au premier démarrage (tables + données)
+      - ./init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d GC"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # Image locale par défaut ; surchargeable via APP_IMAGE (étape 4)
+    image: ${APP_IMAGE:-gc_mvc-app:local}
+    container_name: gc-app
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      # "db" = nom du service PostgreSQL dans ce fichier (résolution DNS interne)
+      ConnectionStrings__GC: "Server=db;Port=5432;Database=GC;User Id=postgres;Password=postgres"
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  pgdata:
+
+

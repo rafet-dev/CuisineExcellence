@@ -4,6 +4,8 @@ variables:
   SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
   GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
   LANG: "C.UTF-8" # Force l'environnement à utiliser l'UTF-8 universal
+  IMAGE_LATEST: $CI_REGISTRY_IMAGE:latest
+  IMAGE_SHA: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
 
 stages:
   - build-sonar
@@ -29,3 +31,21 @@ build-sonar:
   allow_failure: true
   rules:
     - if: $CI_COMMIT_BRANCH == 'main'
+
+docker-build:
+  stage: deploy
+  image: quay.io/buildah/stable
+  variables:
+    STORAGE_DRIVER: vfs        # buildah ne peut pas stacker overlayfs sur overlayfs
+    BUILDAH_FORMAT: docker     # format de sortie compatible
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"   # ne build/publie que sur main
+  before_script:
+    # Login sur la registry avec le token automatique du job GitLab
+    - echo "$CI_REGISTRY_PASSWORD" | buildah login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
+  script:
+    # Build de l'image avec les 2 tags (Dockerfile à la racine du dépôt)
+    - buildah build --isolation chroot -t $IMAGE_LATEST -t $IMAGE_SHA -f Dockerfile .
+    # Push des 2 tags sur la registry du dépôt
+    - buildah push $IMAGE_LATEST
+    - buildah push $IMAGE_SHA
