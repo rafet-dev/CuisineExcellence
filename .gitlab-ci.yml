@@ -9,6 +9,7 @@ variables:
 
 stages:
   - build-sonar
+  - deploy
 
 
 build-sonar:
