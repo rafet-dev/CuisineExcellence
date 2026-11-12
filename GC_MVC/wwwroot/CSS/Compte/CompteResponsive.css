@@ -1,0 +1,64 @@
+
+/* RESPONSIVE COMPLÉMENTAIRE — MON COMPTE */
+
+@media (max-width: 480px) {
+
+    .compte-page {
+        padding: 24px 14px 48px;
+    }
+
+    .compte-entete {
+        margin-bottom: 32px;
+    }
+
+    .compte-entete h1 {
+        font-size: 1.65rem;
+        line-height: 1.3;
+        overflow-wrap: anywhere;
+    }
+
+    .compte-entete > p:last-child {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    .compte-section {
+        margin-bottom: 32px;
+    }
+
+    .compte-section > h2 {
+        font-size: 1.25rem;
+        margin-bottom: 18px;
+    }
+
+    .compte-grille {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+    }
+
+    .compte-carte {
+        min-height: auto;
+        padding: 22px;
+    }
+
+    .compte-carte h3 {
+        font-size: 1.05rem;
+    }
+
+    .compte-carte p {
+        font-size: 0.9rem;
+    }
+
+    .compte-profil-contenu {
+        padding: 20px;
+    }
+
+    .compte-informations {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+    }
+
+    .compte-bouton-deconnexion {
+        width: 100%;
+    }
+}

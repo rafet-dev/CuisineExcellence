@@ -1,0 +1,169 @@
+@using GC_MVC.Models
+@model GC_MVC.ViewModels.RecetteCreationViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Mes Recettes";
+}
+
+<main>
+    <h1>Ajout/Modification de votre recette gourmet</h1>
+    <form asp-controller="Recettes" asp-action="CreerRecette" method="post" enctype="multipart/form-data">
+    <section class ="AjoutRecette">
+        <div class="infos-1">
+            <div class="info">
+                <label id="list" for="titre-recette">Titre de la recette :</label> @* Libellé associé au champ du titre. *@
+                <input asp-for="Nom" type="text" id="titre-recette" required /> @* Champ de saisie du titre de la recette. *@
+                <span asp-validation-for="Nom"></span> @* Affiche les éventuelles erreurs de validation de la propriété Nom. *@
+            </div>
+
+            <div class="info">
+                <label id="list" for="choix-tps-prep">Choisissez ou écrivez un temps de préparation en minutes:</label>
+                <input asp-for="TempsPreparation" type="number" list="suggestions-tps-prep" id="choix-tps-prep" placeholder="Sélectionnez ou écrivez le temps de préparation ..." />
+                <span asp-validation-for="TempsPreparation"></span> @* Affiche les erreurs de validation du temps de préparation. *@
+                <datalist id="suggestions-tps-prep">
+                    <option value="15"/>
+                    <option value="30"/>
+                    <option value="45"/>
+                    <option value="60"/>
+                </datalist>
+            </div>
+
+            <div class="info">
+                <label id="list" for="choix-tps-cui">Choisissez ou écrivez un temps de cuisson en minutes :</label>
+                <input asp-for="TempsCuisson" type="number" list="suggestions-tps-cui" id="choix-tps-cui" placeholder="Sélectionnez ou écrivez le temps de cuisson ..." />
+                <span asp-validation-for="TempsCuisson"></span>
+                <datalist id="suggestions-tps-cui">
+                    <option value="0"/>
+                    <option value="15"/>
+                    <option value="30"/>
+                    <option value="45"/>
+                    <option value="60"/>
+                </datalist>
+            </div>
+
+            <div class="info">
+                <label for="Difficulte" class="diff">
+                    Difficulté :
+                </label>
+
+                <div class="rating">
+
+                    <input type="range" asp-for="Difficulte" id="Difficulte" min="1" max="10" step="1" value="1" />
+                    <span id="valeurDifficulte">1 / 10</span>
+
+                    <div id="toquesDifficulte" class="toques-difficulte">
+                        @for (int i = 0; i < 5; i++)
+                        {
+                            <span class="toque">
+                                <span class="toque-fond">
+                                    <i data-lucide="chef-hat"></i>
+                                </span>
+
+                                <span class="toque-remplissage">
+                                    <i data-lucide="chef-hat"></i>
+                                </span>
+                            </span>
+                        }
+                    </div>
+                    <span id="nombreToques">0,5 toque</span>
+                </div>
+
+                <span asp-validation-for="Difficulte"></span>
+            </div>
+
+            <div class="info">
+                <label id="list" for="nbPersonne">Nombre de personnes:</label> @* Libellé du nombre de personnes. *@
+                <input asp-for="NombrePersonnes" type="number" min="1" max="20" id="nbPersonne" required /> @* Champ numérique lié à la propriété NombrePersonnes du ViewModel. *@
+                <span asp-validation-for="NombrePersonnes"></span>  @* Affiche les éventuelles erreurs de validation. *@
+            </div>
+
+            <div class="info info-categories">
+                <label id="list" for="rechercheCategorie">Catégories : </label>
+                <div class= "zone-categories">
+                    <div class="recherche-categories">
+                        <input type="text" id="rechercheCategorie" placeholder="Rechercher une catégorie ..." /> 
+
+                        <!-- Conteneur regroupant tous les résultats de recherche -->
+                        <div class="resultats-categories">
+                        @foreach(Categories categorie in Model.CategoriesDisponibles)
+                        {
+                            <div class="categorie-resultat" data-id="@categorie.id_categorie">
+                                @categorie.nom
+                            </div>
+                        }
+                        </div>   
+                    </div>
+                    <!-- Conteneur des catégories sélectionnées -->
+                    <div id="categoriesSelectionnees"></div>
+                </div>
+                
+            </div>
+            
+        </div>
+
+        <div class="button-ajout">
+            <div class="button-image">
+                <button type="button" id="ajouterImage">Ajouter une image</button>
+                <input type="file" id="photoRecette" name="PhotoFichier" accept="image/*" hidden>
+                <span asp-validation-for="PhotoFichier" class="text-danger"></span>
+                
+            </div>
+            <div class="button-ingredient">
+                <button type="button" id="ajouterIngrédient">Ajouter un ingrédient</button>
+                <!-- Recherche des ingrédients -->
+                <input type="search" id="rechercheIngredient" placeholder="Rechercher un ingrédient..." />
+
+                <!-- Conteneur des résultats de recherche -->
+                <div id="resultatsIngredients"></div>
+                
+            </div>
+            <div class="button-etape">
+                <button type="button" id="ajouterEtape">
+                    Ajouter une étape
+                </button>
+            </div>
+        </div>
+        <div class="img-recette">
+            <p class="texte-ajout-photo">
+                Ajoutez une photo pour illustrer votre recette
+            </p>
+
+            <img id="apercuPhoto"
+                alt="Aperçu de la photo de la recette"
+                hidden>
+        </div>
+
+        <h1>Ingrédients</h1>
+        <div class="liste-ingredient">
+             <div id="ingredientsSelectionnes"></div>
+        </div>
+        <h1>Préparation</h1>
+
+        <div class="preparation">
+            <div id="etapesRecette"></div>
+        </div>
+    </section>
+    <div class="button-image">
+        <button>Valider la recette</button>
+    </div>
+    </form>
+</main>
+
+@section Styles {
+    <link rel="stylesheet" href="~/CSS/styleCreerRecette.css" asp-append-version="true" />
+} 
+
+@section Scripts {
+    <script>
+        const IngredientsDisponibles = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(
+            Model.IngredientsDisponibles.Select(ingredient => new
+            {
+                id = ingredient.id_ingredient,
+                nom = ingredient.nom
+            })
+        ));
+
+        console.log(IngredientsDisponibles);
+    </script>
+    <script src="~/JS/scriptCreerRecette.js" defer></script>
+}

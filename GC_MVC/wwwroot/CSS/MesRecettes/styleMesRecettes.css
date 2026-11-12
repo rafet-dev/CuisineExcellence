@@ -1,0 +1,210 @@
+
+/* MES RECETTES — GASTRONOMIE CRÉATIVE */
+
+.mes-recettes-page {
+    min-height: 65vh;
+    padding: 48px 24px 80px;
+    background: #FFFDF8;
+    color: #252525;
+    font-family: "Montserrat", sans-serif;
+}
+
+.mes-recettes-container {
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+/* EN-TÊTE */
+
+.mes-recettes-entete {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.mes-recettes-surtitre {
+    margin-bottom: 14px;
+    color: #B68A45;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.mes-recettes-entete h1 {
+    margin: 0 0 14px;
+    font-size: clamp(1.8rem, 3vw, 2.7rem);
+}
+
+.mes-recettes-entete > p:last-child {
+    color: #666;
+    line-height: 1.7;
+}
+
+/* BARRE D'ACTIONS */
+
+.mes-recettes-barre {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.mes-recettes-barre h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.mes-recettes-ajouter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 22px;
+    border-radius: 30px;
+    background: #C9A35C;
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    text-align: center;
+    transition: background 0.2s ease;
+}
+
+.mes-recettes-ajouter:hover {
+    background: #AD8742;
+    color: #FFFFFF;
+}
+
+/* GRILLE */
+
+.mes-recettes-grille {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+
+/* CARTES */
+
+.mes-recettes-carte {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #FFFFFF;
+    border: 1px solid #E5DED1;
+    border-radius: 16px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mes-recettes-carte:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(55, 40, 20, 0.09);
+}
+
+
+.mes-recettes-visuel {
+    width: 100%;
+    height: 190px;
+    overflow: hidden;
+    background-color: #F6F0E5;
+}
+
+.mes-recettes-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+.mes-recettes-contenu {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 24px;
+}
+
+.mes-recettes-contenu h3 {
+    margin: 0 0 24px;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.mes-recettes-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: auto;
+}
+
+.mes-recettes-voir,
+.mes-recettes-modifier {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    border-radius: 25px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.mes-recettes-voir {
+    border: 1px solid #C9A35C;
+    color: #9A7131;
+    background: transparent;
+}
+
+.mes-recettes-modifier {
+    border: 1px solid #C9A35C;
+    color: #FFFFFF;
+    background: #C9A35C;
+}
+
+.mes-recettes-voir:hover {
+    background: #F6F0E5;
+}
+
+.mes-recettes-modifier:hover {
+    background: #AD8742;
+    color: #FFFFFF;
+}
+
+/* LISTE VIDE */
+
+.mes-recettes-vide {
+    padding: 48px 24px;
+    text-align: center;
+    background: #FFFFFF;
+    border: 1px solid #E5DED1;
+    border-radius: 16px;
+}
+
+.mes-recettes-vide h3 {
+    margin-bottom: 12px;
+}
+
+.mes-recettes-vide p {
+    margin-bottom: 24px;
+    color: #666;
+}
+
+.mes-recettes-retour {
+    margin-top: 40px;
+}
+
+.mes-recettes-retour a {
+    color: #9A7131;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.mes-recettes-retour a:hover {
+    text-decoration: underline;
+}
+
+.mes-recettes-page a:focus-visible {
+    outline: 3px solid #C9A35C;
+    outline-offset: 4px;
+}
+

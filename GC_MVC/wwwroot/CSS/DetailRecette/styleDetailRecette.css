@@ -224,21 +224,86 @@ img
     align-items: center;
 }
 
-/* difficulté toques */
-
-.toque-active
-{
-    color : #9B6645;
-}
-
-.toque-inactive
-{
-    color : #CFC7BB;
-}
 
 .difficulte-recette
 {
     display : flex;
     align-items : center;
     gap: 8px;
+}
+
+/* ==========================================
+   ANO-025 - Affichage de la difficulté
+   ========================================== */
+
+.difficulte-recette {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* Conteneur des cinq toques */
+.difficulte-recette .toques-difficulte {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Conteneur individuel */
+.difficulte-recette .toque {
+    position: relative;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+}
+
+/* Superposition des deux icônes */
+.difficulte-recette .toque-fond,
+.difficulte-recette .toque-remplissage {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 24px;
+    height: 24px;
+}
+
+/* Dimensions des icônes Lucide */
+.difficulte-recette .toque svg {
+    display: block;
+    width: 24px;
+    height: 24px;
+    stroke-width: 1.8;
+}
+
+/* Toque inactive */
+.difficulte-recette .toque-fond svg {
+    color: #CFC7BB;
+    fill: #CFC7BB;
+}
+
+/* Toque active */
+.difficulte-recette .toque-remplissage svg {
+    color: #9B6645;
+    fill: #9B6645;
+}
+
+/* Par défaut : remplissage masqué */
+.difficulte-recette .toque-remplissage {
+    clip-path: inset(0 100% 0 0);
+}
+
+/* Toque entièrement active */
+.difficulte-recette .toque-active .toque-remplissage {
+    clip-path: inset(0 0 0 0);
+}
+
+/* Demi-toque */
+.difficulte-recette .toque-demi .toque-remplissage {
+    clip-path: inset(0 50% 0 0);
+}
+
+/* Toque inactive */
+.difficulte-recette .toque-inactive .toque-remplissage {
+    clip-path: inset(0 100% 0 0);
 }

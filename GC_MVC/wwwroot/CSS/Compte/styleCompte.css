@@ -1,0 +1,217 @@
+
+/* PAGE MON COMPTE — GASTRONOMIE CRÉATIVE */
+
+.compte-page {
+    background-color: #FFFDF8;
+    color: #252525;
+    padding: 48px 24px 80px;
+    min-height: 65vh;
+    font-family: "Montserrat", sans-serif;
+}
+
+.compte-container {
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+/* EN-TÊTE */
+
+.compte-entete {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.compte-surtitre {
+    color: #B68A45;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+}
+
+.compte-entete h1 {
+    font-size: clamp(1.8rem, 3vw, 2.7rem);
+    font-weight: 700;
+    margin: 0 0 14px;
+}
+
+.compte-entete > p:last-child {
+    color: #666;
+    line-height: 1.7;
+}
+
+/* SECTIONS */
+
+.compte-section {
+    margin-bottom: 48px;
+}
+
+.compte-section > h2 {
+    font-size: 1.5rem;
+    font-weight: 650;
+    margin-bottom: 24px;
+}
+
+/* CARTES */
+
+.compte-grille {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.compte-carte {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 225px;
+    padding: 30px;
+    border: 1px solid #E5DED1;
+    border-radius: 16px;
+    background: #FFFFFF;
+    color: inherit;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.compte-carte-active:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(55, 40, 20, 0.09);
+    border-color: #C9A35C;
+}
+
+.compte-carte-active:focus-visible,
+.compte-bouton-deconnexion:focus-visible {
+    outline: 3px solid #C9A35C;
+    outline-offset: 4px;
+}
+
+.compte-carte-icone {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    background: #F6F0E5;
+    color: #A77C37;
+    font-size: 1.6rem;
+}
+
+.compte-carte h3 {
+    font-size: 1.2rem;
+    margin: 0 0 12px;
+}
+
+.compte-carte p {
+    color: #666;
+    line-height: 1.6;
+    margin: 0 0 18px;
+}
+
+.compte-carte-action {
+    margin-top: auto;
+    color: #9A7131;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.compte-carte-attente {
+    background: #FAF8F4;
+}
+
+.compte-statut {
+    margin-top: auto;
+    font-size: 0.8rem;
+    color: #777;
+    font-style: italic;
+}
+
+/* INFORMATIONS PERSONNELLES */
+
+.compte-profil-contenu {
+    padding: 30px;
+    background: #FFFFFF;
+    border: 1px solid #E5DED1;
+    border-radius: 16px;
+}
+
+.compte-informations {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    margin-bottom: 28px;
+}
+
+.compte-informations p {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+.compte-informations strong {
+    font-size: 0.85rem;
+    color: #777;
+}
+
+.compte-informations span {
+    font-weight: 600;
+}
+
+.compte-bouton-deconnexion {
+    border: 1px solid #B68A45;
+    background: transparent;
+    color: #8B642A;
+    border-radius: 25px;
+    padding: 12px 24px;
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.compte-bouton-deconnexion:hover {
+    background: #F6F0E5;
+}
+
+/* MESSAGE DE CONFIRMATION */
+
+.compte-message-succes {
+    padding: 16px 20px;
+    margin-bottom: 30px;
+    border: 1px solid #B8D7B8;
+    border-radius: 10px;
+    background: #F0F8F0;
+    color: #315C31;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+    .compte-page {
+        padding: 32px 16px 56px;
+    }
+
+    .compte-grille,
+    .compte-informations {
+        grid-template-columns: 1fr;
+    }
+
+    .compte-carte {
+        min-height: 190px;
+        padding: 24px;
+    }
+
+    .compte-profil-contenu {
+        padding: 24px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .compte-carte {
+        transition: none;
+    }
+}

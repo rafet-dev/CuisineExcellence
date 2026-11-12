@@ -1,0 +1,53 @@
+/* TABLETTE */
+
+@media (max-width: 992px) {
+    .mes-recettes-grille {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+    .mes-recettes-page {
+        padding: 28px 16px 56px;
+    }
+
+    .mes-recettes-entete {
+        margin-bottom: 36px;
+    }
+
+    .mes-recettes-barre {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .mes-recettes-barre h2 {
+        font-size: 1.3rem;
+    }
+
+    .mes-recettes-grille {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 18px;
+    }
+
+    .mes-recettes-contenu {
+        padding: 20px;
+    }
+
+    .mes-recettes-visuel {
+        height: 105px;
+    }
+
+    .mes-recettes-actions a {
+        flex: 1;
+        text-align: center;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mes-recettes-carte,
+    .mes-recettes-ajouter {
+        transition: none;
+    }
+}

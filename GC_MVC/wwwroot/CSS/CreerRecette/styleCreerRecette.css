@@ -1,0 +1,1223 @@
+
+/* =========================================
+   GASTRONOMIE CRÉATIVE
+   PAGE : Creation D'UNE RECETTE
+   ========================================= */
+
+/* 1. Variables de couleurs */
+
+.creer-recette {
+    --ivoire: #FFFDF8;
+    --creme: #F7F2E8;
+    --anthracite: #242424;
+    --gris-chaud: #6F6A62;
+    --or-champagne: #C9A45C;
+    --beige: #E5DED1;
+
+    font-family: "Montserrat", sans-serif;
+    color: var(--anthracite);
+}
+
+/* 2. Conteneur principal */
+
+.creer-recette .AjoutRecette {
+    width: min(1200px, calc(100% - 40px));
+    margin: 30px auto;
+    padding: 30px;
+    box-sizing: border-box;
+
+    background-color: var(--beige);
+    border-radius: 8px;
+}
+
+/* 3. Titres */
+
+.creer-recette h1 {
+    font-family: "Bodoni Moda", serif;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.creer-recette h2 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 22px;
+    margin: 30px 0 20px;
+}
+
+
+/* 4. INFORMATIONS GÉNÉRALES */
+
+/* Conteneur des informations */
+
+.creer-recette .infos-1 {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+}
+
+/* Chaque groupe : label + champ */
+
+.creer-recette .infos-1 .info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    width: 100%;
+}
+
+/* Libellés */
+
+.creer-recette .infos-1 .info label {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--anthracite);
+}
+
+/* Champs de saisie */
+
+.creer-recette .infos-1 .info input:not([type="range"]):not([type="hidden"]) {
+    width: 100%;
+    max-width: 500px;
+    min-height: 42px;
+    padding: 10px 12px;
+    box-sizing: border-box;
+
+    background-color: var(--ivoire);
+    border: 1px solid var(--gris-chaud);
+    border-radius: 5px;
+
+    color: var(--anthracite);
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+}
+
+/* Mise en évidence du champ actif */
+
+.creer-recette .infos-1 .info input:focus {
+    outline: 2px solid var(--or-champagne);
+    outline-offset: 2px;
+}
+
+
+/* 5. DIFFICULTÉ DE LA RECETTE */
+
+/* Conteneur du curseur et des toques */
+
+.creer-recette .rating {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 12px 20px;
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Curseur de difficulté */
+
+.creer-recette #Difficulte {
+    grid-column: 1 / -1;
+    width: 100%;
+    height: 8px;
+    margin: 10px 0;
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    border-radius: 10px;
+    cursor: pointer;
+
+    background: linear-gradient(
+        to right,
+        var(--or-champagne) 0%,
+        var(--or-champagne) var(--progression, 0%),
+        #D1CCC3 var(--progression, 0%),
+        #D1CCC3 100%
+    );
+}
+
+/* Poignée du curseur : Chrome, Edge, Safari */
+
+.creer-recette #Difficulte::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+
+    background-color: var(--or-champagne);
+    border: 2px solid var(--ivoire);
+}
+
+/* Poignée du curseur : Firefox */
+
+.creer-recette #Difficulte::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+
+    background-color: var(--or-champagne);
+    border: 2px solid var(--ivoire);
+}
+
+/* Valeur numérique */
+
+.creer-recette #valeurDifficulte {
+    grid-column: 1;
+    font-size: 16px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* Conteneur des toques */
+
+.creer-recette #toquesDifficulte {
+    grid-column: 2;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Chaque toque */
+
+.creer-recette .toque {
+    position: relative;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+}
+
+/* Icônes superposées */
+
+.creer-recette .toque-fond,
+.creer-recette .toque-remplissage {
+    position: absolute;
+    inset: 0;
+    width: 24px;
+    height: 24px;
+}
+
+/* Dimensions des icônes */
+
+.creer-recette .toque svg {
+    display: block;
+    width: 24px;
+    height: 24px;
+    stroke-width: 1.8;
+}
+
+/* Toque inactive */
+
+.creer-recette .toque-fond svg {
+    color: #CFC7BB;
+    fill: #CFC7BB;
+}
+
+/* Toque active */
+
+.creer-recette .toque-remplissage svg {
+    color: #9B6645;
+    fill: #9B6645;
+}
+
+/* Remplissage par défaut */
+
+.creer-recette .toque-remplissage {
+    clip-path: inset(0 100% 0 0);
+}
+
+/* Toque entièrement remplie */
+
+.creer-recette .toque-active .toque-remplissage {
+    clip-path: inset(0 0 0 0);
+}
+
+/* Demi-toque */
+
+.creer-recette .toque-demi .toque-remplissage {
+    clip-path: inset(0 50% 0 0);
+}
+
+/* Toque inactive */
+
+.creer-recette .toque-inactive .toque-remplissage {
+    clip-path: inset(0 100% 0 0);
+}
+
+/* Texte secondaire utilisé par JavaScript */
+
+.creer-recette #nombreToques {
+    display: none;
+}
+
+
+/* 6. EN-TÊTE ET BOUTONS D'AJOUT */
+
+/* Informations à gauche, boutons à droite */
+
+.creer-recette .entete-recette {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(220px, 1fr);
+    gap: 30px;
+    align-items: start;
+}
+
+/* Colonne des boutons */
+
+.creer-recette .button-ajout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Navigation au clavier */
+
+.creer-recette .button-ajout button:focus-visible {
+    outline: 2px solid var(--anthracite);
+    outline-offset: 3px;
+}
+
+/* 7. FENÊTRES MODALES */
+
+/* Fond sombre couvrant toute la fenêtre */
+
+.creer-recette .modal-gc {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+    box-sizing: border-box;
+
+    background-color: rgba(36, 36, 36, 0.55);
+}
+
+/* Masquer les fenêtres fermées */
+
+.creer-recette .modal-gc[hidden] {
+    display: none;
+}
+
+/* Contenu de la fenêtre */
+
+.creer-recette .modal-gc-contenu {
+    width: 100%;
+    max-width: 550px;
+    max-height: 85vh;
+
+    padding: 30px;
+    box-sizing: border-box;
+    overflow-y: auto;
+
+    background-color: var(--ivoire);
+    border: 1px solid var(--or-champagne);
+    border-radius: 10px;
+
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* En-tête */
+
+.creer-recette .modal-gc-entete {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+/* Titre */
+
+.creer-recette .modal-gc-entete h2 {
+    margin: 0;
+    font-size: 22px;
+}
+
+/* Bouton de fermeture */
+
+.creer-recette .modal-gc-fermer {
+    border: none;
+    background: transparent;
+    color: var(--gris-chaud);
+
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/* Pied de fenêtre */
+
+.creer-recette .modal-gc-pied {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 25px;
+}
+
+/* Bouton Terminer */
+
+.creer-recette .btn-modal-gc {
+    padding: 12px 22px;
+
+    background-color: var(--or-champagne);
+    color: var(--ivoire);
+
+    border: none;
+    border-radius: 5px;
+
+    font-family: "Montserrat", sans-serif;
+    cursor: pointer;
+}
+
+
+/* 8. RECHERCHE ET LISTE DES CATÉGORIES */
+
+/* Champ de recherche */
+
+.creer-recette .modal-gc #rechercheCategorie {
+    display: block;
+    width: 100%;
+    height: 45px;
+    padding: 12px 15px;
+    box-sizing: border-box;
+
+    background-color: var(--ivoire);
+    border: 1px solid var(--or-champagne);
+    border-radius: 5px;
+
+    color: var(--anthracite);
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+}
+
+/* Mise en évidence du champ actif */
+
+.creer-recette .modal-gc #rechercheCategorie:focus {
+    outline: 2px solid var(--or-champagne);
+    outline-offset: 2px;
+}
+
+/* Conteneur des résultats */
+
+.creer-recette .modal-gc .resultats-categories {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    max-height: 170px;
+    margin-top: 8px;
+    box-sizing: border-box;
+
+    overflow-y: auto;
+
+    background-color: var(--ivoire);
+    border: 1px solid var(--or-champagne);
+    border-radius: 5px;
+}
+
+/* Chaque catégorie */
+
+.creer-recette .modal-gc .categorie-resultat {
+    padding: 10px 15px;
+
+    color: var(--anthracite);
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+/* Séparation entre les catégories */
+
+.creer-recette .modal-gc .categorie-resultat:not(:last-child) {
+    border-bottom: 1px solid var(--beige);
+}
+
+/* Survol */
+
+.creer-recette .modal-gc .categorie-resultat:hover {
+    background-color: var(--creme);
+}
+
+/* Catégorie déjà sélectionnée */
+
+.creer-recette .modal-gc .categorie-resultat.est-selectionne {
+    background-color: var(--creme);
+    border-left: 4px solid var(--or-champagne);
+    font-weight: 600;
+}
+
+/* Indication d'ajout */
+
+.creer-recette .modal-gc .indication-ajout {
+    margin-left: 10px;
+    color: #527A55;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* 9. RECHERCHE ET LISTE DES INGRÉDIENTS */
+
+/* Champ de recherche */
+
+.creer-recette .modal-gc #rechercheIngredient {
+    display: block;
+    width: 100%;
+    height: 45px;
+    padding: 12px 15px;
+    box-sizing: border-box;
+
+    background-color: var(--ivoire);
+    border: 1px solid var(--or-champagne);
+    border-radius: 5px;
+
+    color: var(--anthracite);
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+}
+
+/* Mise en évidence du champ actif */
+
+.creer-recette .modal-gc #rechercheIngredient:focus {
+    outline: 2px solid var(--or-champagne);
+    outline-offset: 2px;
+}
+
+/* Liste des résultats */
+
+.creer-recette .modal-gc #resultatsIngredients {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    max-height: 170px;
+    margin-top: 8px;
+    box-sizing: border-box;
+
+    overflow-y: auto;
+
+    background-color: var(--ivoire);
+    border: 1px solid var(--or-champagne);
+    border-radius: 5px;
+}
+
+/* Masquer une liste vide */
+
+.creer-recette .modal-gc #resultatsIngredients:empty {
+    display: none;
+}
+
+/* Chaque ingrédient */
+
+.creer-recette .modal-gc .ingredient-resultat {
+    padding: 10px 15px;
+
+    color: var(--anthracite);
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+/* Séparation entre les ingrédients */
+
+.creer-recette .modal-gc .ingredient-resultat:not(:last-child) {
+    border-bottom: 1px solid var(--beige);
+}
+
+/* Survol */
+
+.creer-recette .modal-gc .ingredient-resultat:hover {
+    background-color: var(--creme);
+}
+
+/* Ingrédient déjà sélectionné */
+
+.creer-recette .modal-gc .ingredient-resultat.est-selectionne {
+    background-color: var(--creme);
+    border-left: 4px solid var(--or-champagne);
+    font-weight: 600;
+}
+
+/* Compteur des ingrédients */
+
+.creer-recette .modal-gc #compteurIngredients {
+    margin-top: 15px;
+    color: var(--gris-chaud);
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+}
+
+
+/* 10. CATÉGORIES SÉLECTIONNÉES */
+
+/* Conteneur des catégories */
+
+.creer-recette #categoriesSelectionnees {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+/* Étiquette individuelle */
+
+.creer-recette .categorie-selectionnee {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 10px;
+    box-sizing: border-box;
+
+    background-color: var(--ivoire);
+    border: 1px solid var(--or-champagne);
+    border-radius: 20px;
+
+    color: var(--anthracite);
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+}
+
+/* Bouton de suppression */
+
+.creer-recette .supprimer-categorie {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0;
+    border: none;
+    background: transparent;
+
+    color: var(--or-champagne);
+    font-size: 20px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+/* Survol du bouton de suppression */
+
+.creer-recette .supprimer-categorie:hover {
+    color: #B85C4A;
+}
+
+/* 11. POSITIONNEMENT DE LA PHOTOGRAPHIE */
+
+.creer-recette .entete-recette .infos-1 {
+    grid-column: 1;
+    grid-row: 1 / 3;
+}
+
+.creer-recette .entete-recette .button-ajout {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.creer-recette .entete-recette .img-recette {
+    grid-column: 2;
+    grid-row: 2;
+
+    width: min(100%, 350px);
+    aspect-ratio: 1;
+    margin: 0 auto;
+
+    border: 1px solid var(--anthracite);
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* 12. AFFICHAGE DES INGRÉDIENTS */
+/* Grille des ingrédients */
+
+.creer-recette #ingredientsSelectionnes {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 35px 20px;
+    margin-top: 30px;
+}
+
+/* Carte individuelle */
+
+.creer-recette .un-ingredient {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    min-width: 0;
+    text-align: center;
+}
+
+/* Cadre de l'image */
+
+.creer-recette .un-ingredient .img {
+    width: 130px;
+    height: 130px;
+    max-width: 100%;
+
+    border: 1px solid var(--gris-chaud);
+    box-sizing: border-box;
+
+    background-color: transparent;
+}
+
+/* Nom de l'ingrédient */
+
+.creer-recette .un-ingredient p {
+    margin: 0;
+
+    color: var(--anthracite);
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* Quantité et bouton de suppression */
+
+.creer-recette .infos-ingredient {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+}
+
+/* Champ de quantité */
+
+.creer-recette .infos-ingredient input[type="text"] {
+    width: 115px;
+    min-width: 0;
+    height: 35px;
+    padding: 8px;
+
+    box-sizing: border-box;
+
+    background-color: var(--ivoire);
+    border: 1px solid var(--gris-chaud);
+    border-radius: 4px;
+
+    color: var(--anthracite);
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+}
+
+/* Bouton de suppression */
+
+.creer-recette .supprimer-ingredient {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+
+    width: 35px;
+    height: 35px;
+
+    background-color: var(--or-champagne);
+    color: var(--ivoire);
+
+    border: 1px solid var(--anthracite);
+    border-radius: 4px;
+
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* Survol du bouton */
+
+.creer-recette .supprimer-ingredient:hover {
+    background-color: #B85C4A;
+}
+
+/* Navigation au clavier */
+
+.creer-recette .supprimer-ingredient:focus-visible {
+    outline: 2px solid var(--anthracite);
+    outline-offset: 3px;
+}
+
+/* 13. ÉTAPES DE PRÉPARATION */
+
+/* Deux étapes par ligne */
+
+.creer-recette #etapesRecette {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 25px 20px;
+    margin-top: 25px;
+}
+
+/* Une étape sur trois colonnes :
+   numéro | texte | suppression */
+
+.creer-recette .etape {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr) 35px;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+/* Numéro à gauche */
+
+.creer-recette .numero-etape {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    height: 40px;
+
+    background-color: var(--or-champagne);
+    color: var(--ivoire);
+    border-radius: 50%;
+
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* Conteneur du texte */
+
+.creer-recette .info-etape {
+    display: contents;
+}
+
+/* Zone de texte au centre */
+
+.creer-recette .info-etape textarea {
+    grid-column: 2;
+    width: 100%;
+    height: 100px;
+    min-height: 100px;
+    padding: 12px;
+    box-sizing: border-box;
+
+    resize: vertical;
+
+    background-color: var(--ivoire);
+    border: 1px solid var(--gris-chaud);
+    border-radius: 5px;
+
+    color: var(--anthracite);
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Focus */
+
+.creer-recette .info-etape textarea:focus {
+    outline: 2px solid var(--or-champagne);
+    outline-offset: 2px;
+}
+
+/* Bouton à droite */
+
+.creer-recette .etape button[type="button"] {
+    grid-column: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 35px;
+    height: 35px;
+    padding: 0;
+
+    background-color: var(--or-champagne);
+    color: var(--ivoire);
+    border: 1px solid var(--anthracite);
+    border-radius: 5px;
+
+    font-size: 0;
+    cursor: pointer;
+}
+
+/* Croix de suppression */
+
+.creer-recette .etape button[type="button"]::before {
+    content: "×";
+    font-family: Arial, sans-serif;
+    font-size: 22px;
+    line-height: 1;
+}
+
+/* Survol */
+
+.creer-recette .etape button[type="button"]:hover {
+    background-color: #B85C4A;
+}
+
+/* Navigation au clavier */
+
+.creer-recette .info-etape button:focus-visible {
+    outline: 2px solid var(--anthracite);
+    outline-offset: 3px;
+}
+
+
+/* 14. ENREGISTREMENT DE LA RECETTE */
+
+.creer-recette .validation-recette {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    margin: 30px 0 50px;
+}
+
+.creer-recette .btn-enregistrer-recette:focus-visible {
+    outline: 2px solid var(--anthracite);
+    outline-offset: 3px;
+}
+
+/* 15. STYLE DU BOUTON DE VALIDATION */
+
+.creer-recette .btn-enregistrer-recette {
+    width: 240px;
+    box-sizing: border-box;
+    text-align: center;
+    margin: 20px;
+    padding: 15px;
+    background-color: #C9A45C;
+    color: #FFFDF8;
+    font-family: "Montserrat", sans-serif;
+    cursor: pointer;
+    font-size: 15px;
+    border-radius: 3px;
+    transition: 0.3s;
+}
+
+.creer-recette .btn-enregistrer-recette:hover {
+    background-color: #B85C4A;
+}
+
+/* Navigation au clavier */
+
+.creer-recette .button-ajout button:focus-visible,
+.creer-recette .btn-enregistrer-recette:focus-visible {
+    outline: 2px solid #242424;
+    outline-offset: 3px;
+}
+
+
+/* =========================================
+   GC — HARMONISATION DES FENÊTRES MODALES
+   ========================================= */
+
+/* En-têtes identiques */
+.creer-recette .modal-gc .modal-gc-entete {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Titres des fenêtres */
+.creer-recette .modal-gc .modal-gc-entete h2 {
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+/* Bouton de fermeture discret */
+.creer-recette .modal-gc .modal-gc-fermer {
+    width: 35px;
+    height: 35px;
+    min-width: 35px;
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: transparent;
+    color: var(--gris-chaud);
+    border: none;
+
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.creer-recette .modal-gc .modal-gc-fermer:hover {
+    color: var(--anthracite);
+    background: transparent;
+}
+
+/* Pied des fenêtres */
+.creer-recette .modal-gc .modal-gc-pied {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 25px;
+}
+
+/* Boutons Terminer */
+.creer-recette .modal-gc .btn-modal-gc {
+    width: auto;
+    min-width: 105px;
+    height: 42px;
+    margin: 0;
+    padding: 10px 20px;
+
+    background-color: var(--or-champagne);
+    color: var(--ivoire);
+    border: none;
+    border-radius: 5px;
+
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.creer-recette .modal-gc .btn-modal-gc:hover {
+    background-color: var(--terracotta, #B85C4A);
+}
+
+
+/* =========================================
+   GC — BOUTONS DE CRÉATION
+   ========================================= */
+
+.creer-recette .entete-recette .button-ajout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 25px;
+    width: 100%;
+}
+
+.creer-recette .entete-recette .button-ajout button,
+.creer-recette .entete-recette .button-ajout #ouvrirModalCategories {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 205px;
+    min-width: 0;
+    max-width: 100%;
+    height: 45px;
+    margin: 0;
+    padding: 10px 12px;
+    box-sizing: border-box;
+
+    background-color: #C9A45C;
+    color: #FFFDF8;
+    border: 1px solid #242424;
+    border-radius: 3px;
+
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.3;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.creer-recette .entete-recette .button-ajout button:hover {
+    background-color: #B85C4A;
+}
+
+/* Hover du bouton Choisir les catégories */
+
+.creer-recette .entete-recette
+.button-ajout #ouvrirModalCategories:hover {
+    background-color: #B85C4A;
+    color: #FFFDF8;
+    transition: background-color 0.3s ease;
+}
+
+
+/* ===== ADAPTATIONS PROPRES A LA CREATION ===== */
+
+/* =========================================
+   GC — TITRES DES SECTIONS
+   ========================================= */
+
+.creer-recette .AjoutRecette h2 {
+    font-family: "Montserrat", "Inter", sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #242424;
+    text-align: left;
+    margin: 30px 0 20px;
+    padding: 0;
+}
+
+
+/* =========================================
+   GC — CROIX DES FENÊTRES MODALES
+   ========================================= */
+
+/* Aligner le titre et la croix */
+.creer-recette .modal-gc .modal-gc-entete {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+/* Harmoniser les boutons de fermeture */
+.creer-recette .modal-gc .modal-gc-fermer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 32px;
+    width: 32px;
+    min-width: 32px;
+    max-width: 32px;
+    height: 32px;
+    min-height: 32px;
+
+    margin: 0;
+    padding: 0;
+
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+
+    color: #6F6A62;
+    font-family: Arial, sans-serif;
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 1;
+
+    cursor: pointer;
+    box-shadow: none;
+}
+
+/* Survol */
+.creer-recette .modal-gc .modal-gc-fermer:hover {
+    background: transparent;
+    color: #242424;
+}
+
+/* Focus clavier */
+.creer-recette .modal-gc .modal-gc-fermer:focus-visible {
+    outline: 2px solid #C9A45C;
+    outline-offset: 2px;
+}
+
+
+
+/* =========================================
+   GC — STYLE UNIQUE DES MODALES
+   ========================================= */
+
+/* Croix de fermeture */
+.creer-recette .modal-gc .modal-gc-fermer,
+.creer-recette .modal-gc .modal-gc-entete button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 30px;
+    width: 30px;
+    min-width: 30px;
+    max-width: 30px;
+    height: 30px;
+    min-height: 30px;
+
+    margin: 0;
+    padding: 0;
+
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+
+    color: #6F6A62;
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.creer-recette .modal-gc .modal-gc-fermer:hover,
+.creer-recette .modal-gc .modal-gc-entete button:hover {
+    background: transparent;
+    color: #242424;
+}
+
+/* Bouton Terminer */
+.creer-recette .modal-gc .modal-gc-pied {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.creer-recette .modal-gc .btn-modal-gc {
+    flex: 0 0 auto;
+    width: auto;
+    min-width: 85px;
+    max-width: none;
+    height: 34px;
+
+    margin: 0;
+    padding: 7px 15px;
+
+    background-color: #C9A45C;
+    color: #FFFDF8;
+    border: none;
+    border-radius: 4px;
+
+    font-family: "Montserrat", sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.creer-recette .modal-gc .btn-modal-gc:hover {
+    background-color: #B85C4A;
+}
+
+
+.creer-recette { background: #FFFDF8; }
+.creer-recette > h1 { font-family: "Bodoni Moda", Didot, Georgia, serif; font-size: clamp(2rem,3vw,2.8rem); font-weight: 600; margin: 25px 15px 30px; }
+.creer-recette .AjoutRecette { background: var(--beige); }
+.creer-recette .entete-recette .button-ajout > .button-image,
+.creer-recette .entete-recette .button-ajout > .button-ingredient,
+.creer-recette .entete-recette .button-ajout > .button-etape { width:100%; display:flex; justify-content:center; margin:0; padding:0; }
+.creer-recette .button-ajout button { flex-shrink:0; }
+.creer-recette .img-recette #apercuPhoto { width:100%; height:100%; object-fit:contain; display:block; }
+.creer-recette .img-recette #apercuPhoto[hidden] { display:none; }
+.creer-recette .img-recette .texte-ajout-photo { padding:20px; color:var(--gris-chaud); font-size:15px; text-align:center; }
+.creer-recette .img-recette:has(#apercuPhoto:not([hidden])) .texte-ajout-photo { display:none; }
+.creer-recette .zone-categories { width:100%; min-width:0; }
+.creer-recette .info-categories { align-items:flex-start; }
+.creer-recette .liste-ingredient, .creer-recette .preparation { min-width:0; }
+.creer-recette .preparation .etape .supprimer-etape { grid-column:3; width:35px; height:35px; padding:0; font-size:0; }
+.creer-recette .preparation .etape .supprimer-etape::before { content:"×"; font-size:22px; line-height:1; }
+.creer-recette .button-image:has(> button[type="submit"]),
+.creer-recette form > .button-image { display:flex; justify-content:center; margin:30px auto 50px; }
+.creer-recette form > .button-image > button { width:240px; padding:15px; background:var(--or-champagne); color:var(--ivoire); border:1px solid var(--anthracite); border-radius:3px; font:15px Montserrat, sans-serif; cursor:pointer; }
+.creer-recette form > .button-image > button:hover { background:#B85C4A; }
+.creer-recette .modal-gc .modal-gc-entete h2 { font-family:Montserrat, sans-serif; }
+.creer-recette .modal-gc .btn-modal-gc { padding:12px 22px; }
+.creer-recette #resultatsIngredients:empty { display:none; }
+.creer-recette .modal-gc .categorie-resultat, .creer-recette .modal-gc .ingredient-resultat { cursor:pointer; }
+.creer-recette .modal-gc .categorie-resultat:hover, .creer-recette .modal-gc .ingredient-resultat:hover { background:var(--creme); }
+.creer-recette .modal-gc .categorie-resultat.est-selectionne, .creer-recette .modal-gc .ingredient-resultat.est-selectionne { background:var(--creme); border-left:4px solid var(--or-champagne); font-weight:600; }
+.creer-recette .modal-gc #compteurIngredients { color:var(--gris-chaud); font-size:14px; }

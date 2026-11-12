@@ -1,0 +1,22 @@
+@{
+    ViewData["Title"] = "Accès refusé";
+}
+
+<section class="container text-center py-5">
+    <h1>Accès refusé</h1>
+
+    <p>
+        Vous n'êtes pas autorisé à accéder à cette page.
+    </p>
+
+    <p>
+        Vous ne pouvez modifier que les recettes
+        dont vous êtes l'auteur.
+    </p>
+
+    <a asp-controller="Recettes"
+       asp-action="Index"
+       class="btn btn-primary">
+        Retour aux recettes
+    </a>
+</section>

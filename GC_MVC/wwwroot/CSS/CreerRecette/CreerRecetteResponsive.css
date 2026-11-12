@@ -1,0 +1,198 @@
+/* =========================================
+   GASTRONOMIE CRÉATIVE
+   RESPONSIVE : MODIFIER RECETTE
+   ========================================= */
+
+/* 1. TABLETTES ET PETITS ÉCRANS */
+
+@media screen and (max-width: 1024px) {
+
+    /* Conteneur principal */
+
+    .creer-recette .AjoutRecette {
+        width: calc(100% - 40px);
+        padding: 25px;
+    }
+
+    /* Une seule colonne */
+
+    .creer-recette .entete-recette {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 25px;
+    }
+
+    /* Informations générales en premier */
+
+    .creer-recette .entete-recette .infos-1 {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    /* Boutons en deuxième */
+
+    .creer-recette .entete-recette .button-ajout {
+        grid-column: 1;
+        grid-row: 2;
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    /* Photographie sous les boutons */
+
+    .creer-recette .entete-recette .img-recette {
+        grid-column: 1;
+        grid-row: 3;
+
+        width: min(100%, 350px);
+        margin: 0 auto;
+    }
+
+}
+
+
+/* 2. SMARTPHONES EN MODE PORTRAIT */
+
+@media screen and (max-width: 600px) and (orientation: portrait) {
+
+    /* Masquer le cadre photographique */
+
+    /* Photographie principale de la recette */
+
+    .creer-recette .entete-recette .img-recette {
+        display: flex;
+        grid-column: 1;
+        grid-row: 3;
+
+        width: min(100%, 300px);
+        max-width: 100%;
+        margin: 20px auto;
+
+        box-sizing: border-box;
+    }
+
+    /* Ingrédients : une seule colonne */
+
+    .creer-recette #ingredientsSelectionnes {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+    }
+
+    /* Chaque ingrédient sur une ligne */
+
+    .creer-recette .un-ingredient {
+        display: grid;
+        grid-template-columns: 75px minmax(0, 1fr);
+        grid-template-rows: auto auto;
+        align-items: center;
+        gap: 8px 15px;
+        text-align: left;
+    }
+
+    /* Image de l'ingrédient à gauche */
+
+    .creer-recette .un-ingredient .img {
+        grid-column: 1;
+        grid-row: 1 / 3;
+
+        width: 75px;
+        height: 75px;
+    }
+
+    /* Nom de l'ingrédient */
+
+    .creer-recette .un-ingredient p {
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    /* Quantité et bouton de suppression */
+
+    .creer-recette .infos-ingredient {
+        grid-column: 2;
+        grid-row: 2;
+
+        justify-content: flex-start;
+        min-width: 0;
+    }
+
+    .creer-recette .infos-ingredient input[type="text"] {
+        width: 100%;
+        min-width: 0;
+    }
+
+    /* Préparation : une seule colonne */
+
+    .creer-recette #etapesRecette {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+    }
+
+    /* Numéro | texte | croix */
+
+    .creer-recette .etape {
+        grid-template-columns: 40px minmax(0, 1fr) 35px;
+        gap: 8px;
+    }
+
+    /* Zone de texte confortable */
+
+    .creer-recette .info-etape textarea {
+        width: 100%;
+        min-width: 0;
+        height: 110px;
+        min-height: 110px;
+    }
+    
+    /* Masquer les images des ingrédients */
+
+    .creer-recette .un-ingredient .img {
+        display: none;
+    }
+
+    /* Réorganiser chaque ingrédient sans image */
+
+    .creer-recette .un-ingredient {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto auto;
+        gap: 8px;
+    }
+
+    .creer-recette .un-ingredient p,
+    .creer-recette .infos-ingredient {
+        grid-column: 1;
+    }
+}
+
+
+/* Adaptation aux petits écrans */
+@media (max-width: 600px) {
+    .creer-recette .entete-recette .button-ajout {
+        gap: 15px;
+    }
+}
+
+
+
+/* Adaptations tablette et mobile communes */
+@media(max-width:1024px){
+ .creer-recette #ingredientsSelectionnes { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ .creer-recette #etapesRecette { grid-template-columns:minmax(0,1fr); }
+}
+@media(max-width:600px){
+ .creer-recette .AjoutRecette { width:calc(100% - 24px); padding:18px; }
+ .creer-recette #ingredientsSelectionnes { grid-template-columns:minmax(0,1fr); }
+ .creer-recette .un-ingredient .img { display:none; }
+ .creer-recette .un-ingredient { display:flex; flex-direction:column; align-items:stretch; }
+ .creer-recette .infos-ingredient { width:100%; }
+ .creer-recette .infos-ingredient input { flex:1; min-width:0; }
+ .creer-recette #etapesRecette { grid-template-columns:minmax(0,1fr); }
+ .creer-recette .entete-recette .button-ajout { flex-direction:column; align-items:center; }
+ .creer-recette .entete-recette .button-ajout button { max-width:100%; }
+ .creer-recette .preparation .etape { grid-template-columns:35px minmax(0,1fr) 35px; }
+ .creer-recette .info label { white-space:normal; }
+}
